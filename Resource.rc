@@ -1,0 +1,201 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 한국어(대한민국) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_KOR)
+LANGUAGE LANG_KOREAN, SUBLANG_DEFAULT
+#pragma code_page(949)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""winres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DIALOG1 DIALOGEX 0, 0, 453, 360
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "모듈설정"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "확인",IDOK,323,339,50,14
+    PUSHBUTTON      "취소",IDCANCEL,396,339,50,14
+    CONTROL         "모듈 없음",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON | WS_GROUP,23,33,55,19
+    GROUPBOX        "패널 모듈",IDC_STATIC,15,15,237,50
+    CONTROL         "더블 패널",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,81,36,51,15
+    CONTROL         "트리플 패널",IDC_RADIO3,"Button",BS_AUTORADIOBUTTON,149,39,55,10
+    CONTROL         "모듈 없음",IDC_RADIO4,"Button",BS_AUTORADIOBUTTON | WS_GROUP,23,94,47,10
+    CONTROL         "기어 모듈",IDC_RADIO5,"Button",BS_AUTORADIOBUTTON,83,93,47,10
+    CONTROL         "자석 모듈",IDC_RADIO6,"Button",BS_AUTORADIOBUTTON,153,94,47,10
+    GROUPBOX        "가감속 모듈",IDC_STATIC,15,185,237,50
+    GROUPBOX        "분열기 모듈",IDC_STATIC,15,247,237,50
+    GROUPBOX        "이동 모듈",IDC_STATIC,16,70,237,50
+    GROUPBOX        "에너지 모듈",IDC_STATIC,15,126,237,50
+    CONTROL         "모듈 없음",IDC_RADIO7,"Button",BS_AUTORADIOBUTTON | WS_GROUP,23,151,47,10
+    CONTROL         "에너지 모듈",IDC_RADIO8,"Button",BS_AUTORADIOBUTTON,89,150,55,10
+    CONTROL         "채렌코프 모듈",IDC_RADIO9,"Button",BS_AUTORADIOBUTTON,153,150,62,10
+    CONTROL         "모듈 없음",IDC_RADIO10,"Button",BS_AUTORADIOBUTTON | WS_GROUP,24,209,47,10
+    CONTROL         "가속 모듈",IDC_RADIO11,"Button",BS_AUTORADIOBUTTON,90,209,47,10
+    CONTROL         "감속 모듈",IDC_RADIO12,"Button",BS_AUTORADIOBUTTON,156,209,47,10
+    CONTROL         "모듈 없음",IDC_RADIO13,"Button",BS_AUTORADIOBUTTON | WS_GROUP,23,269,47,10
+    CONTROL         "적색 분열기",IDC_RADIO14,"Button",BS_AUTORADIOBUTTON,90,268,55,10
+    CONTROL         "청색 분열기",IDC_RADIO15,"Button",BS_AUTORADIOBUTTON,157,268,55,10
+END
+
+IDD_DIALOG2 DIALOGEX 0, 0, 317, 329
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "옵션설정"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "확인",IDOK,198,308,50,14
+    PUSHBUTTON      "취소",IDCANCEL,260,308,50,14
+    GROUPBOX        "해상도 기본 2000 X 1050",IDC_STATIC,17,81,165,63
+    GROUPBOX        "디버그 설정",IDC_STATIC,17,237,72,42
+    CONTROL         "디버그 정보",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,26,249,57,19
+    CONTROL         "X 1",IDC_RADIO20,"Button",BS_AUTORADIOBUTTON | WS_GROUP,28,108,26,10
+    CONTROL         "X 0.8",IDC_RADIO21,"Button",BS_AUTORADIOBUTTON,77,108,33,10
+    CONTROL         "X 0.6",IDC_RADIO22,"Button",BS_AUTORADIOBUTTON,129,109,33,10
+    GROUPBOX        "레일과 패널 색상",IDC_STATIC,17,151,177,64
+    CONTROL         "빨강",IDC_RADIO23,"Button",BS_AUTORADIOBUTTON,34,170,31,10
+    CONTROL         "파랑",IDC_RADIO24,"Button",BS_AUTORADIOBUTTON,90,170,31,10
+    CONTROL         "녹색",IDC_RADIO25,"Button",BS_AUTORADIOBUTTON,146,170,31,10
+    CONTROL         "자홍",IDC_RADIO26,"Button",BS_AUTORADIOBUTTON,33,193,31,10
+    CONTROL         "노랑",IDC_RADIO28,"Button",BS_AUTORADIOBUTTON,146,193,31,10
+    CONTROL         "청록",IDC_RADIO27,"Button",BS_AUTORADIOBUTTON,90,193,31,10
+    GROUPBOX        "게임플레이 설정",IDC_STATIC,19,20,213,49
+    CONTROL         "WASD 이동",IDC_CHECK2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,27,41,53,10
+    CONTROL         "압력 초기화 설정",IDC_CHECK3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,77,41,71,10
+    CONTROL         "모듈 기본 활성화",IDC_CHECK4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,149,42,71,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_DIALOG1, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 446
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 353
+    END
+
+    IDD_DIALOG2, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 310
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 322
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_DIALOG1 AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DIALOG2 AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON1               ICON                    "icon1.ico"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BITMAP1             BITMAP                  "Img\\Button_Dial_Mask.bmp"
+
+IDB_BITMAP2             BITMAP                  "Img\\Button_Valve_Mask.bmp"
+
+IDB_BITMAP3             BITMAP                  "Img\\Cherenkov_mask.bmp"
+
+IDB_BITMAP4             BITMAP                  "Img\\Pressure_Mask.bmp"
+
+IDB_BITMAP5             BITMAP                  "Img\\Reflector_Color_Mask.bmp"
+
+IDB_BITMAP6             BITMAP                  "Img\\Reflector_Effect_Mask.bmp"
+
+IDB_BITMAP7             BITMAP                  "Img\\Reflector_Light_Mask.bmp"
+
+IDB_BITMAP8             BITMAP                  "Img\\Reflector_Mask.bmp"
+
+IDB_BITMAP9             BITMAP                  "Img\\Reflector_Module_Mask.bmp"
+
+IDB_BITMAP10            BITMAP                  "Img\\Temperture_Mask.bmp"
+
+#endif    // 한국어(대한민국) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

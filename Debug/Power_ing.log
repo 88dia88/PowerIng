@@ -1,0 +1,14 @@
+﻿  소스.cpp
+C:\Users\양영현\source\repos\Power_ing\소스.cpp(77,15): warning C4244: '초기화 중': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\양영현\source\repos\Power_ing\소스.cpp(90,51): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\양영현\source\repos\Power_ing\소스.cpp(181,20): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\양영현\source\repos\Power_ing\소스.cpp(182,18): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\양영현\source\repos\Power_ing\소스.cpp(183,23): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\양영현\source\repos\Power_ing\소스.cpp(184,33): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\양영현\source\repos\Power_ing\소스.cpp(189,69): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\양영현\source\repos\Power_ing\소스.cpp(189,26): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\양영현\source\repos\Power_ing\소스.cpp(191,64): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\양영현\source\repos\Power_ing\소스.cpp(191,34): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\양영현\source\repos\Power_ing\소스.cpp(105,10): warning C4101: 'oldBit1' :참조되지 않은 지역 변수입니다.
+C:\Users\양영현\source\repos\Power_ing\소스.cpp(105,19): warning C4101: 'oldBit2' :참조되지 않은 지역 변수입니다.
+  Power_ing.vcxproj -> C:\Users\양영현\source\repos\Power_ing\Debug\Power_ing.exe
