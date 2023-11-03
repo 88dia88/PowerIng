@@ -14,7 +14,7 @@ extern LPCTSTR lpszClass, lpszWindowName;
 extern int Menu;
 
 extern bool WASD, RestartPressure, ChargedMod, debug, keyboard;
-
+extern int PlayerRGB;
 extern int Reflector1Left, Reflector1Right, Reflector1Up, Reflector1Down, Player1RGB[3], Player1Charge[3];
 
 extern double window_half, window_size_x, window_size_y, Pibot_x, Pibot_y;
@@ -35,9 +35,7 @@ extern int Controllroom_half_y, Reflector_half_y;
 extern HDC hdc, memdc;
 extern HBITMAP hBitmap;
 
-LRESULT CALLBACK WndProc(HWND hwnd, UINT iMessage, WPARAM wparam, LPARAM lparam); // 구버전
-BOOL CALLBACK Module_Proc(HWND hDlg, UINT iMsg, WPARAM wParam, LPARAM lParam); // 구버전
-BOOL CALLBACK Option_Proc(HWND hDlg, UINT iMsg, WPARAM wParam, LPARAM lParam); // 구버전
+LRESULT CALLBACK WndProc(HWND hwnd, UINT iMessage, WPARAM wparam, LPARAM lparam); // 메세지 처리 함수
 //--------------------------------------------------------------------------------------------------------------//
 // 
 // Power_Orb
@@ -75,7 +73,7 @@ struct Power_Orb // 오브 구조체
 struct Power_Reflector // 패널 구조체
 {
 	double angle, position, size, speed;
-	int module[5], age, effect;
+	int module[5], age, effect, rebound;
 	bool module_charged[5]; 
 	struct Power_Reflector* next;
 };
@@ -113,7 +111,9 @@ void ReflectReflector(struct Power_Orb* Orb, struct Power_Reflector* Reflector);
 struct Power_Orb* ReflectReflectorOrb(struct Power_Orb* Orb, struct Power_Reflector* Reflector); // 패널의 상태에 따라 공에 변화를 주는 함수
 struct Power_Orb* ReflectOrb(struct Power_Orb* Orb, double Angle); // 오브를 반사시키는 함수
 //--------------------------------------------------------------------------------------------------------------// 패널 관련 함수
-void ReflectorPosition(struct Power_Reflector* Reflector, bool Reflect, short Left, short Right, short Up, short Down); // 패널을 이동시키는 함수 
+void ReflectorPosition(struct Power_Reflector* Reflector, short Left, short Right, short Up, short Down); // 패널을 이동시키는 함수 
+void ReflectorProcess(struct Power_Reflector* Reflector, bool Reflect); // 패널을 이동시키는 함수 
+
 void ReflectorCreate(struct Power_Reflector* Reflector, int Count); // 패널을 추가하는 함수
 void ReflectorRemove(struct Power_Reflector* NextReflector, struct Power_Reflector* Reflector); // 패널을 제거하는 함수
 void ReflectClear(); // 모든 패널을 제거하는 함수
@@ -130,6 +130,7 @@ extern CImage Reactor_RailImg, Reflector_ColorImg, Reflector_LightImg, Reflector
 extern CImage Button_PressureImg, Button_DialImg, Button_ValveImg, Button_OrbImg, Button_LampImg, Cherenkov_LeverImg, TempertureImg, DoorImg, Door_Light_Img;
 extern CImage Pressure_Mask_Img, Cherenkov_Mask_Img, Button_Valve_Mask_Img, Button_Dial_Mask_Img, Temperture_Mask_Img;
 extern CImage Reflector_Module_Img, Reflector_Module_Mask_Img;
+extern const int RGBTemplate_Red, RGBTemplate_Green, RGBTemplate_Blue, RGBTemplate_Magenta, RGBTemplate_Yellow, RGBTemplate_Cyan, RGBTemplate_White, RGBTemplate_Black, RGBTemplate_Gray;
 extern struct Power_Effect* EffectHead; // 이펙트용 구조체
 //--------------------------------------------------------------------------------------------------------------//
 void CreateEffect(struct Power_Effect* Effect, double x, double y, double Score); // 이펙트 개체 생성
@@ -144,11 +145,14 @@ void DisplayOrb(struct Power_Orb* Orb); // 오브 출력 함수
 void DisplayReflector(struct Power_Reflector* Reflector); // 패널 출력 함수
 void DisplayRotatedImage(double x, double y, double Sizex, double Sizey, double Angle, int Type); // 회전하는 오브젝트를 출력하는 함수
 //--------------------------------------------------------------------------------------------------------------//
-void Menu_UI(int SelectedButton, const TCHAR String0[30], const TCHAR String1[30], const TCHAR String2[30], const TCHAR String3[30], const TCHAR String4[30]); // 신 메뉴 UI
 
-
-void UIMenu(bool Start, bool Module, bool Option, bool Quit, bool Esc); // 구 메뉴 UI
-void UIButton(int x, int y, int R, int G, int B, int SR, int SG, int SB, bool Seleted, const TCHAR String[30]); // UI 버튼을 출력하는 함수
+int RGBConverter(int RGB, short type);
+void UIRGBSlider(int Red, int Green, int Blue);
+void UIModule(int x, int y, bool Active);
+void UIBack(bool Selected);
+void UIMenu(int SelectedButton, const TCHAR String0[30], const TCHAR String1[30], const TCHAR String2[30], const TCHAR String3[30], const TCHAR String4[30], int RGB[9]); // 신 메뉴 UI
+//void UIMenu(bool Start, bool Module, bool Option, bool Quit, bool Esc); // 구 메뉴 UI
+void UIButton(int x, int y, int RGB, bool Seleted, const TCHAR String[30]); // UI 버튼을 출력하는 함수
 bool UIButtonSelected(int x, int y, int sizex, int sizey, POINTS Mouse); // UI 버튼 위에 마우스가 올라갔는지 판단하는 함수
 void UIEndMessage(); // 게임 종료 후 점수를 출력하는 함수
 void UIScore(); // 점수를 출력하는 함수

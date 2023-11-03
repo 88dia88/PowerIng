@@ -295,7 +295,7 @@ void ReflectReflector(struct Power_Orb* Orb, struct Power_Reflector* Reflector)
 			else if (score > 250) Reflector->effect = 112;
 			else Reflector->effect = 12;
 			Reflector->age = (int)(50 / Orb->next->speed);
-			Reflector->position += 15.0 * (int)Orb->next->speed;
+			Reflector->rebound += 15.0 * (int)Orb->next->speed;
 		}
 	}
 	else
@@ -319,6 +319,7 @@ void ReflectReflector(struct Power_Orb* Orb, struct Power_Reflector* Reflector)
 			else Temperture = 0;
 			break;
 		}
+		Reflector->rebound += 3.0 * (int)Orb->next->speed;
 		OrbRemove(Orb->next, Orb);
 	}
 }
@@ -345,14 +346,10 @@ struct Power_Orb* ReflectOrb(struct Power_Orb* Orb, double Angle)
 	return Orb;
 }
 //--------------------------------------------------------------------------------------------------------------//
-void ReflectorPosition(struct Power_Reflector* Reflector, bool Reflect, short Left, short Right, short Up, short Down)
+void ReflectorPosition(struct Power_Reflector* Reflector, short Left, short Right, short Up, short Down)
 {
 	if (Reflector->next != ReflectorHead)
 	{
-		if (Reflect && Reflector->next->age <= 0) ReflectDetect(OrbHead, Reflector->next);
-		if (Reflector->next->effect % 100 == 0) Reflector->next->effect = 0;
-		else if ((Reflect & 1) && Reflector->next->effect > 0) Reflector->next->effect--;
-		if (Reflector->next->age > -101) Reflector->next->age--;
 		double Break = 1;
 		if ((Up & 0x8001) || (Down & 0x8001) || (Up & 0x8000) || (Down & 0x8000) && Reflector->next->position < 455 && Reflector->next->position > 270)
 		{
@@ -385,10 +382,28 @@ void ReflectorPosition(struct Power_Reflector* Reflector, bool Reflect, short Le
 		}
 		if (Right & 0x8001) Reflector->next->angle = AngleOverflow(Reflector->next->angle - 0.006 * Reflector->next->speed / Reflector->next->position * 375 * Break);
 		if (Left & 0x8001) Reflector->next->angle = AngleOverflow(Reflector->next->angle + 0.006 * Reflector->next->speed / Reflector->next->position * 375 * Break);
-		ReflectorPosition(Reflector->next, Reflect, Left, Right, Up, Down);
+		ReflectorPosition(Reflector->next, Left, Right, Up, Down);
 	}
 	else return;
 }
+
+
+void ReflectorProcess(struct Power_Reflector* Reflector, bool Reflect)
+{
+	if (Reflector->next != ReflectorHead)
+	{
+		if (Reflect && Reflector->next->age <= 0) ReflectDetect(OrbHead, Reflector->next);
+		if (Reflector->next->effect % 100 == 0) Reflector->next->effect = 0;
+		else if ((Reflect & 1) && Reflector->next->effect > 0) Reflector->next->effect--;
+		if (Reflector->next->age > -101) Reflector->next->age--;
+		if (Reflector->next->rebound > 0) Reflector->next->rebound -= 5;
+		else Reflector->next->rebound = 0;
+		double Break = 1;
+		ReflectorProcess(Reflector->next, Reflect);
+	}
+	else return;
+}
+
 void ReflectorCreate(struct Power_Reflector* Reflector, int Count)
 {
 	if (Reflector->next == ReflectorHead)
@@ -424,7 +439,7 @@ struct Power_Reflector* ReflectorReset(struct Power_Reflector* Reflector)
 		if (Reflector->module[i] != 0) Reflector->module_charged[i] = ChargedMod;
 		else Reflector->module_charged[i] = false;
 	}
-	Reflector->position = 375, Reflector->size = 375, Reflector->speed = 1, Reflector->age = -100, Reflector->effect = 0;
+	Reflector->position = 375, Reflector->size = 375, Reflector->speed = 1, Reflector->age = -100, Reflector->effect = 0, Reflector->rebound = 0;
 	if (Reflector->module[0] & 1) Reflector->angle = 0;
 	else Reflector->angle = 0.25;
 	return Reflector;
@@ -436,6 +451,7 @@ struct Power_Reflector* ReflectorApply(struct Power_Reflector* Reflector, int Co
 	Reflector->speed = ReflectorHead->speed;
 	Reflector->age = ReflectorHead->age;
 	Reflector->effect = ReflectorHead->effect;
+	Reflector->rebound = ReflectorHead->rebound;
 	for (int i = 0; i < 5; i++)
 	{
 		Reflector->module[i] = ReflectorHead->module[i];

@@ -9,6 +9,8 @@ int Reflector1Right = 0X27;
 int Reflector1Up = 0X26;
 int Reflector1Down = 0X28;
 
+
+int PlayerRGB = RGBTemplate_Yellow;
 int Player1RGB[3] = {255,255,0};
 
 HINSTANCE g_hInst;
