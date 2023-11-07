@@ -11,11 +11,16 @@
 extern HINSTANCE g_hInst;
 extern LPCTSTR lpszClass, lpszWindowName;
 
+
+extern bool Multireflect;
+
+
 extern int Menu;
 
 extern bool WASD, RestartPressure, ChargedMod, debug, keyboard;
+extern int Reflector1Left, Reflector1Right, Reflector1Up, Reflector1Down, Player1Charge[3];
+
 extern int PlayerRGB;
-extern int Reflector1Left, Reflector1Right, Reflector1Up, Reflector1Down, Player1RGB[3], Player1Charge[3];
 
 extern double window_half, window_size_x, window_size_y, Pibot_x, Pibot_y;
 extern double window_size;
@@ -42,13 +47,14 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMessage, WPARAM wparam, LPARAM lparam)
 // 
 //--------------------------------------------------------------------------------------------------------------//
 
+
 struct Power_Control {
 	int Left, Right, Up, Down;
 	int Start;
 	bool Button[5];
 };
 
-struct Power_Reactor // 리엑터 구조체
+struct Power_Reactor // 리엑터 구조체 - 게임 상태 관리
 {
 	bool cherenkov, meltdown;
 	int cherenkovlevel, meltdownlevel;
@@ -70,6 +76,21 @@ struct Power_Orb // 오브 구조체
 	double afterx[25], aftery[25];
 	struct Power_Orb* next;
 };
+
+
+
+
+struct Power_Reflector_Pointless // 패널 구조체 - 포인터 안씀
+{
+	double angle, position, size, speed;
+	int module[5], age;
+	int effect, rebound;
+	bool module_charged[5];
+};
+
+
+
+
 struct Power_Reflector // 패널 구조체
 {
 	double angle, position, size, speed;
@@ -77,16 +98,31 @@ struct Power_Reflector // 패널 구조체
 	bool module_charged[5]; 
 	struct Power_Reflector* next;
 };
+
+
+struct Power_Player {
+	bool Online, Ready;
+	int ID, RGB;
+	int Score, CherenkovMeter;
+	struct Power_Reflector_Pointless Reflector;
+};
+
+
+
 extern bool GameStart;
 extern double Score, Temperture, Mole, TotalScore;
 extern int Time, PreTime, ReactorEffect, OrbType, Orbcount;
 extern int Button[5];
 extern int AnimationTime_Door, AnimationTime_Button[5];
 
+extern struct Power_Player Player[7];
+
 extern struct Power_Control Control;
 extern struct Power_Reactor Reactor;
 extern struct Power_Orb* OrbHead;
-extern struct Power_Reflector* ReflectorHead;
+
+//extern struct Power_Reflector* ReflectorHead;
+
 //--------------------------------------------------------------------------------------------------------------//
 bool ReactorMeltdown(); // 공 충돌 효과 판정
 void ReactorCherenkov();
@@ -105,20 +141,21 @@ void OrbRemove(struct Power_Orb* NextOrb, struct Power_Orb* Orb); // 오브를 제거
 void OrbClear(); // 모든 오브를 제거하는 함수
 struct Power_Orb* OrbApply(struct Power_Orb* Orb, int Type, bool Major, double x, double y, double Angle); // 오브에 기본값을 적용하는 함수
 //--------------------------------------------------------------------------------------------------------------// 반사 관련 함수
-bool ReflectCheck(double x, double y, double angle, double position, double size); // 오브가 반사되기 적합한지 판단하는 함수
-void ReflectDetect(struct Power_Orb* Orb, struct Power_Reflector* Reflector); // 리스트에서 ReflectCheck를 만족하는 오브가 있는지 찾는 함수
-void ReflectReflector(struct Power_Orb* Orb, struct Power_Reflector* Reflector); // 반사할 때 패널의 변화를 다루는 함수
-struct Power_Orb* ReflectReflectorOrb(struct Power_Orb* Orb, struct Power_Reflector* Reflector); // 패널의 상태에 따라 공에 변화를 주는 함수
-struct Power_Orb* ReflectOrb(struct Power_Orb* Orb, double Angle); // 오브를 반사시키는 함수
-//--------------------------------------------------------------------------------------------------------------// 패널 관련 함수
-void ReflectorPosition(struct Power_Reflector* Reflector, short Left, short Right, short Up, short Down); // 패널을 이동시키는 함수 
-void ReflectorProcess(struct Power_Reflector* Reflector, bool Reflect); // 패널을 이동시키는 함수 
 
-void ReflectorCreate(struct Power_Reflector* Reflector, int Count); // 패널을 추가하는 함수
-void ReflectorRemove(struct Power_Reflector* NextReflector, struct Power_Reflector* Reflector); // 패널을 제거하는 함수
-void ReflectClear(); // 모든 패널을 제거하는 함수
-struct Power_Reflector* ReflectorReset(struct Power_Reflector* Reflector); // 패널 값을 초기화하는 함수
-struct Power_Reflector* ReflectorApply(struct Power_Reflector* Reflector, int Count); // 메인 패널의 값을 추가 패널에 적용하는 함수  
+
+
+
+bool ReflectCheck(double x, double y, double angle, double position, double size); // 오브가 반사되기 적합한지 판단하는 함수
+struct Power_Reflector_Pointless ReflectDetect(struct Power_Orb* Orb, struct Power_Reflector_Pointless Reflector); // 리스트에서 ReflectCheck를 만족하는 오브가 있는지 찾는 함수
+struct Power_Reflector_Pointless ReflectReflector(struct Power_Orb* Orb, struct Power_Reflector_Pointless Reflector); // 반사할 때 패널의 변화를 다루는 함수
+struct Power_Orb* ReflectReflectorOrb(struct Power_Orb* Orb, struct Power_Reflector_Pointless Reflector); // 패널의 상태에 따라 공에 변화를 주는 함수
+struct Power_Orb* ReflectOrb(struct Power_Orb* Orb, double Angle); // 오브를 반사시키는 함수
+//--------------------------------------------------------------------------------------------------------------//
+struct Power_Reflector_Pointless ReflectorPosition(struct Power_Reflector_Pointless Reflector, short Left, short Right, short Up, short Down); // 패널을 이동시키는 함수 
+struct Power_Reflector_Pointless ReflectorProcess(struct Power_Reflector_Pointless Reflector, bool Reflect); // 패널을 이동시키는 함수 
+struct Power_Reflector_Pointless ReflectorReset(struct Power_Reflector_Pointless Reflector); // 패널 값을 초기화하는 함수
+//--------------------------------------------------------------------------------------------------------------//플레이어 관련 함수
+struct Power_Player PlayerReset(struct Power_Player Player, int ID);
 //--------------------------------------------------------------------------------------------------------------//
 // 
 // Power_Display
@@ -138,34 +175,32 @@ void RemoveEffect(struct Power_Effect* Effect, struct Power_Effect* NextEffect);
 void EffectPrint(struct Power_Effect* Effect); // 이펙트 개체 출력
 //--------------------------------------------------------------------------------------------------------------//
 void DisplayLoad(); // 이미지 로드 및 알파 채널 적용
-void DisplayColorApply(); // 이미지에 색상값 적용
+void DisplayColorApply(int RGB); // 이미지에 색상값 적용
 void DisplayWindow(); // 윈도우 크기에 따라 크기 값을 구하는 함수
 //--------------------------------------------------------------------------------------------------------------//
 void DisplayOrb(struct Power_Orb* Orb); // 오브 출력 함수
-void DisplayReflector(struct Power_Reflector* Reflector); // 패널 출력 함수
+void DisplayReflector(struct Power_Reflector_Pointless Reflector); // 패널 출력 함수
 void DisplayRotatedImage(double x, double y, double Sizex, double Sizey, double Angle, int Type); // 회전하는 오브젝트를 출력하는 함수
 //--------------------------------------------------------------------------------------------------------------//
 
 int RGBConverter(int RGB, short type);
 void UIRGBSlider(int Red, int Green, int Blue);
-void UIModule(int x, int y, bool Active);
+void UIModule(int x, int y, bool Active, int module[5]);
 void UIBack(bool Selected);
 void UIMenu(int SelectedButton, const TCHAR String0[30], const TCHAR String1[30], const TCHAR String2[30], const TCHAR String3[30], const TCHAR String4[30], int RGB[9]); // 신 메뉴 UI
-//void UIMenu(bool Start, bool Module, bool Option, bool Quit, bool Esc); // 구 메뉴 UI
 void UIButton(int x, int y, int RGB, bool Seleted, const TCHAR String[30]); // UI 버튼을 출력하는 함수
 bool UIButtonSelected(int x, int y, int sizex, int sizey, POINTS Mouse); // UI 버튼 위에 마우스가 올라갔는지 판단하는 함수
 void UIEndMessage(); // 게임 종료 후 점수를 출력하는 함수
 void UIScore(); // 점수를 출력하는 함수
 void UIDebugInfo(); // 게임플레이 디버그를 위한 정보를 출력하는 함수
-void UIGameStatusDebugInfo(int GameStatus, int EscMode, bool DisplayGame);
 
 //--------------------------------------------------------------------------------------------------------------// 이미지 회전 출력용 함수
 POINT RotatePaint1(double x, double y, double sizex, double sizey, double angle); 
 POINT RotatePaint2(double x, double y, double sizex, double sizey, double angle);
 POINT RotatePaint3(double x, double y, double sizex, double sizey, double angle);
 //-----------------------------------------------------// 패널 회전 출력용 함수
-POINT ReflectorPaint1(struct Power_Reflector* Reflector, double Vertical);
-POINT ReflectorPaint2(struct Power_Reflector* Reflector, double Vertical);
-POINT ReflectorPaint3(struct Power_Reflector* Reflector, double Vertical);
+POINT ReflectorPaint1(struct Power_Reflector_Pointless Reflector, double Vertical);
+POINT ReflectorPaint2(struct Power_Reflector_Pointless Reflector, double Vertical);
+POINT ReflectorPaint3(struct Power_Reflector_Pointless Reflector, double Vertical);
 //--------------------------------------------------------------------------------------------------------------//
 #endif

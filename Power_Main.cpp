@@ -3,15 +3,13 @@
 int Menu = 0;
 
 double window_size = 0.96 * 0.8;
-bool WASD = false, RestartPressure = false, ChargedMod = false, debug = false, keyboard = true;
+bool WASD = false, RestartPressure = false, ChargedMod = false, debug = true, keyboard = true;
 int Reflector1Left = 0x25;
 int Reflector1Right = 0X27;
 int Reflector1Up = 0X26;
 int Reflector1Down = 0X28;
 
-
 int PlayerRGB = RGBTemplate_Yellow;
-int Player1RGB[3] = {255,255,0};
 
 HINSTANCE g_hInst;
 LPCTSTR lpszClass = L"Power.ing";
