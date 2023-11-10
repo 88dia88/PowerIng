@@ -6,14 +6,13 @@ int Time, PreTime, ReactorEffect, OrbType, Orbcount;
 int Button[5];
 int AnimationTime_Door, AnimationTime_Button[5];
 
+struct Power_Setting_Player Setting;
+
 struct Power_Player Player[7];
 
 struct Power_Control Control;
 struct Power_Reactor Reactor;
 struct Power_Orb* OrbHead = (Power_Orb*)malloc(sizeof(struct Power_Orb));
-
-//struct Power_Reflector* ReflectorHead = (Power_Reflector*)malloc(sizeof(struct Power_Reflector));
-
 //--------------------------------------------------------------------------------------------------------------//
 bool ReactorMeltdown()
 {
@@ -242,7 +241,7 @@ bool ReflectCheck(double x, double y, double angle, double position, double size
 		DistanceDetect(x, y, AnglePosition(x, y) - angle, position, size));
 
 }
-struct Power_Reflector_Pointless ReflectDetect(struct Power_Orb* Orb, struct Power_Reflector_Pointless Reflector)
+struct Power_Reflector ReflectDetect(struct Power_Orb* Orb, struct Power_Reflector Reflector)
 {
 	if (Orb->next != OrbHead)
 	{
@@ -252,7 +251,7 @@ struct Power_Reflector_Pointless ReflectDetect(struct Power_Orb* Orb, struct Pow
 	}
 	else return Reflector;
 }
-struct Power_Reflector_Pointless ReflectReflector(struct Power_Orb* Orb, struct Power_Reflector_Pointless Reflector)
+struct Power_Reflector ReflectReflector(struct Power_Orb* Orb, struct Power_Reflector Reflector)
 {
 	if (Orb->next->major)
 	{
@@ -277,29 +276,32 @@ struct Power_Reflector_Pointless ReflectReflector(struct Power_Orb* Orb, struct 
 			switch (Orb->next->type)
 			{
 			case 1:
-				if (Reflector.age > -100) score = OrbScore(Orb->next->speed, Mole, PressureCaculate(Mole, Temperture), 1 * Energy, Reactor.cherenkov);
+				if (Reflector.age > Time - 100) score = OrbScore(Orb->next->speed, Mole, PressureCaculate(Mole, Temperture), 1 * Energy, Reactor.cherenkov);
 				else score = OrbScore(Orb->next->speed, Mole, PressureCaculate(Mole, Temperture), 0.5, Reactor.cherenkov);
 				if (Reactor.cherenkovmeter < 1000 && Reactor.cherenkov == false) Reactor.cherenkovcounter += int(125 * Cherenks);
 				break;
 			case 2:
-				if (Reflector.age > -100) score = OrbScore(Orb->next->speed, Mole, PressureCaculate(Mole, Temperture), 1.0125 * Energy, Reactor.cherenkov);
+				if (Reflector.age > Time - 100) score = OrbScore(Orb->next->speed, Mole, PressureCaculate(Mole, Temperture), 1.0125 * Energy, Reactor.cherenkov);
 				else score = OrbScore(Orb->next->speed, Mole, PressureCaculate(Mole, Temperture), 0.75 * Energy, Reactor.cherenkov);
 				if (Reactor.cherenkovmeter < 1000 && Reactor.cherenkov == false) Reactor.cherenkovcounter += int(100 * Orb->next->speed * Orb->next->speed * Cherenks);
 				break;
 			default:
-				if (Reflector.age > -100) score = OrbScore(Orb->next->speed, Mole, PressureCaculate(Mole, Temperture), 1.35 * Energy, Reactor.cherenkov);
+				if (Reflector.age > Time - 100) score = OrbScore(Orb->next->speed, Mole, PressureCaculate(Mole, Temperture), 1.35 * Energy, Reactor.cherenkov);
 				else score = OrbScore(Orb->next->speed, Mole, PressureCaculate(Mole, Temperture), 1 * Energy, Reactor.cherenkov);
 				if (Reactor.cherenkovmeter < 1000 && Reactor.cherenkov == false) Reactor.cherenkovcounter += int(125 * Cherenks);
 				break;
 			}
 			CreateEffect(EffectHead, Orb->next->x, Orb->next->y, score);
 			Score += score;
-			if (score > 1000) Reflector.effect = 312;
-			else if (score > 500) Reflector.effect = 212;
-			else if (score > 250) Reflector.effect = 112;
-			else Reflector.effect = 12;
-			Reflector.age = (int)(50 / Orb->next->speed);
-			Reflector.rebound += int(15 * Orb->next->speed);
+
+			Reflector.age = Time + (int)(50 / Orb->next->speed);
+
+			if (score > 1000) Reflector.Effect_effect = Time + 324;
+			else if (score > 500) Reflector.Effect_effect = Time + 224;
+			else if (score > 250) Reflector.Effect_effect = Time + 124;
+			else Reflector.Effect_effect = Time + 24;
+
+			Reflector.Effect_rebound = Time + int(3 * Orb->next->speed);
 		}
 	}
 	else
@@ -324,12 +326,12 @@ struct Power_Reflector_Pointless ReflectReflector(struct Power_Orb* Orb, struct 
 			else Temperture = 0;
 			break;
 		}
-		Reflector.rebound += int(3 * Orb->next->speed);
+		Reflector.Effect_rebound = Time + int(0.6 * Orb->next->speed);
 		OrbRemove(Orb->next, Orb);
 	}
 	return Reflector;
 }
-struct Power_Orb* ReflectReflectorOrb(struct Power_Orb* Orb, struct Power_Reflector_Pointless Reflector)
+struct Power_Orb* ReflectReflectorOrb(struct Power_Orb* Orb, struct Power_Reflector Reflector)
 {
 	if (Reflector.module_charged[3])
 	{
@@ -352,7 +354,13 @@ struct Power_Orb* ReflectOrb(struct Power_Orb* Orb, double Angle)
 	return Orb;
 }
 //--------------------------------------------------------------------------------------------------------------//
-struct Power_Reflector_Pointless ReflectorPosition(struct Power_Reflector_Pointless Reflector, short Left, short Right, short Up, short Down)
+struct Power_Reflector ReflectorControl(struct Power_Reflector Reflector, short Left, short Right, short Up, short Down)
+{
+	
+	return Reflector;
+}
+
+struct Power_Reflector ReflectorPosition(struct Power_Reflector Reflector, short Left, short Right, short Up, short Down)
 {
 	double Break = 1;
 	if ((Up & 0x8001) || (Down & 0x8001) || (Up & 0x8000) || (Down & 0x8000) && Reflector.position < 455 && Reflector.position > 270)
@@ -388,18 +396,20 @@ struct Power_Reflector_Pointless ReflectorPosition(struct Power_Reflector_Pointl
 
 	return Reflector;
 }
-struct Power_Reflector_Pointless ReflectorProcess(struct Power_Reflector_Pointless Reflector, bool Reflect)
+
+struct Power_Reflector ReflectorProcess(struct Power_Reflector Reflector, bool Reflect)
 {
-	//if (Reflect && Reflector.age <= 0) 
-	Reflector = ReflectDetect(OrbHead, Reflector);
-	if (Reflector.effect % 100 == 0) Reflector.effect = 0;
-	else if ((Reflect & 1) && Reflector.effect > 0) Reflector.effect--;
-	if (Reflector.age > -101) Reflector.age--;
-	if (Reflector.rebound > 0) Reflector.rebound -= 5;
-	else Reflector.rebound = 0;
+	if (Reflect && Reflector.age <= Time)
+		Reflector = ReflectDetect(OrbHead, Reflector);
+
+	if (Reflector.age <= Time -101 || Time < 1) Reflector.age = 0;
+
+	if (Reflector.Effect_effect <= Time || Time < 1 || (Reflector.Effect_effect - Time) % 100 == 0) Reflector.Effect_effect = 0;
+	if (Reflector.Effect_rebound <= Time || Time < 1) Reflector.Effect_rebound = 0;
+
 	return Reflector;
 }
-struct Power_Reflector_Pointless ReflectorReset(struct Power_Reflector_Pointless Reflector)
+struct Power_Reflector ReflectorReset(struct Power_Reflector Reflector)
 {
 	Reflector.module[0] = 0, Reflector.module[1] = 0, Reflector.module[2] = 0, Reflector.module[3] = 0, Reflector.module[4] = 0;
 	for (int i = 0; i < 5; i++)
@@ -411,8 +421,8 @@ struct Power_Reflector_Pointless ReflectorReset(struct Power_Reflector_Pointless
 	Reflector.position = 375;
 	if (Reflector.module[0] & 1) Reflector.angle = 0;
 	else Reflector.angle = 0.25;
-	Reflector.size = 375, Reflector.speed = 1, Reflector.age = -100;
-	Reflector.effect = 0, Reflector.rebound = 0;
+	Reflector.size = 375, Reflector.speed = 1, Reflector.age = 0;
+	Reflector.Effect_effect = 0, Reflector.Effect_rebound = 0;
 	return Reflector;
 }
 //--------------------------------------------------------------------------------------------------------------//
@@ -424,3 +434,36 @@ struct Power_Player PlayerReset(struct Power_Player Player, int ID) {
 	Player.Reflector = ReflectorReset(Player.Reflector);
 	return Player;
 }
+
+struct Power_Setting_Player SettingReset(struct Power_Setting_Player Setting) {
+	Setting.Control_Active = 0x0D;
+	Setting.Control_Left = 0x25;
+	Setting.Control_Up = 0X26;
+	Setting.Control_Right = 0X27;
+	Setting.Control_Down = 0X28;
+
+	Setting.Debug = false;
+
+	Setting.Game_Cherenkov_auto = false;
+	Setting.Game_PressureReset = false;
+	Setting.Game_ScoreType = 0;
+
+	Setting.Display_Resolution = 0.8;
+	Setting.Display_Trail_Quality = 0;
+
+	Setting.Sound_Volume_Master = 100;
+	Setting.Sound_Volume = 100;
+	Setting.Sound_Alert = 0;
+	
+	return Setting;
+}
+
+int MenuEscape(int Menu_Type) {
+	if (Menu_Type / 10 == 2) Menu_Type = 2;
+	else if (Menu_Type / 10 == 3) Menu_Type = 3;
+	else if (Menu_Type / 10 == 23) Menu_Type = 23;
+	else if (Menu_Type / 10 == 31) Menu_Type = 31;
+	else Menu_Type = 0;
+	return Menu_Type;
+}
+

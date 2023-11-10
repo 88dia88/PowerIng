@@ -44,7 +44,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 
 	static bool OrbLaunch = false;
 
-	static bool Shift = false, Ctrl = false;
 	static int CustomRGB[4] = { RGBTemplate_Yellow, 255, 255, 0 };
 
 	static struct Power_Player MainPlayer;
@@ -69,6 +68,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 		ReflectorHead->next = ReflectorHead;
 		ReflectorHead = ReflectorReset(ReflectorHead);
 		*/
+
+		Setting = SettingReset(Setting);
 
 		MainPlayer = PlayerReset(MainPlayer, 0);
 		
@@ -252,6 +253,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 							}
 						}
 
+						/*
+						if (ServerTime > Time + 30) Time = ServerTime;
+						else if (ServerTime > Time) Time += 2;
+						else Time++;
+						*/
+
+						Time++;
+
 						//ReflectorControl(Player[0].Reflector, GetAsyncKeyState(Reflector1Left), GetAsyncKeyState(Reflector1Right), GetAsyncKeyState(Reflector1Up), GetAsyncKeyState(Reflector1Down));
 
 						Player[0].Reflector = ReflectorPosition(Player[0].Reflector, GetAsyncKeyState(Reflector1Left), GetAsyncKeyState(Reflector1Right), GetAsyncKeyState(Reflector1Up), GetAsyncKeyState(Reflector1Down));
@@ -263,8 +272,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 							}
 						}
 
-						
-						
 						break;
 					case 1:
 						if (Reactor.meltdown == false and Orbcount < 0) {
@@ -326,7 +333,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 				//오브
 				DisplayOrb(OrbHead);
 				//리엑터 이펙트
-				
 				if (Reactor.meltdownlevel > 0) {
 					if (Reactor.meltdownlevel < 72) Reactor_EffectImg.Draw(memdc, int(Pibot_x - Reactor_half), int(Pibot_y - Reactor_half), Reactor_window, Reactor_window, Reactor_size * (int)(Reactor.meltdownlevel / 12), Reactor_size, Reactor_size, Reactor_size);
 					else Reactor_EffectImg.Draw(memdc, int(Pibot_x - Reactor_half), int(Pibot_y - Reactor_half), Reactor_window, Reactor_window, Reactor_size * 5, Reactor_size, Reactor_size, Reactor_size);
@@ -335,8 +341,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 					if (Reactor.cherenkovlevel < 72) Reactor_EffectImg.Draw(memdc, int(Pibot_x - Reactor_half), int(Pibot_y - Reactor_half), Reactor_window, Reactor_window, Reactor_size * (int)(Reactor.cherenkovlevel / 12), 0, Reactor_size, Reactor_size);
 					else Reactor_EffectImg.Draw(memdc, int(Pibot_x - Reactor_half), int(Pibot_y - Reactor_half), Reactor_window, Reactor_window, Reactor_size * 5, 0, Reactor_size, Reactor_size);
 				}
-				//수정 필요 GameStatus 2
-				if (Time >= 20 && Time <= 35) Orb_Animation_Img.Draw(memdc, int(Pibot_x - Reactor_half), int(Pibot_y - Reactor_half), Reactor_window, Reactor_window, Reactor_size * int(Time / 2 - 10), 0, Reactor_size, Reactor_size);
+				//수정 필요 Orb 시작 애니메이션
+
+				//if (Time >= 20 && Time <= 35) Orb_Animation_Img.Draw(memdc, int(Pibot_x - Reactor_half), int(Pibot_y - Reactor_half), Reactor_window, Reactor_window, Reactor_size * int(Time / 2 - 10), 0, Reactor_size, Reactor_size);
+				
 				//외곽
 				//조작판
 				//버튼
@@ -361,7 +369,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 				UIScore();
 				EffectPrint(EffectHead);
 
-				if (debug) UIDebugInfo();
+				if (Setting.Debug) UIDebugInfo();
+
+				if (true) UIDebugInfo();
 
 				if (AnimationTime_Door != 0) {
 					DoorImg.Draw(memdc, int(Pibot_x - Controllroom_half_x), int(Pibot_y - Controllroom_half_y), Controllroom_window_x, Controllroom_window_y,
@@ -397,29 +407,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 	else {
 		switch (iMsg) {
 		case WM_KEYDOWN:
-			if (wParam == VK_SHIFT) {
-				Shift = true;
-			}
-			else if (wParam == VK_CONTROL) {
-				Ctrl = true;
-			}
-			else if (wParam == VK_ESCAPE) {
-				if (Menu_Type == 1) Menu_Type = 0;
-				else if (Menu_Type == 2) Menu_Type = 0;
-				else if (Menu_Type == 3) Menu_Type = 0;
-				else if (Menu_Type / 10 == 2) Menu_Type = 2;
-				else if (Menu_Type / 10 == 3) Menu_Type = 3;
-				else if (Menu_Type / 10 == 23) Menu_Type = 23;
-				else Menu_Type = 0;
-			}
-			break;
-		case WM_KEYUP:
-			if (wParam == VK_SHIFT) {
-				Shift = false;
-			}
-			else if (wParam == VK_CONTROL) {
-				Ctrl = false;
-			}
+			if (wParam == VK_ESCAPE) Menu_Type = MenuEscape(Menu_Type);
 			break;
 		case WM_MOUSEMOVE:
 			Mouse = MAKEPOINTS(lParam);
@@ -501,13 +489,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			break;
 		case WM_LBUTTONDOWN:
 			if (SelectedButton == -1) {
-				if (Menu_Type == 1) Menu_Type = 0;
-				else if (Menu_Type == 2) Menu_Type = 0;
-				else if (Menu_Type == 3) Menu_Type = 0;
-				else if (Menu_Type / 10 == 2) Menu_Type = 2;
-				else if (Menu_Type / 10 == 3) Menu_Type = 3;
-				else if (Menu_Type / 10 == 23) Menu_Type = 23;
-				else Menu_Type = 0;
+				Menu_Type = MenuEscape(Menu_Type);
 				SelectedButton = 0;
 			}
 			else {
@@ -524,20 +506,22 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 						GameStatus = -1;
 						Player[0] = MainPlayer;
 						SelectedButton = 0;
+						Time = 0;
 						DisplayGame = true;
 						Ingame = true;
 					}
 					break;
 				case 2:
-					Menu_Type = 20 + SelectedButton;
+					if (SelectedButton == 1 || SelectedButton == 3) Menu_Type = 20 + SelectedButton;
 					SelectedButton = 0;
 					break;
 				case 3:
-					Menu_Type = 30 + SelectedButton;
+					if (SelectedButton != 0) Menu_Type = 30 + SelectedButton;
 					break;
 				case 21:
-					if (Ctrl) MassSel *= 10;
-					if (Shift) MassSel *= 5;
+					if (GetAsyncKeyState(0x10) & 0x8001 || GetAsyncKeyState(0x10) & 0x8000) MassSel *= 5;
+					if (GetAsyncKeyState(0x11) & 0x8001 || GetAsyncKeyState(0x11) & 0x8000) MassSel *= 10;
+
 					switch (SelectedButton) {
 					case 4:
 						CustomRGB[0] = (CustomRGB[1] << 16) | (CustomRGB[2] << 8) | CustomRGB[3];
@@ -696,12 +680,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 				int SelectedModule = Menu_Type % 230;
 				if (SelectedModule < 5) {
 					if (MainPlayer.Reflector.module[SelectedModule] == 1) {
-						rgb[1] = RGBTemplate_Red;
-						rgb[5] = RGBTemplate_Yellow;
+						rgb[1] = RGBTemplate_Yellow;
+						rgb[5] = RGBTemplate_Red;
 					}
 					else if (MainPlayer.Reflector.module[SelectedModule] == 2) {
-						rgb[3] = RGBTemplate_Red;
-						rgb[7] = RGBTemplate_Yellow;
+						rgb[3] = RGBTemplate_Yellow;
+						rgb[7] = RGBTemplate_Red;
 					}
 				}
 				UIModule(400, 100, true, MainPlayer.Reflector.module);
@@ -710,6 +694,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 				else if (SelectedModule == 2) UIMenu(SelectedButton, L"Energy", L"Electric", L"", L"Cherenkov", L"", rgb);
 				else if (SelectedModule == 3) UIMenu(SelectedButton, L"Reactive", L"Acceleration", L"", L"Decceleration", L"", rgb);
 				else if (SelectedModule == 4) UIMenu(SelectedButton, L"Divider", L"Red", L"", L"Blue", L"", rgb);
+				UIBack(SelectedButton == -1);
+			}
+			else if (Menu_Type == 311) {
+				UIMenu(SelectedButton, L"Control", L"Movement", L"Action", L"", L"Reset to defult", rgb);
 				UIBack(SelectedButton == -1);
 			}
 

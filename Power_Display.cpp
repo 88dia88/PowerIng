@@ -53,7 +53,7 @@ void EffectPrint(struct Power_Effect* Effect)
 {
 	if (Effect->next != EffectHead)
 	{
-		if (Effect->next->age == Time || Time < 1)
+		if (Effect->next->age <= Time || Time < 1)
 		{
 			RemoveEffect(Effect->next, Effect);
 		}
@@ -355,7 +355,7 @@ void DisplayOrb(struct Power_Orb* Orb)
 	}
 	else return;
 }
-void DisplayReflector(struct Power_Reflector_Pointless Reflector)
+void DisplayReflector(struct Power_Reflector Reflector)
 {
 	POINT Reflector_Point[3] = {
 		ReflectorPaint1(Reflector, 0),
@@ -364,12 +364,12 @@ void DisplayReflector(struct Power_Reflector_Pointless Reflector)
 	};
 	ReflectorImg.PlgBlt(memdc, Reflector_Point, 0, 0, 375, 115, Reflector_Mask_Img, 0, 0);
 
-	if (Reflector.age < -100 && Reflector.module_charged[0])
+	if (Reflector.age < Time - 100 && Reflector.module_charged[0])
 	{
 		Reflector_ColorImg.PlgBlt(memdc, Reflector_Point, 0, 0, 375, 115, Reflector_Color_Mask_Img, 0, 0);
 		Reflector_LightImg.PlgBlt(memdc, Reflector_Point, 0, 0, 375, 115, Reflector_Light_Mask_Img, 0, 0);
 	}
-	else if (Reflector.age < 0 && Reflector.module_charged[0])
+	else if (Reflector.age < Time && Reflector.module_charged[0])
 	{
 		Reflector_ColorChargeImg.PlgBlt(memdc, Reflector_Point, 0, 0, 375, 115, Reflector_Color_Mask_Img, 0, 0);
 		Reflector_LightChargeImg.PlgBlt(memdc, Reflector_Point, 0, 0, 375, 115, Reflector_Light_Mask_Img, 0, 0);
@@ -386,14 +386,17 @@ void DisplayReflector(struct Power_Reflector_Pointless Reflector)
 		Reflector_Module_Img.PlgBlt(memdc, Reflector_Point, 375 * Reflector.module_charged[i] + 750 * i, (115 * (Reflector.module[i] - 1)), 375, 115, Reflector_Module_Mask_Img, 375 * Reflector.module_charged[i] + 750 * i, (115 * (Reflector.module[i] - 1)));
 	}
 
-	if (Reflector.effect > 0)
+
+	if (Reflector.Effect_effect > 0)
 	{
+		int effect = 0;
+		effect = (Reflector.Effect_effect - Time)/2;
 		POINT Reflector_Effect_Point[3] = {
 		ReflectorPaint1(Reflector, 67.5),
 		ReflectorPaint2(Reflector, 67.5),
 		ReflectorPaint3(Reflector, 67.5)
 		};
-		Reflector_EffectImg.PlgBlt(memdc, Reflector_Effect_Point, 375 * (Reflector.effect % 100), (300 * (int)(Reflector.effect / 100.0)), 375, 300, Reflector_Effect_Mask_Img, 375 * (Reflector.effect % 100), 0);
+		Reflector_EffectImg.PlgBlt(memdc, Reflector_Effect_Point, 375 * (effect % 100), (300 * (int)(effect / 100.0)), 375, 300, Reflector_Effect_Mask_Img, 375 * (effect % 100), 0);
 	}
 	return;
 }
@@ -687,8 +690,15 @@ void UIDebugInfo()
 	TextOut(memdc, 0, 87, lpOut, lstrlen(lpOut));
 	swprintf_s(lpOut, 100, L"Time : %d ", Time);
 	TextOut(memdc, 0, 100, lpOut, lstrlen(lpOut));
+
+	swprintf_s(lpOut, 100, L"effect : %d ", Player[0].Reflector.Effect_effect);
+	TextOut(memdc, 0, 112, lpOut, lstrlen(lpOut));
+
+	/*
 	swprintf_s(lpOut, 100, L"Cherenkov : %d ", Reactor.cherenkovmeter);
 	TextOut(memdc, 0, 112, lpOut, lstrlen(lpOut));
+	*/
+
 	swprintf_s(lpOut, 100, L"Cherenkov counter : %d ", Reactor.cherenkovcounter);
 	TextOut(memdc, 0, 125, lpOut, lstrlen(lpOut));
 	swprintf_s(lpOut, 100, L"Temperture : %g ", Temperture);
@@ -726,7 +736,7 @@ void UIGameStatusDebugInfo(int GameStatus, int EscMode, bool DisplayGame)
 	TextOut(memdc, 0, 75, lpOut, lstrlen(lpOut));
 	swprintf_s(lpOut, 100, L"cherenkov : %d ", Reactor.cherenkovlevel);
 	TextOut(memdc, 0, 87, lpOut, lstrlen(lpOut));
-	swprintf_s(lpOut, 100, L"effect : %d ", Player[0].Reflector.effect);
+	swprintf_s(lpOut, 100, L"effect : %d ", Player[0].Reflector.Effect_effect);
 	TextOut(memdc, 0, 100, lpOut, lstrlen(lpOut));
 	/*
 	swprintf_s(lpOut, 100, L" : % ");
@@ -762,15 +772,21 @@ POINT RotatePaint3(double x, double y, double sizex, double sizey, double angle)
 	return{ (long)(Pibot_x + x * window_size + PointRotationX(-sizex * window_half, sizey * window_half, angle)), (long)(Pibot_y + y * window_size + PointRotationY(-sizex * window_half, sizey * window_half, angle)) };
 }
 //--------------------------------------------------------------------------------------------------------------//
-POINT ReflectorPaint1(struct Power_Reflector_Pointless Reflector, double Vertical)
+POINT ReflectorPaint1(struct Power_Reflector Reflector, double Vertical)
 {
-	return{ (long)(Pibot_x + PointRotationX(window_size * sqrt((Reflector.position + Reflector.rebound) * (Reflector.position + Reflector.rebound) - Reflector.size * Reflector.size * 0.25) - Reflector_half_y + (25 - Vertical) * window_size, Reflector_half_x, Reflector.angle)),(long)(Pibot_y + PointRotationY(window_size * sqrt((Reflector.position + Reflector.rebound) * (Reflector.position + Reflector.rebound) - Reflector.size * Reflector.size * 0.25) - Reflector_half_y + (25 - Vertical) * window_size, Reflector_half_x, Reflector.angle)) };
+	int rebound = 0;
+	if (Reflector.Effect_rebound > 0) rebound = (Reflector.Effect_rebound - Time) * 5;
+	return{ (long)(Pibot_x + PointRotationX(window_size * sqrt((Reflector.position + rebound) * (Reflector.position + rebound) - Reflector.size * Reflector.size * 0.25) - Reflector_half_y + (25 - Vertical) * window_size, Reflector_half_x, Reflector.angle)),(long)(Pibot_y + PointRotationY(window_size * sqrt((Reflector.position + rebound) * (Reflector.position + rebound) - Reflector.size * Reflector.size * 0.25) - Reflector_half_y + (25 - Vertical) * window_size, Reflector_half_x, Reflector.angle)) };
 }
-POINT ReflectorPaint2(struct Power_Reflector_Pointless Reflector, double Vertical)
+POINT ReflectorPaint2(struct Power_Reflector Reflector, double Vertical)
 {
-	return{ (long)(Pibot_x + PointRotationX(window_size * sqrt((Reflector.position + Reflector.rebound) * (Reflector.position + Reflector.rebound) - Reflector.size * Reflector.size * 0.25) - Reflector_half_y + (25 - Vertical) * window_size, -Reflector_half_x, Reflector.angle)),(long)(Pibot_y + PointRotationY(window_size * sqrt((Reflector.position + Reflector.rebound) * (Reflector.position + Reflector.rebound) - Reflector.size * Reflector.size * 0.25) - Reflector_half_y + (25 - Vertical) * window_size, -Reflector_half_x, Reflector.angle)) };
+	int rebound = 0;
+	if (Reflector.Effect_rebound > 0) rebound = (Reflector.Effect_rebound - Time) * 5;
+	return{ (long)(Pibot_x + PointRotationX(window_size * sqrt((Reflector.position + rebound) * (Reflector.position + rebound) - Reflector.size * Reflector.size * 0.25) - Reflector_half_y + (25 - Vertical) * window_size, -Reflector_half_x, Reflector.angle)),(long)(Pibot_y + PointRotationY(window_size * sqrt((Reflector.position + rebound) * (Reflector.position + rebound) - Reflector.size * Reflector.size * 0.25) - Reflector_half_y + (25 - Vertical) * window_size, -Reflector_half_x, Reflector.angle)) };
 }
-POINT ReflectorPaint3(struct Power_Reflector_Pointless Reflector, double Vertical)
+POINT ReflectorPaint3(struct Power_Reflector Reflector, double Vertical)
 {
-	return{ (long)(Pibot_x + PointRotationX(window_size * sqrt((Reflector.position + Reflector.rebound) * (Reflector.position + Reflector.rebound) - Reflector.size * Reflector.size * 0.25) + Reflector_half_y + (25 + Vertical) * window_size, Reflector_half_x, Reflector.angle)),(long)(Pibot_y + PointRotationY(window_size * sqrt((Reflector.position + Reflector.rebound) * (Reflector.position + Reflector.rebound) - Reflector.size * Reflector.size * 0.25) + Reflector_half_y + (25 + Vertical) * window_size, Reflector_half_x, Reflector.angle)) };
+	int rebound = 0;
+	if (Reflector.Effect_rebound > 0) rebound = (Reflector.Effect_rebound - Time) * 5;
+	return{ (long)(Pibot_x + PointRotationX(window_size * sqrt((Reflector.position + rebound) * (Reflector.position + rebound) - Reflector.size * Reflector.size * 0.25) + Reflector_half_y + (25 + Vertical) * window_size, Reflector_half_x, Reflector.angle)),(long)(Pibot_y + PointRotationY(window_size * sqrt((Reflector.position + rebound) * (Reflector.position + rebound) - Reflector.size * Reflector.size * 0.25) + Reflector_half_y + (25 + Vertical) * window_size, Reflector_half_x, Reflector.angle)) };
 }
