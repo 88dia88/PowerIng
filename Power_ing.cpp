@@ -86,6 +86,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 		TotalScore = 0;
 		DisplayLoad();
 		DisplayColorApply(MainPlayer.RGB);
+		DisplayReflectorColorApply(MainPlayer.RGB);
 
 		Control.Left = 0x25;
 		Control.Right = 0X27;
@@ -527,6 +528,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 						CustomRGB[0] = (CustomRGB[1] << 16) | (CustomRGB[2] << 8) | CustomRGB[3];
 						PlayerRGB = CustomRGB[0];
 						DisplayColorApply(PlayerRGB);
+						DisplayReflectorColorApply(PlayerRGB);
 						Menu_Type = 2;
 						break;
 					case 5:

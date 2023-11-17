@@ -1,2 +1,0 @@
-C:\Users\양영현\source\repos\Power_ing\x64\Release\Power_ing.exe
-C:\Users\양영현\Desktop\Power_ing_refactorwnproc\x64\Release\Power_ing.exe

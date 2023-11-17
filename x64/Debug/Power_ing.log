@@ -1,7 +1,0 @@
-﻿  Power_Display.cpp
-  Power_Orb.cpp
-C:\Users\양영현\Desktop\git\PowerIng\Power_Orb.cpp(466,31): warning C4244: '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  코드를 생성하고 있습니다...
-C:\Users\양영현\Desktop\git\PowerIng\Power_Orb.cpp(172): warning C4715: 'OrbMajorCheck': 모든 제어 경로에서 값을 반환하지는 않습니다.
-C:\Users\양영현\Desktop\git\PowerIng\Power_Orb.cpp(253): warning C4715: 'ReflectDetect': 모든 제어 경로에서 값을 반환하지는 않습니다.
-  Power_ing.vcxproj -> C:\Users\양영현\Desktop\git\PowerIng\x64\Debug\Power_ing.exe

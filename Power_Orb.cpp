@@ -38,12 +38,13 @@ void ReactorCherenkov()
 		if (Reactor.cherenkovlevel < 100) Reactor.cherenkovlevel += 2;
 		else if (Reactor.cherenkovmeter > 0) Reactor.cherenkovmeter--;
 		else Reactor.cherenkov = false;
+		if (Reactor.cherenkovcounter > 0) Reactor.cherenkovcounter = 0;
 	}
 	else {
 		if (Reactor.cherenkovlevel > 0) Reactor.cherenkovlevel -= 2;
 		if (Reactor.cherenkovcounter > 0)
 		{
-			Reactor.cherenkovmeter++;
+			if (Reactor.cherenkovmeter < 1000) Reactor.cherenkovmeter++;
 			Reactor.cherenkovcounter--;
 		}
 	}
@@ -150,6 +151,8 @@ void CollisionDetect(struct Power_Orb* Orb)
 				{
 					Reactor.meltdown = true;
 
+					//评 格见 贸府
+
 					ReactorEffect = 6;
 					if (Orbcount > 0) ReactorEffect = 6;
 					else Orbcount = -1;
@@ -245,7 +248,7 @@ struct Power_Reflector ReflectDetect(struct Power_Orb* Orb, struct Power_Reflect
 {
 	if (Orb->next != OrbHead)
 	{
-		if (ReflectCheck(Orb->next->x + Orb->next->shellx, Orb->next->y + Orb->next->shelly, Reflector.angle, Reflector.position, Reflector.size))
+		if (ReflectCheck(Orb->next->x + Orb->next->shellx, Orb->next->y + Orb->next->shelly, Reflector.polar_x, Reflector.polar_y, Reflector.size))
 			return ReflectReflector(Orb, Reflector);
 		Reflector = ReflectDetect(Orb->next, Reflector);
 	}
@@ -261,10 +264,10 @@ struct Power_Reflector ReflectReflector(struct Power_Orb* Orb, struct Power_Refl
 			{
 				if (Reflector.module_charged[4])
 				{
-					OrbCreate(OrbHead, Reflector.module[4], false, Orb->next->x, Orb->next->y, Reflector.angle - 0.5);
+					OrbCreate(OrbHead, Reflector.module[4], false, Orb->next->x, Orb->next->y, Reflector.polar_x - 0.5);
 					Reflector.module_charged[4] = false;
 				}
-				else OrbCreate(OrbHead, 0, false, Orb->next->x, Orb->next->y, Reflector.angle - 0.5);
+				else OrbCreate(OrbHead, 0, false, Orb->next->x, Orb->next->y, Reflector.polar_x - 0.5);
 			}
 			ReflectReflectorOrb(Orb->next, Reflector);
 			double score = 0, Energy = 1, Cherenks = 1;
@@ -338,7 +341,8 @@ struct Power_Orb* ReflectReflectorOrb(struct Power_Orb* Orb, struct Power_Reflec
 		if (Reflector.module[3] == 1) Orb->power += 0.1;
 		else if (Reflector.module[3] == 2) Orb->power -= 0.1;
 	}
-	ReflectOrb(Orb, Reflector.angle);
+	Orb->RGB = Reflector.RGB;
+	ReflectOrb(Orb, Reflector.polar_x);
 	OrbPosition(Orb);
 	return Orb;
 }
@@ -356,14 +360,8 @@ struct Power_Orb* ReflectOrb(struct Power_Orb* Orb, double Angle)
 //--------------------------------------------------------------------------------------------------------------//
 struct Power_Reflector ReflectorControl(struct Power_Reflector Reflector, short Left, short Right, short Up, short Down)
 {
-	
-	return Reflector;
-}
-
-struct Power_Reflector ReflectorPosition(struct Power_Reflector Reflector, short Left, short Right, short Up, short Down)
-{
 	double Break = 1;
-	if ((Up & 0x8001) || (Down & 0x8001) || (Up & 0x8000) || (Down & 0x8000) && Reflector.position < 455 && Reflector.position > 270)
+	if ((Up & 0x8001) || (Down & 0x8001) || (Up & 0x8000) || (Down & 0x8000) && Reflector.polar_y < 455 && Reflector.polar_y > 270)
 	{
 		if (Reflector.module_charged[1])
 		{
@@ -374,8 +372,8 @@ struct Power_Reflector ReflectorPosition(struct Power_Reflector Reflector, short
 				if ((Down & 0x8000) && Reflector.speed > 0) Reflector.speed -= 0.5;
 				break;
 			case 2:
-				if ((Up & 0x8001) && Reflector.position > 300)  Reflector.position -= 15;
-				if ((Down & 0x8001) && Reflector.position < 450) Reflector.position += 15;
+				if ((Up & 0x8001) && Reflector.polar_y > 300)  Reflector.polar_y -= 15;
+				if ((Down & 0x8001) && Reflector.polar_y < 450) Reflector.polar_y += 15;
 				break;
 			}
 		}
@@ -387,12 +385,77 @@ struct Power_Reflector ReflectorPosition(struct Power_Reflector Reflector, short
 	}
 	else
 	{
-		if (Reflector.position < 375) Reflector.position += 5;
-		else if (Reflector.position > 500) Reflector.position -= (int)((Reflector.position * 0.2 - 75) * 0.2) * 5.0;
-		else if (Reflector.position > 375) Reflector.position -= 5;
+		if (Reflector.polar_y < 375) Reflector.polar_y += 5;
+		else if (Reflector.polar_y > 500) Reflector.polar_y -= (int)((Reflector.polar_y * 0.2 - 75) * 0.2) * 5.0;
+		else if (Reflector.polar_y > 375) Reflector.polar_y -= 5;
 	}
-	if (Right & 0x8001) Reflector.angle = AngleOverflow(Reflector.angle - 0.006 * Reflector.speed / Reflector.position * 375 * Break);
-	if (Left & 0x8001) Reflector.angle = AngleOverflow(Reflector.angle + 0.006 * Reflector.speed / Reflector.position * 375 * Break);
+
+	Reflector.polar_x = AngleOverflow(Reflector.polar_x + Reflector.polar_speedx * 0.0001 / Reflector.polar_y * 375 * Break);
+
+	if (Right & 0x8001) {
+		if (Reflector.polar_speedx > -60)
+			Reflector.polar_speedx -= int(Reflector.speed * 10);
+	}
+	else if (Reflector.polar_speedx < 0) {
+		Reflector.polar_speedx += 10;
+	}
+
+	if (Left & 0x8001) {
+		if (Reflector.polar_speedx < 60)
+			Reflector.polar_speedx += int(Reflector.speed * 10);
+	}
+	else if (Reflector.polar_speedx > 0) {
+		Reflector.polar_speedx -= 10;
+	}
+
+	return Reflector;
+}
+
+struct Power_Reflector ReflectorPosition(struct Power_Reflector Reflector, short Left, short Right, short Up, short Down)
+{
+	double Break = 1;
+	if ((Up & 0x8001) || (Down & 0x8001) || (Up & 0x8000) || (Down & 0x8000) && Reflector.polar_y < 455 && Reflector.polar_y > 270)
+	{
+		if (Reflector.module_charged[1])
+		{
+			switch (Reflector.module[1])
+			{
+			case 1:
+				if ((Up & 0x8000) && Reflector.speed < 2) Reflector.speed += 0.5;
+				if ((Down & 0x8000) && Reflector.speed > 0) Reflector.speed -= 0.5;
+				break;
+			case 2:
+				if ((Up & 0x8001) && Reflector.polar_y > 300)  Reflector.polar_y -= 15;
+				if ((Down & 0x8001) && Reflector.polar_y < 450) Reflector.polar_y += 15;
+				break;
+			}
+		}
+		else
+		{
+			if (Up & 0x8001) Break = 2;
+			if (Down & 0x8001) Break = 0.5;
+		}
+	}
+	else
+	{
+		if (Reflector.polar_y < 375) Reflector.polar_y += 5;
+		else if (Reflector.polar_y > 500) Reflector.polar_y -= (int)((Reflector.polar_y * 0.2 - 75) * 0.2) * 5.0;
+		else if (Reflector.polar_y > 375) Reflector.polar_y -= 5;
+	}
+
+	if ((Right & 0x8001) && (Reflector.polar_speedx > int(-60 * Break))) {
+		Reflector.polar_speedx -= int(Reflector.speed * 10);
+	}
+	else if (Reflector.polar_speedx < 0) {
+		Reflector.polar_speedx += 10;
+	}
+
+	if ((Left & 0x8001)&& (Reflector.polar_speedx < int(60 * Break))) {
+		Reflector.polar_speedx += int(Reflector.speed * 10);
+	}
+	else if (Reflector.polar_speedx > 0) {
+		Reflector.polar_speedx -= 10;
+	}
 
 	return Reflector;
 }
@@ -401,6 +464,8 @@ struct Power_Reflector ReflectorProcess(struct Power_Reflector Reflector, bool R
 {
 	if (Reflect && Reflector.age <= Time)
 		Reflector = ReflectDetect(OrbHead, Reflector);
+
+	Reflector.polar_x = AngleOverflow(Reflector.polar_x + Reflector.polar_speedx * 0.0001 / Reflector.polar_y * 375);
 
 	if (Reflector.age <= Time -101 || Time < 1) Reflector.age = 0;
 
@@ -418,9 +483,9 @@ struct Power_Reflector ReflectorReset(struct Power_Reflector Reflector)
 		else Reflector.module_charged[i] = false;
 	}
 	Reflector.module_charged[0] = true;
-	Reflector.position = 375;
-	if (Reflector.module[0] & 1) Reflector.angle = 0;
-	else Reflector.angle = 0.25;
+	Reflector.polar_y = 375;
+	if (Reflector.module[0] & 1) Reflector.polar_x = 0;
+	else Reflector.polar_x = 0.25;
 	Reflector.size = 375, Reflector.speed = 1, Reflector.age = 0;
 	Reflector.Effect_effect = 0, Reflector.Effect_rebound = 0;
 	return Reflector;

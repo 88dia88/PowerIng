@@ -31,6 +31,8 @@ extern int Reactor_window, Rail_window, Orb_window;
 extern int Controllroom_window_x, Reflector_window_x;
 extern int Controllroom_window_y, Reflector_window_y;
 
+extern const double ModifireValue[6][2];
+
 extern int Reactor_half, Rail_half, Orb_half;
 extern int Controllroom_half_x, Reflector_half_x;
 extern int Controllroom_half_y, Reflector_half_y;
@@ -81,25 +83,35 @@ struct Power_Effect // 충돌 시 이펙트 구조체
 struct Power_Orb // 오브 구조체
 {
 	bool major;
+	double x, y;
+	double speed, speedx, speedy, shellx, shelly;
+	int RGB;
 	int type, effect, effect_count;
-	double speedx, speedy, shellx, shelly;
-	double x, y, speed, angle, power, size;
+	double angle, power, size;
 	double afterx[25], aftery[25];
 	struct Power_Orb* next;
 };
 struct Power_Reflector // 패널 구조체
 {
-	double angle, position, size, speed;
+	double polar_x, polar_y;
+	int polar_speedx, polar_speedy;
+	double size, speed;
+	int RGB;
 	int module[5], age;
 	int Effect_effect, Effect_rebound;
 	bool module_charged[5];
 };
-
 struct Power_Player {
 	bool Online, Ready;
 	int ID, RGB;
 	int Score, CherenkovMeter;
 	struct Power_Reflector Reflector;
+};
+
+struct Power_Team {
+	int RGB;
+	int ID[7];
+	int life;
 };
 
 extern bool GameStart;
@@ -160,11 +172,22 @@ int MenuEscape(int Menu_Type);
 //--------------------------------------------------------------------------------------------------------------//
 extern CImage ReactorImg, Reactor_EffectImg, ReflectorImg, Reflector_EffectImg, OrbImg, Orb_Animation_Img, PressureImg, CherenkovImg;
 extern CImage Reflector_Mask_Img, Reflector_Effect_Mask_Img, Reflector_Color_Mask_Img, Reflector_Light_Mask_Img;
-extern CImage Reactor_RailImg, Reflector_ColorImg, Reflector_LightImg, Reflector_ColorChargeImg, Reflector_LightChargeImg, Reflector_ColorOffImg, Reflector_LightOffImg;
+extern CImage Reactor_RailImg;
 extern CImage Button_PressureImg, Button_DialImg, Button_ValveImg, Button_OrbImg, Button_LampImg, Cherenkov_LeverImg, TempertureImg, DoorImg, Door_Light_Img;
 extern CImage Pressure_Mask_Img, Cherenkov_Mask_Img, Button_Valve_Mask_Img, Button_Dial_Mask_Img, Temperture_Mask_Img;
 extern CImage Reflector_Module_Img, Reflector_Module_Mask_Img;
 extern const int RGBTemplate_Red, RGBTemplate_Green, RGBTemplate_Blue, RGBTemplate_Magenta, RGBTemplate_Yellow, RGBTemplate_Cyan, RGBTemplate_White, RGBTemplate_Black, RGBTemplate_Gray;
+
+extern CImage Reflector_ColorImg[6];
+
+
+extern CImage Reflector_Player_ColorImg[7],
+Reflector_Player_LightImg[7],
+Reflector_Player_ColorChargeImg[7],
+Reflector_Player_LightChargeImg[7],
+Reflector_Player_ColorOffImg[7],
+Reflector_Player_LightOffImg[7];
+
 extern struct Power_Effect* EffectHead; // 이펙트용 구조체
 //--------------------------------------------------------------------------------------------------------------//
 void CreateEffect(struct Power_Effect* Effect, double x, double y, double Score); // 이펙트 개체 생성
@@ -173,6 +196,10 @@ void EffectPrint(struct Power_Effect* Effect); // 이펙트 개체 출력
 //--------------------------------------------------------------------------------------------------------------//
 void DisplayLoad(); // 이미지 로드 및 알파 채널 적용
 void DisplayColorApply(int RGB); // 이미지에 색상값 적용
+void DisplayReflectorColorApply(int RGB); // 패널에 색상값 적용
+
+void DisplayPlayerColorApply(int RGB, int Num);
+
 void DisplayWindow(); // 윈도우 크기에 따라 크기 값을 구하는 함수
 //--------------------------------------------------------------------------------------------------------------//
 void DisplayOrb(struct Power_Orb* Orb); // 오브 출력 함수
