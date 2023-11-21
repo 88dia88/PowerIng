@@ -3,19 +3,33 @@
 #include "Player.h"
 #include "Globals.h"
 
+
 #define SERVERPORT 9000
 #define BUFSIZE    512
+
 
 LONG clientCnt = 0;
 CRITICAL_SECTION cs;
 Player players[3];
+HANDLE hLobbyThread, hProcessThread;
+HANDLE hClientKeyInputEvent[3], hProcessEvent;
+int gameState;
+
+
+int GenerateClientIndex();
+DWORD WINAPI ClientThread(LPVOID arg);
+DWORD WINAPI ProcessThread(LPVOID lpParam);
+DWORD WINAPI LobbyThread(LPVOID lpParam);
+int RecvC2SPacket(SOCKET clientSock, const char* buffer, int bufferSize, int clientID);
+int SendS2CPacket(SOCKET clientSock);
+
 
 int GenerateClientIndex()
 {
 	int userID = -1;
 
 	EnterCriticalSection(&cs);
-	for (int i = 0; i < MAX_CLIENTS; i++)
+	for (int i = 0; i < MAX_NUM_CLIENTS; i++)
 	{
 		// 비활성화된 플레이어에 새로운 클라이언트를 할당한다.
 		if (!players[i].GetState()) {
@@ -38,7 +52,7 @@ int GenerateClientIndex()
 DWORD WINAPI ClientThread(LPVOID arg)
 {
 	int retval;
-	SOCKET client_sock = (SOCKET)arg;
+	SOCKET clientSock = (SOCKET)arg;
 	struct sockaddr_in clientaddr;
 	char addr[INET_ADDRSTRLEN];
 	int addrlen;
@@ -47,15 +61,15 @@ DWORD WINAPI ClientThread(LPVOID arg)
 
 	// 클라이언트 정보 얻기
 	addrlen = sizeof(clientaddr);
-	getpeername(client_sock, (struct sockaddr*)&clientaddr, &addrlen);
+	getpeername(clientSock, (struct sockaddr*)&clientaddr, &addrlen);
 	inet_ntop(AF_INET, &clientaddr.sin_addr, addr, sizeof(addr));
 
 	//clientID 생성 (0~2사이의 값으로 clients의 인덱스로 사용)
 	int clientID = GenerateClientIndex();
 
 	while (1) {
-		// 데이터 받기
-		retval = recv(client_sock, buf, BUFSIZE, 0);
+		// 패킷 받기 & 처리
+		retval = RecvC2SPacket(clientSock, clientID);
 		if (retval == SOCKET_ERROR) {
 			err_display("recv()");
 			break;
@@ -63,23 +77,21 @@ DWORD WINAPI ClientThread(LPVOID arg)
 		else if (retval == 0)
 			break;
 
-		// 데이터 처리
-		buf[retval] = '\0';
-		//printf("[TCP/%s:%d] %s\n", addr, ntohs(clientaddr.sin_port), buf);
-		ProcessPacket(buf, retval);
+		// 클라이언트 입력완료
+		SetEvent(hClientKeyInputEvent[clientID]);
 
-		// 데이터 보내기
-		/*
-		retval = send(client_sock, buf, retval, 0);
+		// 데이터 처리 대기
+		DWORD result = WaitForSingleObject(hProcessEvent, INFINITE);
+		
+		retval = SendS2CPacket(clientSock);
 		if (retval == SOCKET_ERROR) {
-			err_display("send()");
+			err_display("recv()");
 			break;
 		}
-		*/
 	}
 
 	// 소켓 닫기
-	closesocket(client_sock);
+	closesocket(clientSock);
 	// 클라이언트 수 감소
 	InterlockedDecrement(&clientCnt);
 	// player 비활성화
@@ -90,9 +102,61 @@ DWORD WINAPI ClientThread(LPVOID arg)
 	return 0;
 }
 
+DWORD WINAPI ProcessThread(LPVOID lpParam)
+{
+	while (gameState != GAME_STATE_END)
+	{
+		// 모든 클라이언트의 키입력을 대기
+		DWORD result = WaitForMultipleObjects(clientCnt, hClientKeyInputEvent, TRUE, 300);
+		ResetEvent(hProcessEvent);
+
+		if (result == WAIT_FAILED) {
+			// .
+		}
+		else if (result == WAIT_TIMEOUT) {
+			// 일정 시간동안 클라이언트의 입력을 받지 못하면 이전 입력값을 사용한다.
+			for (int i = 0; i < clientCnt; i++)
+			{
+				if (WaitForSingleObject(hClientKeyInputEvent[i], 0) != WAIT_OBJECT_0) {
+					// action키만 비활성화
+					players[i].SetActionKeyDwon(false);
+				}
+			}
+		}
+		else {
+			// 데이터 처리
+			
+
+			// 데이터 처리 완료
+			SetEvent(hProcessEvent);
+		}
+	}
+}
+
+DWORD WINAPI LobbyThread(LPVOID lpParam)
+{
+	// 로비 처리
+	while (gameState == GAME_STATE_LOBBY)
+	{
+		
+	}
+
+	// 프로세스 스레드 시작
+	ResumeThread(hProcessThread);
+}
+
 int main(int argc, char* argv[])
 {
 	int retval;
+
+	// ProcessThread는 대기상태로 생성 LobbyThread가 종료할 때 스레드를 깨움
+	hProcessThread = CreateThread(NULL, 0, ProcessThread, NULL, CREATE_SUSPENDED, NULL);
+	hLobbyThread = CreateThread(NULL, 0, LobbyThread, NULL, 0, NULL);
+
+	// 이벤트 생성
+	for (int i = 0; i < MAX_NUM_CLIENTS; i++)
+		hClientKeyInputEvent[i] = CreateEvent(NULL, FALSE, FALSE, NULL);
+	hProcessEvent = CreateEvent(NULL, TRUE, TRUE, NULL);
 
 	// 윈속 초기화
 	WSADATA wsa;
@@ -122,7 +186,7 @@ int main(int argc, char* argv[])
 	int addrlen;
 	HANDLE hThread;
 
-	while (clientCnt < MAX_CLIENTS) {
+	while (clientCnt < MAX_NUM_CLIENTS) {
 		// accept()
 		addrlen = sizeof(clientaddr);
 		client_sock = accept(listen_sock, (struct sockaddr*)&clientaddr, &addrlen);
@@ -153,4 +217,69 @@ int main(int argc, char* argv[])
 	WSACleanup();
 
 	return 0;
+}
+
+int RecvC2SPacket(SOCKET clientSock, int clientID)
+{
+	char buf[BUFSIZE + 1];
+	int retval = recv(clientSock, buf, BUFSIZE, 0);
+
+	if (retval == SOCKET_ERROR || retval == 0) {
+		return retval;
+	}
+	else if (retval < sizeof(PacketType)) {
+		printf("error 패킷 사이즈가 너무 작습니다. %s\n", buf);
+		return;
+	}
+
+	PacketType type;
+	memcpy(&type, buf, sizeof(PacketType));
+
+	switch (type) {
+	case PACKET_TYPE_KEY_INPUT: {
+		if (retval < sizeof(KeyInputPacket)) {
+			return;
+		}
+
+		KeyInputPacket keyInputPacket;
+		memcpy(&keyInputPacket, buf, sizeof(KeyInputPacket));
+
+		players[clientID].SetKeyInput(keyInputPacket.keyInput);
+		/*
+		printf("키 인풋 처리, up=%s, down=%s, right=%s, left=%s, action=%s",
+			keyInputPacket.keyInput.up ? "true" : "false",
+			keyInputPacket.keyInput.down ? "true" : "false",
+			keyInputPacket.keyInput.right ? "true" : "false",
+			keyInputPacket.keyInput.left ? "true" : "false",
+			keyInputPacket.keyInput.action ? "true" : "false");
+		*/
+		break;
+	}
+							  // 다른 패킷 타입들 예외처리
+	default:
+		printf("error 패킷타입이 정의되지 않았습니다.\n");
+		break;
+	}
+}
+
+int SendS2CPacket(SOCKET clientSock)
+{
+	char buf[BUFSIZE + 1];
+	int retval = 0;
+
+	switch (gameState)
+	{
+	case GAME_STATE_GAME:
+		GameDataPacket gameDataPacket;
+		// GameDataPacket 채우기
+		// ...
+
+		memcpy(buf, &gameDataPacket, sizeof(GameDataPacket));
+		retval = send(clientSock, buf, sizeof(gameDataPacket), 0);
+
+		return retval;
+		break;
+	default:
+		break;
+	}
 }

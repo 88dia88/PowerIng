@@ -1,4 +1,5 @@
 #pragma once
+#include "Packit.h"
 
 class Player
 {
@@ -13,6 +14,10 @@ public:
     void SetPanel(int color, int module);
 
     void SetPos(float x, float y);
+    void SetKeyInput(KeyInput keyInput);
+    void SetKeyInput(bool up, bool down, bool right, bool left, bool action);
+    void SetActionKeyDwon(bool actionKey);
+    KeyInput GetKeyInput();
 
     bool GetState();
     bool IsReady();
@@ -32,5 +37,6 @@ private:
     double mSpeed;
     int mEffect;
 
+    KeyInput mKeyInput;
 };
 

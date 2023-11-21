@@ -7,6 +7,8 @@ enum PacketType
 {
     PACKET_TYPE_DEFALT,
     PACKET_TYPE_KEY_INPUT,
+    PACKET_TYPE_LOBBY,
+    PACKET_TYPE_IN_GAME,
     Count
 };
 
@@ -22,11 +24,8 @@ enum ModuleType
 
 #pragma pack(1)
 
-// 사용자의 키 입력을 전송을 위한 패킷
-struct KeyInputPacket
+struct KeyInput
 {
-    const PacketType type = PACKET_TYPE_KEY_INPUT;
-
     bool up = false;
     bool down = false;
     bool right = false;
@@ -34,13 +33,31 @@ struct KeyInputPacket
     bool action = false;
 };
 
+// 사용자의 키 입력을 전송을 위한 패킷
+struct KeyInputPacket
+{
+    const PacketType type = PACKET_TYPE_KEY_INPUT;
+
+    KeyInput keyInput;
+};
+
 struct LobbyPlayerPacket
 {
+    const PacketType type = PACKET_TYPE_LOBBY;
+
     int id;
     int color;
     int module;
     bool playerReady;
     bool playerRule;
+};
+
+struct GameDataPacket
+{
+    const PacketType type = PACKET_TYPE_IN_GAME;
+
+
+    BallData ballData;
 };
 
 struct BallData 
@@ -51,5 +68,3 @@ struct BallData
 };
 
 #pragma pack()
-
-void ProcessPacket(const char* buffer, int bufferSize);

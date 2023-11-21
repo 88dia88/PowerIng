@@ -48,6 +48,30 @@ void Player::SetPos(float x, float y)
     mPosY = y;
 }
 
+void Player::SetKeyInput(bool up, bool down, bool right, bool left, bool action)
+{
+    mKeyInput.up = up;
+    mKeyInput.down = down;
+    mKeyInput.right = right;
+    mKeyInput.left = left;
+    mKeyInput.action = action;
+}
+
+void Player::SetKeyInput(KeyInput keyInput)
+{
+    mKeyInput = keyInput;
+}
+
+void Player::SetActionKeyDwon(bool actionKey)
+{
+    mKeyInput.action = actionKey;
+}
+
+KeyInput Player::GetKeyInput()
+{
+    return mKeyInput;
+}
+
 bool Player::GetState()
 {
     return mState;
