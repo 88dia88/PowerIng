@@ -40,7 +40,7 @@ extern int Controllroom_half_y, Reflector_half_y;
 extern HDC hdc, memdc;
 extern HBITMAP hBitmap;
 
-LRESULT CALLBACK WndProc(HWND hwnd, UINT iMessage, WPARAM wparam, LPARAM lparam); // 메세지 처리 함수
+LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam); // 메세지 처리 함수
 //--------------------------------------------------------------------------------------------------------------//
 // 
 // Power_Orb
@@ -146,10 +146,6 @@ void OrbRemove(struct Power_Orb* NextOrb, struct Power_Orb* Orb); // 오브를 제거
 void OrbClear(); // 모든 오브를 제거하는 함수
 struct Power_Orb* OrbApply(struct Power_Orb* Orb, int Type, bool Major, double x, double y, double Angle); // 오브에 기본값을 적용하는 함수
 //--------------------------------------------------------------------------------------------------------------// 반사 관련 함수
-
-
-
-
 bool ReflectCheck(double x, double y, double angle, double position, double size); // 오브가 반사되기 적합한지 판단하는 함수
 struct Power_Reflector ReflectDetect(struct Power_Orb* Orb, struct Power_Reflector Reflector); // 리스트에서 ReflectCheck를 만족하는 오브가 있는지 찾는 함수
 struct Power_Reflector ReflectReflector(struct Power_Orb* Orb, struct Power_Reflector Reflector); // 반사할 때 패널의 변화를 다루는 함수
@@ -170,7 +166,7 @@ int MenuEscape(int Menu_Type);
 // Power_Display
 // 
 //--------------------------------------------------------------------------------------------------------------//
-extern CImage ReactorImg, Reactor_EffectImg, ReflectorImg, Reflector_EffectImg, OrbImg, Orb_Animation_Img, PressureImg, CherenkovImg;
+extern CImage ReactorImg, Reactor_EffectImg, ReflectorImg, Reflector_EffectImg, Orb_Animation_Img, PressureImg, CherenkovImg;
 extern CImage Reflector_Mask_Img, Reflector_Effect_Mask_Img, Reflector_Color_Mask_Img, Reflector_Light_Mask_Img;
 extern CImage Reactor_RailImg;
 extern CImage Button_PressureImg, Button_DialImg, Button_ValveImg, Button_OrbImg, Button_LampImg, Cherenkov_LeverImg, TempertureImg, DoorImg, Door_Light_Img;
@@ -178,15 +174,20 @@ extern CImage Pressure_Mask_Img, Cherenkov_Mask_Img, Button_Valve_Mask_Img, Butt
 extern CImage Reflector_Module_Img, Reflector_Module_Mask_Img;
 extern const int RGBTemplate_Red, RGBTemplate_Green, RGBTemplate_Blue, RGBTemplate_Magenta, RGBTemplate_Yellow, RGBTemplate_Cyan, RGBTemplate_White, RGBTemplate_Black, RGBTemplate_Gray;
 
+extern int ColliderColor;
+
+extern int PlayerColor[7];
+
+extern CImage OrbImg[2][3][2][5];
+extern CImage Orb_ColorImg[7][2][8];
+
+extern CImage Reactor_Effect_ColorImg[7];
+
+extern CImage Orb_MajorImg[3][2][5];
+extern CImage Orb_MinorImg[3][2][5];
+
 extern CImage Reflector_ColorImg[6];
-
-
-extern CImage Reflector_Player_ColorImg[7],
-Reflector_Player_LightImg[7],
-Reflector_Player_ColorChargeImg[7],
-Reflector_Player_LightChargeImg[7],
-Reflector_Player_ColorOffImg[7],
-Reflector_Player_LightOffImg[7];
+extern CImage Reflector_Player_ColorImg[6][7];
 
 extern struct Power_Effect* EffectHead; // 이펙트용 구조체
 //--------------------------------------------------------------------------------------------------------------//
@@ -195,15 +196,21 @@ void RemoveEffect(struct Power_Effect* Effect, struct Power_Effect* NextEffect);
 void EffectPrint(struct Power_Effect* Effect); // 이펙트 개체 출력
 //--------------------------------------------------------------------------------------------------------------//
 void DisplayLoad(); // 이미지 로드 및 알파 채널 적용
-void DisplayColorApply(int RGB); // 이미지에 색상값 적용
-void DisplayReflectorColorApply(int RGB); // 패널에 색상값 적용
 
-void DisplayPlayerColorApply(int RGB, int Num);
+void DisplayOrbLoad();
+void DisplayOrbColorApply(int RGB, int Num);
+
+void DisplayColorApply(int RGB); // 이미지에 색상값 적용
+void DisplayReactorColorApply(int RGB, int Num);
+void DisplayReflectorColorApply(int RGB); // 패널에 색상값 적용
+void DisplayPlayerColorApply(int RGB, int Num); // 플레이어별 색상값 적용된 패널 출력
+
 
 void DisplayWindow(); // 윈도우 크기에 따라 크기 값을 구하는 함수
 //--------------------------------------------------------------------------------------------------------------//
 void DisplayOrb(struct Power_Orb* Orb); // 오브 출력 함수
 void DisplayReflector(struct Power_Reflector Reflector); // 패널 출력 함수
+void DisplayPlayerReflector(struct Power_Reflector Reflector, int Num);
 void DisplayRotatedImage(double x, double y, double Sizex, double Sizey, double Angle, int Type); // 회전하는 오브젝트를 출력하는 함수
 //--------------------------------------------------------------------------------------------------------------//
 

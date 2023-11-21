@@ -85,8 +85,19 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 		Orbcount = 3;
 		TotalScore = 0;
 		DisplayLoad();
+		DisplayOrbLoad();
+		
 		DisplayColorApply(MainPlayer.RGB);
 		DisplayReflectorColorApply(MainPlayer.RGB);
+
+		DisplayPlayerColorApply(MainPlayer.RGB, 0);
+
+		DisplayPlayerColorApply(RGBTemplate_Red, 1);
+		DisplayPlayerColorApply(RGBTemplate_Green, 2);
+		DisplayPlayerColorApply(RGBTemplate_Blue, 3);
+		DisplayPlayerColorApply(RGBTemplate_Cyan, 4);
+		DisplayPlayerColorApply(RGBTemplate_Magenta, 5);
+		DisplayPlayerColorApply(RGBTemplate_Black, 6);
 
 		Control.Left = 0x25;
 		Control.Right = 0X27;
@@ -249,6 +260,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 								CollisionDetect(OrbHead);
 								if (OrbLaunch) {
 									OrbLaunch = false;
+									ColliderColor = 0;
 									OrbCreate(OrbHead, OrbType, true, 0, 0, 0.25);
 								}
 							}
@@ -329,18 +341,64 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 				{
 					if (Player[i].Online) {
 						DisplayReflector(Player[i].Reflector);
+
+						int Color = -1;
+						for (int k = 0; k < 6; k++) {
+							if (Player[i].Reflector.RGB == PlayerColor[k]) Color = k;
+						}
+						if (Color != -1) DisplayPlayerReflector(Player[i].Reflector, Color);
+
+						else DisplayPlayerReflector(Player[i].Reflector, i);
 					}
 				}
+
 				//오브
 				DisplayOrb(OrbHead);
 				//리엑터 이펙트
-				if (Reactor.meltdownlevel > 0) {
-					if (Reactor.meltdownlevel < 72) Reactor_EffectImg.Draw(memdc, int(Pibot_x - Reactor_half), int(Pibot_y - Reactor_half), Reactor_window, Reactor_window, Reactor_size * (int)(Reactor.meltdownlevel / 12), Reactor_size, Reactor_size, Reactor_size);
-					else Reactor_EffectImg.Draw(memdc, int(Pibot_x - Reactor_half), int(Pibot_y - Reactor_half), Reactor_window, Reactor_window, Reactor_size * 5, Reactor_size, Reactor_size, Reactor_size);
+
+				if (ColliderColor != 0) {
+					if (Reactor.meltdownlevel > 0) {
+						if (Reactor.meltdownlevel < 72) 
+							Reactor_Effect_ColorImg[ColliderColor].Draw(memdc, 
+								int(Pibot_x - Reactor_half), int(Pibot_y - Reactor_half), 
+								Reactor_window, Reactor_window, 
+								Reactor_size * (int)(Reactor.meltdownlevel / 12), 0, 
+								Reactor_size, Reactor_size);
+						else 
+							Reactor_Effect_ColorImg[ColliderColor].Draw(memdc, 
+								int(Pibot_x - Reactor_half), int(Pibot_y - Reactor_half), 
+								Reactor_window, Reactor_window, 
+								Reactor_size * 5, 0, 
+								Reactor_size, Reactor_size);
+					}
+				}
+				else if(Reactor.meltdownlevel > 0) {
+					if (Reactor.meltdownlevel < 72) 
+						Reactor_EffectImg.Draw(memdc, 
+							int(Pibot_x - Reactor_half), int(Pibot_y - Reactor_half), 
+							Reactor_window, Reactor_window, 
+							Reactor_size * (int)(Reactor.meltdownlevel / 12), Reactor_size, 
+							Reactor_size, Reactor_size);
+					else 
+						Reactor_EffectImg.Draw(memdc, 
+							int(Pibot_x - Reactor_half), int(Pibot_y - Reactor_half), 
+							Reactor_window, Reactor_window, 
+							Reactor_size * 5, Reactor_size, 
+							Reactor_size, Reactor_size);
 				}
 				else if (Reactor.cherenkovlevel > 0) {
-					if (Reactor.cherenkovlevel < 72) Reactor_EffectImg.Draw(memdc, int(Pibot_x - Reactor_half), int(Pibot_y - Reactor_half), Reactor_window, Reactor_window, Reactor_size * (int)(Reactor.cherenkovlevel / 12), 0, Reactor_size, Reactor_size);
-					else Reactor_EffectImg.Draw(memdc, int(Pibot_x - Reactor_half), int(Pibot_y - Reactor_half), Reactor_window, Reactor_window, Reactor_size * 5, 0, Reactor_size, Reactor_size);
+					if (Reactor.cherenkovlevel < 72) 
+						Reactor_EffectImg.Draw(memdc, 
+							int(Pibot_x - Reactor_half), int(Pibot_y - Reactor_half), 
+							Reactor_window, Reactor_window, 
+							Reactor_size * (int)(Reactor.cherenkovlevel / 12), 0, 
+							Reactor_size, Reactor_size);
+					else 
+						Reactor_EffectImg.Draw(memdc, 
+							int(Pibot_x - Reactor_half), int(Pibot_y - Reactor_half), 
+							Reactor_window, Reactor_window, 
+							Reactor_size * 5, 0, 
+							Reactor_size, Reactor_size);
 				}
 				//수정 필요 Orb 시작 애니메이션
 

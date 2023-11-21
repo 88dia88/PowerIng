@@ -20,12 +20,9 @@ HBITMAP hBitmap;
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hprevlnstance, LPSTR lpszCmdParam, int nCmdShow)
 {
-	HWND hWnd;
-	MSG Message;
 	g_hInst = hInstance;
 
 	WNDCLASSEX WndClass;
-
 	WndClass.cbSize = sizeof(WndClass);
 	WndClass.style = CS_HREDRAW | CS_VREDRAW;
 	WndClass.lpfnWndProc = (WNDPROC)WndProc;
@@ -40,10 +37,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hprevlnstance, LPSTR lpszCmdPa
 	WndClass.hIconSm = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ICON1));
 	RegisterClassEx(&WndClass);
 
-	hWnd = CreateWindow(lpszClass, lpszWindowName, WS_POPUP, 0, 0, (int)(window_size_x), (int)(window_size_y),
+	HWND hWnd = CreateWindow(lpszClass, lpszWindowName, 
+		WS_POPUP, 0, 0, (int)(window_size_x), (int)(window_size_y),
 		NULL, (HMENU)NULL, hInstance, NULL);
 	ShowWindow(hWnd, nCmdShow);
 	UpdateWindow(hWnd);
+	
+	MSG Message;
 	while (GetMessage(&Message, 0, 0, 0)) {
 		TranslateMessage(&Message);
 		DispatchMessage(&Message);

@@ -6,6 +6,8 @@ int Time, PreTime, ReactorEffect, OrbType, Orbcount;
 int Button[5];
 int AnimationTime_Door, AnimationTime_Button[5];
 
+int ColliderColor;
+
 struct Power_Setting_Player Setting;
 
 struct Power_Player Player[7];
@@ -140,7 +142,8 @@ void CollisionDetect(struct Power_Orb* Orb)
 		OrbPosition(Orb->next);
 		if (DistanceOvercmp(Orb->next->x + Orb->next->shellx, Orb->next->y + Orb->next->shelly, 500))
 		{
-			if (((Orb->next->major == false && Orb->next->type == 0) || Orb->next->effect == 1) && Distancecmp(Orb->next->x + Orb->next->shellx, Orb->next->y + Orb->next->shelly, 525))
+			if (((Orb->next->major == false && Orb->next->type == 0) || Orb->next->effect == 1) 
+				&& Distancecmp(Orb->next->x + Orb->next->shellx, Orb->next->y + Orb->next->shelly, 525))
 			{
 				ReflectOrb(Orb->next, AnglePosition(Orb->next->x, Orb->next->y));
 				if (Orb->next->effect == 1) Orb->next->effect = 0;
@@ -149,6 +152,12 @@ void CollisionDetect(struct Power_Orb* Orb)
 			{
 				if (Orb->next->major)
 				{
+					int Color = -1;
+					for (int k = 0; k < 6; k++) {
+						if (Orb->next->RGB == PlayerColor[k]) Color = k;
+					}
+					if (Color >= 0 and Color < 7) ColliderColor = Color;
+
 					Reactor.meltdown = true;
 
 					//评 格见 贸府
@@ -304,6 +313,8 @@ struct Power_Reflector ReflectReflector(struct Power_Orb* Orb, struct Power_Refl
 			else if (score > 250) Reflector.Effect_effect = Time + 124;
 			else Reflector.Effect_effect = Time + 24;
 
+			//Reflector.RGB = PlayerColor[rand() % 7];
+
 			Reflector.Effect_rebound = Time + int(3 * Orb->next->speed);
 		}
 	}
@@ -318,7 +329,11 @@ struct Power_Reflector ReflectReflector(struct Power_Orb* Orb, struct Power_Refl
 			else if (Reflector.module[2] != 0 && Reflector.module_charged[2] == false) Reflector.module_charged[2] = true;
 			else if (Reflector.module[3] != 0 && Reflector.module_charged[3] == false) Reflector.module_charged[3] = true;
 			else if (Reflector.module[4] != 0 && Reflector.module_charged[4] == false) Reflector.module_charged[4] = true;
-			else Score += OrbScore(Orb->next->speed, Mole, PressureCaculate(Mole, Temperture), 1, Reactor.cherenkov);
+			else {
+				double score = OrbScore(Orb->next->speed, Mole, PressureCaculate(Mole, Temperture), 1, Reactor.cherenkov);
+				CreateEffect(EffectHead, Orb->next->x, Orb->next->y, score);
+				Score += score;
+			}
 			break;
 		case 1:
 			if (Temperture < MaxTemp - 1)	Temperture++;

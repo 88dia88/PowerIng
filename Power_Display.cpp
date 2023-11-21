@@ -3,11 +3,24 @@
 double window_half = window_size * 0.5;
 double window_size_x = 2000 * window_size, window_size_y = 1125 * window_size, Pibot_x = window_size_x * 0.5, Pibot_y = window_size_y * 0.5;
 
-const int Reactor_size = 1000, Rail_size = 375, Orb_size = 50;
+const int Reactor_size = 1000, Rail_size = 375, Orb_size = 100;
 const int Controllroom_size_x = 3000, Reflector_size_x = 375;
 const int Controllroom_size_y = 2000, Reflector_size_y = 115;
 
-const double ModifireValue[6][2] = { { 0.35 , 196 }, { 0.5 , 196 }, { 0.9 , 255 }, { 1 , 255 }, { 1 , 255 }, { 0.1 , 26 } };
+const double ModifireValue[6][2] = { 
+	{ 0.625, 0 },
+	{ 0.625, 32 },
+	{ 0.75, 0 },
+	{ 0.75, 64 },
+	{ 1, 0 },
+	{ 0.25, 191 } 
+};
+const double OrbColorModifireValue[4][2] = {
+	{ 0.625, 0 },
+	{ 0.625, 32 },
+	{ 0.75, 64 },
+	{ 0.25, 191 }
+};
 
 int Reactor_window = int(Reactor_size * window_size), Rail_window = int(Rail_size * window_size), Orb_window = int(Orb_size * window_size);
 int Controllroom_window_x = int(Controllroom_size_x * window_size), Reflector_window_x = int(Reflector_size_x * window_size);
@@ -21,8 +34,10 @@ const int RGBTemplate_Red = 0xff0000, RGBTemplate_Green = 0x00ff00, RGBTemplate_
 	RGBTemplate_Magenta = 0xff00ff, RGBTemplate_Yellow = 0xffff00, RGBTemplate_Cyan = 0x00ffff,
 	RGBTemplate_White = 0xffffff, RGBTemplate_Black = 0x000000, RGBTemplate_Gray = 0x808080;
 
+int PlayerColor[7];
+
 //--------------------------------------------------------------------------------------------------------------//
-CImage ReactorImg, Reactor_EffectImg, ReflectorImg, Reflector_EffectImg, OrbImg, Orb_Animation_Img, PressureImg, CherenkovImg;
+CImage ReactorImg, Reactor_EffectImg, ReflectorImg, Reflector_EffectImg, Orb_Animation_Img, PressureImg, CherenkovImg;
 CImage Reactor_RailImg;
 CImage Reflector_Mask_Img, Reflector_Effect_Mask_Img, Reflector_Color_Mask_Img, Reflector_Light_Mask_Img;
 CImage Button_PressureImg, Button_DialImg, Button_ValveImg, Button_OrbImg, Button_LampImg, Cherenkov_LeverImg, TempertureImg, DoorImg, Door_Light_Img;
@@ -30,19 +45,41 @@ CImage Pressure_Mask_Img, Cherenkov_Mask_Img, Button_Valve_Mask_Img, Button_Dial
 CImage Reflector_Module1_Img, Reflector_Module2_Img, Reflector_Module3_Img, Reflector_Module4_Img, Reflector_Module5_Img, Reflector_Module_Img, Reflector_Module_Mask_Img;
 CImage Reflector_Module1_Mask_Img, Reflector_Module2_Mask_Img, Reflector_Module3_Mask_Img, Reflector_Module4_Mask_Img, Reflector_Module5_Mask_Img;
 
+CImage OrbImg[2][3][2][5];
+CImage Orb_ColorImg[7][2][8];
+
+CImage Reactor_Effect_ColorImg[7];
+
+
+CImage Orb_MajorImg[3][2][5];
+CImage Orb_MinorImg[3][2][5];
+
+const char* OrbImgPrefix[2] = {
+	"_Major", "_Minor"
+};
+const char* OrbImgType[2][3] = {
+	{"_Basic", "_Low", "_Rad"},
+	{"_Bonus", "_Lowtemp", "_Hightemp"}
+};
+
+const char* OrbImgMajorType[3] = {
+	"_Basic", "_Low", "_Rad"
+};
+const char* OrbImgMinorType[3] = {
+	"_Bonus", "_Lowtemp", "_Hightemp"
+};
+const char* OrbImgMode[2] = {
+	"", "_Cherenkov"
+};
+const char* OrbImgSuffix[5] = {
+	"", "_Effect_1", "_Effect_2", "_Effect_3", "_Effect_4"
+};
+const char* OrbColorImgSuffix[8] = {
+	"_Effect_1", "_Effect_2", "_Effect_3", "_Effect_4", "_1","_2","_3","_4"
+};
+
 CImage Reflector_ColorImg[6];
-
-CImage Reflector_Player_ColorImg[7], Reflector_Player_LightImg[7], Reflector_Player_ColorChargeImg[7], Reflector_Player_LightChargeImg[7], Reflector_Player_ColorOffImg[7], Reflector_Player_LightOffImg[7];
-
-
-
-
-
-
-
-
-
-
+CImage Reflector_Player_ColorImg[6][7];
 
 struct Power_Effect* EffectHead = (Power_Effect*)malloc(sizeof(struct Power_Effect));
 //--------------------------------------------------------------------------------------------------------------//
@@ -100,11 +137,25 @@ void EffectPrint(struct Power_Effect* Effect)
 	else return;
 }
 //--------------------------------------------------------------------------------------------------------------//
+
+void DisplayWindow()
+{
+	window_half = window_size * 0.5;
+	window_size_x = 2000 * window_size, window_size_y = 1125 * window_size, Pibot_x = window_size_x * 0.5, Pibot_y = window_size_y * 0.5;
+
+	Reactor_window = int(Reactor_size * window_size), Rail_window = int(Rail_size * window_size), Orb_window = int(Orb_size * window_size);
+	Controllroom_window_x = int(Controllroom_size_x * window_size), Reflector_window_x = int(Reflector_size_x * window_size);
+	Controllroom_window_y = int(Controllroom_size_y * window_size), Reflector_window_y = int(Reflector_size_y * window_size);
+
+	Reactor_half = int(Reactor_size * window_half), Rail_half = int(Rail_size * window_half), Orb_half = int(Orb_size * window_half);
+	Controllroom_half_x = int(Controllroom_size_x * window_half), Reflector_half_x = int(Reflector_size_x * window_half);
+	Controllroom_half_y = int(Controllroom_size_y * window_half), Reflector_half_y = int(Reflector_size_y * window_half);
+}
+
 void DisplayLoad()
 {
 	ReactorImg.Load(TEXT("Img\\Reactor.png"));
 	Reactor_EffectImg.Load(TEXT("Img\\Reactor_Effect.png"));
-	OrbImg.Load(TEXT("Img\\Orb.png"));
 	Orb_Animation_Img.Load(TEXT("Img\\Orb_Animation.png"));
 	PressureImg.Load(TEXT("Img\\Pressure.png"));
 	CherenkovImg.Load(TEXT("Img\\Cherenkov.png"));
@@ -141,9 +192,7 @@ void DisplayLoad()
 		for (int j = 0; j < Door_Light_Img.GetHeight(); j++)
 		{
 			BYTE* ptr = (BYTE*)Door_Light_Img.GetPixelAddress(i, j);
-			ptr[0] = ((ptr[0] * ptr[3]) + 127) / 255;
-			ptr[1] = ((ptr[1] * ptr[3]) + 127) / 255;
-			ptr[2] = ((ptr[2] * ptr[3]) + 127) / 255;
+			for (int k = 0; k < 3; k++) ptr[k] = ((ptr[k] * ptr[3]) + 127) / 255;
 		}
 	}
 	for (int i = 0; i < Reactor_EffectImg.GetWidth(); i++)
@@ -151,9 +200,7 @@ void DisplayLoad()
 		for (int j = 0; j < Reactor_EffectImg.GetHeight(); j++)
 		{
 			BYTE* ptr = (BYTE*)Reactor_EffectImg.GetPixelAddress(i, j);
-			ptr[0] = ((ptr[0] * ptr[3]) + 127) / 255;
-			ptr[1] = ((ptr[1] * ptr[3]) + 127) / 255;
-			ptr[2] = ((ptr[2] * ptr[3]) + 127) / 255;
+			for (int k = 0; k < 3; k++) ptr[k] = ((ptr[k] * ptr[3]) + 127) / 255;
 		}
 	}
 	for (int i = 0; i < Cherenkov_LeverImg.GetWidth(); i++)
@@ -161,9 +208,7 @@ void DisplayLoad()
 		for (int j = 0; j < Cherenkov_LeverImg.GetHeight(); j++)
 		{
 			BYTE* ptr = (BYTE*)Cherenkov_LeverImg.GetPixelAddress(i, j);
-			ptr[0] = ((ptr[0] * ptr[3]) + 127) / 255;
-			ptr[1] = ((ptr[1] * ptr[3]) + 127) / 255;
-			ptr[2] = ((ptr[2] * ptr[3]) + 127) / 255;
+			for (int k = 0; k < 3; k++) ptr[k] = ((ptr[k] * ptr[3]) + 127) / 255;
 		}
 	}
 	for (int i = 0; i < Button_PressureImg.GetWidth(); i++)
@@ -171,9 +216,7 @@ void DisplayLoad()
 		for (int j = 0; j < Button_PressureImg.GetHeight(); j++)
 		{
 			BYTE* ptr = (BYTE*)Button_PressureImg.GetPixelAddress(i, j);
-			ptr[0] = ((ptr[0] * ptr[3]) + 127) / 255;
-			ptr[1] = ((ptr[1] * ptr[3]) + 127) / 255;
-			ptr[2] = ((ptr[2] * ptr[3]) + 127) / 255;
+			for (int k = 0; k < 3; k++) ptr[k] = ((ptr[k] * ptr[3]) + 127) / 255;
 		}
 	}
 	for (int i = 0; i < Button_OrbImg.GetWidth(); i++)
@@ -181,9 +224,7 @@ void DisplayLoad()
 		for (int j = 0; j < Button_OrbImg.GetHeight(); j++)
 		{
 			BYTE* ptr = (BYTE*)Button_OrbImg.GetPixelAddress(i, j);
-			ptr[0] = ((ptr[0] * ptr[3]) + 127) / 255;
-			ptr[1] = ((ptr[1] * ptr[3]) + 127) / 255;
-			ptr[2] = ((ptr[2] * ptr[3]) + 127) / 255;
+			for (int k = 0; k < 3; k++) ptr[k] = ((ptr[k] * ptr[3]) + 127) / 255;
 		}
 	}
 	for (int i = 0; i < Button_LampImg.GetWidth(); i++)
@@ -191,19 +232,7 @@ void DisplayLoad()
 		for (int j = 0; j < Button_LampImg.GetHeight(); j++)
 		{
 			BYTE* ptr = (BYTE*)Button_LampImg.GetPixelAddress(i, j);
-			ptr[0] = ((ptr[0] * ptr[3]) + 127) / 255;
-			ptr[1] = ((ptr[1] * ptr[3]) + 127) / 255;
-			ptr[2] = ((ptr[2] * ptr[3]) + 127) / 255;
-		}
-	}
-	for (int i = 0; i < OrbImg.GetWidth(); i++)
-	{
-		for (int j = 0; j < OrbImg.GetHeight(); j++)
-		{
-			BYTE* ptr = (BYTE*)OrbImg.GetPixelAddress(i, j);
-			ptr[0] = ((ptr[0] * ptr[3]) + 127) / 255;
-			ptr[1] = ((ptr[1] * ptr[3]) + 127) / 255;
-			ptr[2] = ((ptr[2] * ptr[3]) + 127) / 255;
+			for (int k = 0; k < 3; k++) ptr[k] = ((ptr[k] * ptr[3]) + 127) / 255;
 		}
 	}
 	for (int i = 0; i < Orb_Animation_Img.GetWidth(); i++)
@@ -211,9 +240,7 @@ void DisplayLoad()
 		for (int j = 0; j < Orb_Animation_Img.GetHeight(); j++)
 		{
 			BYTE* ptr = (BYTE*)Orb_Animation_Img.GetPixelAddress(i, j);
-			ptr[0] = ((ptr[0] * ptr[3]) + 127) / 255;
-			ptr[1] = ((ptr[1] * ptr[3]) + 127) / 255;
-			ptr[2] = ((ptr[2] * ptr[3]) + 127) / 255;
+			for (int k = 0; k < 3; k++) ptr[k] = ((ptr[k] * ptr[3]) + 127) / 255;
 		}
 	}
 	for (int i = 0; i < ReflectorImg.GetWidth(); i++)
@@ -221,9 +248,7 @@ void DisplayLoad()
 		for (int j = 0; j < ReflectorImg.GetHeight(); j++)
 		{
 			BYTE* ptr = (BYTE*)ReflectorImg.GetPixelAddress(i, j);
-			ptr[0] = ((ptr[0] * ptr[3]) + 127) / 255;
-			ptr[1] = ((ptr[1] * ptr[3]) + 127) / 255;
-			ptr[2] = ((ptr[2] * ptr[3]) + 127) / 255;
+			for (int k = 0; k < 3; k++) ptr[k] = ((ptr[k] * ptr[3]) + 127) / 255;
 		}
 	}
 	for (int i = 0; i < Reflector_Module_Img.GetWidth(); i++)
@@ -231,26 +256,78 @@ void DisplayLoad()
 		for (int j = 0; j < Reflector_Module_Img.GetHeight(); j++)
 		{
 			BYTE* ptr = (BYTE*)Reflector_Module_Img.GetPixelAddress(i, j);
-			ptr[0] = ((ptr[0] * ptr[3]) + 127) / 255;
-			ptr[1] = ((ptr[1] * ptr[3]) + 127) / 255;
-			ptr[2] = ((ptr[2] * ptr[3]) + 127) / 255;
+			for (int k = 0; k < 3; k++) ptr[k] = ((ptr[k] * ptr[3]) + 127) / 255;
 		}
 	}
 }
-void DisplayWindow()
+
+void DisplayOrbLoad()
 {
-	window_half = window_size * 0.5;
-	window_size_x = 2000 * window_size, window_size_y = 1125 * window_size, Pibot_x = window_size_x * 0.5, Pibot_y = window_size_y * 0.5;
-
-	Reactor_window = int(Reactor_size * window_size), Rail_window = int(Rail_size * window_size), Orb_window = int(Orb_size * window_size);
-	Controllroom_window_x = int(Controllroom_size_x * window_size), Reflector_window_x = int(Reflector_size_x * window_size);
-	Controllroom_window_y = int(Controllroom_size_y * window_size), Reflector_window_y = int(Reflector_size_y * window_size);
-
-	Reactor_half = int(Reactor_size * window_half), Rail_half = int(Rail_size * window_half), Orb_half = int(Orb_size * window_half);
-	Controllroom_half_x = int(Controllroom_size_x * window_half), Reflector_half_x = int(Reflector_size_x * window_half);
-	Controllroom_half_y = int(Controllroom_size_y * window_half), Reflector_half_y = int(Reflector_size_y * window_half);
+	for (int i = 0; i < 2; i++) {
+		for (int j = 0; j < 3; j++) {
+			for (int k = 0; k < 2; k++) {
+				for (int l = 0; l < 5; l++) {
+					if (!OrbImg[i][j][k][l].IsNull()) OrbImg[i][j][k][l].Destroy();
+					OrbImg[i][j][k][l].Load(_T("Img\\Orb\\Orb\\Orb") +
+						CString(OrbImgPrefix[i]) +
+						CString(OrbImgType[i][j]) +
+						CString(OrbImgMode[k]) +
+						CString(OrbImgSuffix[l]) +
+						_T(".png"));
+				}
+			}
+		}
+	}
+	BYTE* ptr[2][3][2][5];
+	for (int i = 0; i < OrbImg[0][0][0][0].GetWidth(); i++)
+	{
+		for (int j = 0; j < OrbImg[0][0][0][0].GetHeight(); j++)
+		{
+			for (int k = 0; k < 2; k++) {
+				for (int l = 0; l < 3; l++) {
+					for (int m = 0; m < 2; m++) {
+						for (int n = 0; n < 5; n++) {
+							ptr[k][l][m][n] = (BYTE*)OrbImg[k][l][m][n].GetPixelAddress(i, j);
+							for (int o = 0; o < 3; o++) ptr[k][l][m][n][o] = ((ptr[k][l][m][n][o] * ptr[k][l][m][n][3]) + 127) / 255;
+						}
+					}
+				}
+			}
+		}
+	}
 }
+void DisplayOrbColorApply(int RGB, int Num)
+{
+	for (int i = 0; i < 2; i++) {
+		for (int j = 0; j < 8; j++) {
+			if (!Orb_ColorImg[Num][i][j].IsNull()) Orb_ColorImg[Num][i][j].Destroy();
+			Orb_ColorImg[Num][i][j].Load(_T("Img\\Orb\\Orb_Color\\Orb_Major_Color") +
+				CString(OrbColorImgSuffix[j]) +
+				_T(".png"));
+		}
+	}
+	int rgb[4] = { 0, 0, 0, 0 };
+	for (int i = 1; i < 4; i++) rgb[i] = RGBConverter(RGB, i);
 
+	BYTE* ptr[2][8];
+	for (int i = 0; i < Orb_ColorImg[0][0][0].GetWidth(); i++)
+	{
+		for (int j = 0; j < Orb_ColorImg[0][0][0].GetHeight(); j++)
+		{
+			for (int k = 0; k < 8; k++)
+			{
+				for(int l = 0; l < 2; l++) {
+					ptr[l][k] = (BYTE*)Orb_ColorImg[Num][l][k].GetPixelAddress(i, j);
+					for (int m = 0; m < 3; m++) 
+						ptr[l][k][m] = BYTE(((rgb[3 - m] * OrbColorModifireValue[k % 4][0] + OrbColorModifireValue[k % 4][1]) * ptr[l][k][3] + 127) / 255);
+				}
+				ptr[1][k][0] = (((ptr[1][k][0] * 0.5 + 112.5) * ptr[1][k][3]) + 127) / 255;
+				ptr[1][k][1] = (((ptr[1][k][1] * 0.5 + 85) * ptr[1][k][3]) + 127) / 255;
+				ptr[1][k][2] = (((ptr[1][k][2] * 0.5 + 20) * ptr[1][k][3]) + 127) / 255;
+			}
+		}
+	}
+}
 void DisplayColorApply(int RGB)
 {
 	if (!Reactor_RailImg.IsNull())
@@ -263,12 +340,29 @@ void DisplayColorApply(int RGB)
 		for (int j = 0; j < Reactor_RailImg.GetHeight(); j++)
 		{
 			BYTE* ptr = (BYTE*)Reactor_RailImg.GetPixelAddress(i, j);
-			ptr[0] = ((ptr[0] - 255 + rgb[3]) * ptr[3] + 127) / 255;
-			ptr[1] = ((ptr[1] - 255 + rgb[2]) * ptr[3] + 127) / 255;
-			ptr[2] = ((ptr[2] - 255 + rgb[1]) * ptr[3] + 127) / 255;
+			for (int k = 0; k < 3; k++) ptr[k] = ((ptr[k] - 255 + rgb[3 - k]) * ptr[3] + 127) / 255;
 		}
 	}
 }
+
+void DisplayReactorColorApply(int RGB, int Num)
+{
+	if (!Reactor_Effect_ColorImg[Num].IsNull())
+		Reactor_Effect_ColorImg[Num].Destroy();
+	Reactor_Effect_ColorImg[Num].Load(TEXT("Img\\Reactor\\Reactor_Color_Effect.png"));
+	int rgb[4] = { 0, 0, 0, 0 };
+	for (int i = 1; i < 4; i++) rgb[i] = RGBConverter(RGB, i);
+	for (int i = 0; i < Reactor_Effect_ColorImg[Num].GetWidth(); i++)
+	{
+		for (int j = 0; j < Reactor_Effect_ColorImg[Num].GetHeight(); j++)
+		{
+			BYTE* ptr = (BYTE*)Reactor_Effect_ColorImg[Num].GetPixelAddress(i, j);
+			for (int k = 0; k < 3; k++) ptr[k] = ((ptr[k] - 255 + rgb[3 - k]) * ptr[3] + 127) / 255;
+		}
+	}
+}
+
+
 void DisplayReflectorColorApply(int RGB)
 {
 	for (int i = 0; i < 6; i++)
@@ -280,116 +374,42 @@ void DisplayReflectorColorApply(int RGB)
 	}
 	int rgb[4] = { 0, 0, 0, 0 };
 	for (int i = 1; i < 4; i++) rgb[i] = RGBConverter(RGB, i);
+	BYTE* ptr[6];
 	for (int i = 0; i < Reflector_ColorImg[0].GetWidth(); i++)
 	{
 		for (int j = 0; j < Reflector_ColorImg[0].GetHeight(); j++)
 		{
-
-			BYTE* ptr[6] = {
-				(BYTE*)Reflector_ColorImg[0].GetPixelAddress(i, j),
-				(BYTE*)Reflector_ColorImg[1].GetPixelAddress(i, j),
-				(BYTE*)Reflector_ColorImg[2].GetPixelAddress(i, j),
-				(BYTE*)Reflector_ColorImg[3].GetPixelAddress(i, j),
-				(BYTE*)Reflector_ColorImg[4].GetPixelAddress(i, j),
-				(BYTE*)Reflector_ColorImg[5].GetPixelAddress(i, j)
-			};
-			for (int i = 0; i < 6; i++)
+			for (int k = 0; k < 6; k++)
 			{
-				for (int j = 0; j < 3; j++)
-				{
-					ptr[i][j] = BYTE(((ptr[i][j] + rgb[3 - j] * ModifireValue[i][0] - ModifireValue[i][1]) * ptr[i][j] + 127) / 255);
-				}
+				ptr[k] = (BYTE*)Reflector_ColorImg[k].GetPixelAddress(i, j);
+				for (int l = 0; l < 3; l++) ptr[k][l] = BYTE(((rgb[3 - l] * ModifireValue[k][0] + ModifireValue[k][1]) * ptr[k][3] + 127) / 255);
 			}
 		}
 	}
 }
-
 void DisplayPlayerColorApply(int RGB, int Num)
 {
-	if (!Reflector_Player_ColorImg[Num].IsNull())
-		Reflector_Player_ColorImg[Num].Destroy();
-	if (!Reflector_Player_LightImg[Num].IsNull())
-		Reflector_Player_LightImg[Num].Destroy();
-	if (!Reflector_Player_ColorChargeImg[Num].IsNull())
-		Reflector_Player_ColorChargeImg[Num].Destroy();
-	if (!Reflector_Player_LightChargeImg[Num].IsNull())
-		Reflector_Player_LightChargeImg[Num].Destroy();
-	if (!Reflector_Player_ColorOffImg[Num].IsNull())
-		Reflector_Player_ColorOffImg[Num].Destroy();
-	if (!Reflector_Player_LightOffImg[Num].IsNull())
-		Reflector_Player_LightOffImg[Num].Destroy();
-	Reflector_Player_ColorImg[Num].Load(TEXT("Img\\Reflector_Color.png"));
-	Reflector_Player_LightImg[Num].Load(TEXT("Img\\Reflector_Color.png"));
-	Reflector_Player_ColorChargeImg[Num].Load(TEXT("Img\\Reflector_Color.png"));
-	Reflector_Player_LightChargeImg[Num].Load(TEXT("Img\\Reflector_Color.png"));
-	Reflector_Player_ColorOffImg[Num].Load(TEXT("Img\\Reflector_Color.png"));
-	Reflector_Player_LightOffImg[Num].Load(TEXT("Img\\Reflector_Color.png"));
-
+	DisplayOrbColorApply(RGB, Num);
+	DisplayReactorColorApply(RGB, Num);
+	PlayerColor[Num] = RGB;
+	for (int i = 0; i < 6; i++)
+	{
+		if (!Reflector_Player_ColorImg[i][Num].IsNull())
+			Reflector_Player_ColorImg[i][Num].Destroy();
+		Reflector_Player_ColorImg[i][Num].Load(TEXT("Img\\Reflector_Color.png"));
+	}
 	int rgb[4] = { 0, 0, 0, 0 };
-	for (int i = 1; i < 4; i++)
+	for (int i = 1; i < 4; i++) rgb[i] = RGBConverter(RGB, i);
+	BYTE* ptr[6];
+	for (int i = 0; i < Reflector_Player_ColorImg[0][Num].GetWidth(); i++)
 	{
-		rgb[i] = RGBConverter(RGB, i);
-	}
-
-
-	for (int i = 0; i < Reflector_Player_LightImg[Num].GetWidth(); i++)
-	{
-		for (int j = 0; j < Reflector_Player_LightImg[Num].GetHeight(); j++)
+		for (int j = 0; j < Reflector_Player_ColorImg[0][Num].GetHeight(); j++)
 		{
-			BYTE* ptr = (BYTE*)Reflector_Player_LightImg[Num].GetPixelAddress(i, j);
-			ptr[0] = ((ptr[0] - 255 + rgb[3]) * ptr[3] + 127) / 255;
-			ptr[1] = ((ptr[1] - 255 + rgb[2]) * ptr[3] + 127) / 255;
-			ptr[2] = ((ptr[2] - 255 + rgb[1]) * ptr[3] + 127) / 255;
-		}
-	}
-	for (int i = 0; i < Reflector_Player_ColorImg[Num].GetWidth(); i++)
-	{
-		for (int j = 0; j < Reflector_Player_ColorImg[Num].GetHeight(); j++)
-		{
-			BYTE* ptr = (BYTE*)Reflector_Player_ColorImg[Num].GetPixelAddress(i, j);
-			ptr[0] = BYTE(((ptr[0] - 255 + rgb[3] * 0.9) * ptr[3] + 127) / 255);
-			ptr[1] = BYTE(((ptr[1] - 255 + rgb[2] * 0.9) * ptr[3] + 127) / 255);
-			ptr[2] = BYTE(((ptr[2] - 255 + rgb[1] * 0.9) * ptr[3] + 127) / 255);
-		}
-	}
-	for (int i = 0; i < Reflector_Player_LightChargeImg[Num].GetWidth(); i++)
-	{
-		for (int j = 0; j < Reflector_Player_LightChargeImg[Num].GetHeight(); j++)
-		{
-			BYTE* ptr = (BYTE*)Reflector_Player_LightChargeImg[Num].GetPixelAddress(i, j);
-			ptr[0] = BYTE(((ptr[0] - 26 + rgb[3] * 0.1) * ptr[3] + 127) / 255);
-			ptr[1] = BYTE(((ptr[1] - 26 + rgb[2] * 0.1) * ptr[3] + 127) / 255);
-			ptr[2] = BYTE(((ptr[2] - 26 + rgb[1] * 0.1) * ptr[3] + 127) / 255);
-		}
-	}
-	for (int i = 0; i < Reflector_Player_ColorChargeImg[Num].GetWidth(); i++)
-	{
-		for (int j = 0; j < Reflector_Player_ColorChargeImg[Num].GetHeight(); j++)
-		{
-			BYTE* ptr = (BYTE*)Reflector_Player_ColorChargeImg[Num].GetPixelAddress(i, j);
-			ptr[0] = BYTE(((ptr[0] - 255 + rgb[3]) * ptr[3] + 127) / 255);
-			ptr[1] = BYTE(((ptr[1] - 255 + rgb[2]) * ptr[3] + 127) / 255);
-			ptr[2] = BYTE(((ptr[2] - 255 + rgb[1]) * ptr[3] + 127) / 255);
-		}
-	}
-	for (int i = 0; i < Reflector_Player_LightOffImg[Num].GetWidth(); i++)
-	{
-		for (int j = 0; j < Reflector_Player_LightOffImg[Num].GetHeight(); j++)
-		{
-			BYTE* ptr = (BYTE*)Reflector_Player_LightOffImg[Num].GetPixelAddress(i, j);
-			ptr[0] = BYTE(((ptr[0] - 196 + rgb[3] * 0.5) * ptr[3] + 127) / 255);
-			ptr[1] = BYTE(((ptr[1] - 196 + rgb[2] * 0.5) * ptr[3] + 127) / 255);
-			ptr[2] = BYTE(((ptr[2] - 196 + rgb[1] * 0.5) * ptr[3] + 127) / 255);
-		}
-	}
-	for (int i = 0; i < Reflector_Player_ColorOffImg[Num].GetWidth(); i++)
-	{
-		for (int j = 0; j < Reflector_Player_ColorOffImg[Num].GetHeight(); j++)
-		{
-			BYTE* ptr = (BYTE*)Reflector_Player_ColorOffImg[Num].GetPixelAddress(i, j);
-			ptr[0] = BYTE(((ptr[0] - 196 + rgb[3] * 0.35) * ptr[3] + 127) / 255);
-			ptr[1] = BYTE(((ptr[1] - 196 + rgb[2] * 0.35) * ptr[3] + 127) / 255);
-			ptr[2] = BYTE(((ptr[2] - 196 + rgb[1] * 0.35) * ptr[3] + 127) / 255);
+			for (int k = 0; k < 6; k++)
+			{
+				ptr[k] = (BYTE*)Reflector_Player_ColorImg[k][Num].GetPixelAddress(i, j);
+				for (int l = 0; l < 3; l++) ptr[k][l] = BYTE(((rgb[3 - l] * ModifireValue[k][0] + ModifireValue[k][1]) * ptr[k][3] + 127) / 255);
+			}
 		}
 	}
 }
@@ -399,19 +419,130 @@ void DisplayOrb(struct Power_Orb* Orb)
 {
 	if (Orb->next != OrbHead)
 	{
-		for (int j = 2; j < 6; j++)
-			for (int i = Orb->next->effect_count; i > 0; i--)
-				OrbImg.AlphaBlend(memdc,
-					int(Pibot_x + (Orb->next->afterx[i] - Orb->next->size) * window_size),
-					int(Pibot_y + (Orb->next->aftery[i] - Orb->next->size) * window_size),
-					int(Orb->next->size * 2 * window_size),
-					int(Orb->next->size * 2 * window_size),
-					Orb_size * (4 * Reactor.cherenkov + 10 * Orb->next->major + j),
-					Orb_size * Orb->next->type,
-					Orb_size, Orb_size,
-					BYTE(1.5 * (Orb->next->effect_count - i)));
+		bool DisplayOrb_major = Orb->next->major;
+		double DisplayOrb_size = Orb->next->size;
+		int DisplayOrb_type = Orb->next->type;
+		int DisplayOrb_effect_count = Orb->next->effect_count;
+		double DisplayOrb_x = Orb->next->x;
+		double DisplayOrb_y = Orb->next->y;
+		double* DisplayOrb_afterx = Orb->next->afterx;
+		double* DisplayOrb_aftery = Orb->next->aftery;
+		/*
+		for (int j = 0; j < 4; j++)
+			for (int i = DisplayOrb_effect_count; i > 0; i--)
+				Orb_EffectImg[DisplayOrb_type + Reactor.cherenkov][1 - DisplayOrb_major].AlphaBlend(memdc,
+					int(Pibot_x + (DisplayOrb_afterx[i] - DisplayOrb_size) * window_size),
+					int(Pibot_y + (DisplayOrb_aftery[i] - DisplayOrb_size) * window_size),
+					int(DisplayOrb_size * 2 * window_size),
+					int(DisplayOrb_size * 2 * window_size),
+					Orb_size * j, 0, Orb_size, Orb_size,
+					BYTE(1.5 * (DisplayOrb_effect_count - i)));
+		Orb_Img[DisplayOrb_type + Reactor.cherenkov][1 - DisplayOrb_major].Draw(memdc,
+			int(Pibot_x + (Orb->next->x - DisplayOrb_size) * window_size),
+			int(Pibot_y + (Orb->next->y - DisplayOrb_size) * window_size),
+			int(DisplayOrb_size * 2 * window_size),
+			int(DisplayOrb_size * 2 * window_size),
+			0, 0, Orb_size, Orb_size);
+		*/
 
-		OrbImg.Draw(memdc, int(Pibot_x + (Orb->next->x - Orb->next->size) * window_size), int(Pibot_y + (Orb->next->y - Orb->next->size) * window_size), int(Orb->next->size * 2 * window_size), int(Orb->next->size * 2 * window_size), Orb_size * (Reactor.cherenkov + 10 * Orb->next->major), Orb_size * Orb->next->type, Orb_size, Orb_size);
+		/*
+		if (DisplayOrb_major) {
+			for (int j = 0; j < 5; j++)
+				for (int i = DisplayOrb_effect_count; i > 0; i--)
+					Orb_MajorImg[DisplayOrb_type][Reactor.cherenkov][j].AlphaBlend(memdc,
+						int(Pibot_x + (DisplayOrb_afterx[i] - DisplayOrb_size) * window_size),
+						int(Pibot_y + (DisplayOrb_aftery[i] - DisplayOrb_size) * window_size),
+						int(DisplayOrb_size * 2 * window_size),
+						int(DisplayOrb_size * 2 * window_size),
+						0, 0, Orb_size, Orb_size,
+						BYTE((DisplayOrb_effect_count - i) * 2.5));
+			Orb_MajorImg[DisplayOrb_type][Reactor.cherenkov][0].Draw(memdc,
+				int(Pibot_x + (DisplayOrb_x - DisplayOrb_size) * window_size),
+				int(Pibot_y + (DisplayOrb_y - DisplayOrb_size) * window_size),
+				int(DisplayOrb_size * 2 * window_size),
+				int(DisplayOrb_size * 2 * window_size),
+				0, 0, Orb_size, Orb_size);
+		}
+		else {
+			for (int j = 0; j < 5; j++)
+				for (int i = DisplayOrb_effect_count; i > 0; i--)
+					Orb_MinorImg[DisplayOrb_type][Reactor.cherenkov][j].AlphaBlend(memdc,
+						int(Pibot_x + (DisplayOrb_afterx[i] - DisplayOrb_size) * window_size),
+						int(Pibot_y + (DisplayOrb_aftery[i] - DisplayOrb_size) * window_size),
+						int(DisplayOrb_size * 2 * window_size),
+						int(DisplayOrb_size * 2 * window_size),
+						0, 0, Orb_size, Orb_size,
+						BYTE((DisplayOrb_effect_count - i) * 2.5));
+			Orb_MinorImg[DisplayOrb_type][Reactor.cherenkov][0].Draw(memdc,
+				int(Pibot_x + (DisplayOrb_x - DisplayOrb_size) * window_size),
+				int(Pibot_y + (DisplayOrb_y - DisplayOrb_size) * window_size),
+				int(DisplayOrb_size * 2 * window_size),
+				int(DisplayOrb_size * 2 * window_size),
+				0, 0, Orb_size, Orb_size);
+		}
+		*/
+
+		int Color = -1;
+		for (int i = 0; i < 6; i++) {
+			if (Orb->next->RGB == PlayerColor[i]) Color = i;
+		}
+		if (Color != -1) {
+			for (int j = 0; j < 4; j++)
+				for (int i = DisplayOrb_effect_count; i > 0; i--)
+					Orb_ColorImg[Color][Reactor.cherenkov][j].AlphaBlend(memdc,
+						int(Pibot_x + (DisplayOrb_afterx[i] - DisplayOrb_size) * window_size),
+						int(Pibot_y + (DisplayOrb_aftery[i] - DisplayOrb_size) * window_size),
+						int(DisplayOrb_size * 2 * window_size),
+						int(DisplayOrb_size * 2 * window_size),
+						0, 0, Orb_size, Orb_size,
+						BYTE((DisplayOrb_effect_count - i) * 2.5));
+			for (int i = 0; i < 8; i++)
+				Orb_ColorImg[Color][Reactor.cherenkov][i].Draw(memdc,
+					int(Pibot_x + (DisplayOrb_x - DisplayOrb_size) * window_size),
+					int(Pibot_y + (DisplayOrb_y - DisplayOrb_size) * window_size),
+					int(DisplayOrb_size * 2 * window_size),
+					int(DisplayOrb_size * 2 * window_size),
+					0, 0, Orb_size, Orb_size);
+		}
+		else {
+			for (int j = 1; j < 5; j++)
+				for (int i = DisplayOrb_effect_count; i > 0; i--)
+					OrbImg[1 - DisplayOrb_major][DisplayOrb_type][Reactor.cherenkov][j].AlphaBlend(memdc,
+						int(Pibot_x + (DisplayOrb_afterx[i] - DisplayOrb_size) * window_size),
+						int(Pibot_y + (DisplayOrb_aftery[i] - DisplayOrb_size) * window_size),
+						int(DisplayOrb_size * 2 * window_size),
+						int(DisplayOrb_size * 2 * window_size),
+						0, 0, Orb_size, Orb_size,
+						BYTE((DisplayOrb_effect_count - i) * 2.5));
+			OrbImg[1 - DisplayOrb_major][DisplayOrb_type][Reactor.cherenkov][0].Draw(memdc,
+				int(Pibot_x + (DisplayOrb_x - DisplayOrb_size) * window_size),
+				int(Pibot_y + (DisplayOrb_y - DisplayOrb_size) * window_size),
+				int(DisplayOrb_size * 2 * window_size),
+				int(DisplayOrb_size * 2 * window_size),
+				0, 0, Orb_size, Orb_size);
+		}
+
+		/*
+		if (DisplayOrb_major) {
+			for (int j = 0; j < 5; j++)
+				for (int i = DisplayOrb_effect_count; i > 0; i--)
+					OrbImg[1 - DisplayOrb_major][DisplayOrb_type][Reactor.cherenkov][j].AlphaBlend(memdc,
+						int(Pibot_x + (DisplayOrb_afterx[i] - DisplayOrb_size) * window_size),
+						int(Pibot_y + (DisplayOrb_aftery[i] - DisplayOrb_size) * window_size),
+						int(DisplayOrb_size * 2 * window_size),
+						int(DisplayOrb_size * 2 * window_size),
+						0, 0, Orb_size, Orb_size,
+						BYTE((DisplayOrb_effect_count - i) * 2.5));
+		}
+
+		OrbImg[1 - DisplayOrb_major][DisplayOrb_type][Reactor.cherenkov][0].Draw(memdc,
+			int(Pibot_x + (DisplayOrb_x - DisplayOrb_size) * window_size),
+			int(Pibot_y + (DisplayOrb_y - DisplayOrb_size) * window_size),
+			int(DisplayOrb_size * 2 * window_size),
+			int(DisplayOrb_size * 2 * window_size),
+			0, 0, Orb_size, Orb_size);
+		*/
+
 		DisplayOrb(Orb->next);
 	}
 	else return;
@@ -461,6 +592,56 @@ void DisplayReflector(struct Power_Reflector Reflector)
 	}
 	return;
 }
+
+
+void DisplayPlayerReflector(struct Power_Reflector Reflector, int Num)
+{
+	POINT Reflector_Point[3] = {
+		ReflectorPaint1(Reflector, 0),
+		ReflectorPaint2(Reflector, 0),
+		ReflectorPaint3(Reflector, 0)
+	};
+	ReflectorImg.PlgBlt(memdc, Reflector_Point, 0, 0, 375, 115, Reflector_Mask_Img, 0, 0);
+
+	if (Reflector.age < Time - 100 && Reflector.module_charged[0])
+	{
+		Reflector_Player_ColorImg[2][Num].PlgBlt(memdc, Reflector_Point, 0, 0, 375, 115, Reflector_Color_Mask_Img, 0, 0);
+		Reflector_Player_ColorImg[3][Num].PlgBlt(memdc, Reflector_Point, 0, 0, 375, 115, Reflector_Light_Mask_Img, 0, 0);
+	}
+	else if (Reflector.age < Time && Reflector.module_charged[0])
+	{
+		Reflector_Player_ColorImg[4][Num].PlgBlt(memdc, Reflector_Point, 0, 0, 375, 115, Reflector_Color_Mask_Img, 0, 0);
+		Reflector_Player_ColorImg[5][Num].PlgBlt(memdc, Reflector_Point, 0, 0, 375, 115, Reflector_Light_Mask_Img, 0, 0);
+	}
+	else
+	{
+		Reflector_Player_ColorImg[0][Num].PlgBlt(memdc, Reflector_Point, 0, 0, 375, 115, Reflector_Color_Mask_Img, 0, 0);
+		Reflector_Player_ColorImg[1][Num].PlgBlt(memdc, Reflector_Point, 0, 0, 375, 115, Reflector_Light_Mask_Img, 0, 0);
+	}
+
+	Reflector_Module_Img.PlgBlt(memdc, Reflector_Point, 375 * Reflector.module_charged[4] + 750 * 4, (115 * (Reflector.module[4] - 1)), 375, 115, Reflector_Module_Mask_Img, 375 * Reflector.module_charged[4] + 750 * 4, (115 * (Reflector.module[4] - 1)));
+	for (int i = 0; i < 4; i++)
+	{
+		Reflector_Module_Img.PlgBlt(memdc, Reflector_Point, 375 * Reflector.module_charged[i] + 750 * i, (115 * (Reflector.module[i] - 1)), 375, 115, Reflector_Module_Mask_Img, 375 * Reflector.module_charged[i] + 750 * i, (115 * (Reflector.module[i] - 1)));
+	}
+
+
+	if (Reflector.Effect_effect > 0)
+	{
+		int effect = 0;
+		effect = (Reflector.Effect_effect - Time) / 2;
+		POINT Reflector_Effect_Point[3] = {
+		ReflectorPaint1(Reflector, 67.5),
+		ReflectorPaint2(Reflector, 67.5),
+		ReflectorPaint3(Reflector, 67.5)
+		};
+		Reflector_EffectImg.PlgBlt(memdc, Reflector_Effect_Point, 375 * (effect % 100), (300 * (int)(effect / 100.0)), 375, 300, Reflector_Effect_Mask_Img, 375 * (effect % 100), 0);
+	}
+	return;
+}
+
+
+
 void DisplayRotatedImage(double x, double y, double Sizex, double Sizey, double Angle, int Type)
 {
 	POINT Image_Point[3] = {
