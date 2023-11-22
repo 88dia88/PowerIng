@@ -76,7 +76,28 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 		for (int i = 1; i < 7; i++)
 		{
 			Player[i] = PlayerReset(Player[i], i);
-			Player[i].Online = false;
+			Player[i].Reflector.polar_x = i / 6.0;
+			Player[i].Online = false; // 주석 처리하면 추가 패널이 활성화됨
+			//if (i % 2 == 0) Player[i].Online = false; // 주석 처리하면 6개의 패널이 활성화됨
+
+			/* //아래 코드의 주석 처리를 해제하면 플레이어에 9가지중 무작위 색상이 적용됨
+			while (true) {
+				if (rand() % 9 == 1) Player[i].RGB = RGBTemplate_Red;
+				else if (rand() % 9 == 2) Player[i].RGB = RGBTemplate_Green;
+				else if (rand() % 9 == 3) Player[i].RGB = RGBTemplate_Blue;
+				else if (rand() % 9 == 4) Player[i].RGB = RGBTemplate_Yellow;
+				else if (rand() % 9 == 5) Player[i].RGB = RGBTemplate_Magenta;
+				else if (rand() % 9 == 6) Player[i].RGB = RGBTemplate_Cyan;
+				else if (rand() % 9 == 6) Player[i].RGB = RGBTemplate_Black;
+				else if (rand() % 9 == 6) Player[i].RGB = RGBTemplate_Gray;
+				else if (rand() % 9 == 6) Player[i].RGB = RGBTemplate_White;
+
+				int ColorDupe = 0;
+				for (int j = 1; j < i; j++) if (Player[i].RGB == Player[j].RGB) ColorDupe++;
+				if (ColorDupe == 0) break;
+			}
+			*/
+			Player[i].Reflector.RGB = Player[i].RGB;
 		}
 
 		GeneralReset();
@@ -92,12 +113,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 
 		DisplayPlayerColorApply(MainPlayer.RGB, 0);
 
-		DisplayPlayerColorApply(RGBTemplate_Red, 1);
-		DisplayPlayerColorApply(RGBTemplate_Green, 2);
-		DisplayPlayerColorApply(RGBTemplate_Blue, 3);
-		DisplayPlayerColorApply(RGBTemplate_Cyan, 4);
-		DisplayPlayerColorApply(RGBTemplate_Magenta, 5);
-		DisplayPlayerColorApply(RGBTemplate_Black, 6);
+		for (int i = 1; i < 7; i++) DisplayPlayerColorApply(Player[i].RGB, i);
 
 		Control.Left = 0x25;
 		Control.Right = 0X27;
@@ -266,13 +282,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 							}
 						}
 
-						/*
-						if (ServerTime > Time + 30) Time = ServerTime;
-						else if (ServerTime > Time) Time += 2;
-						else Time++;
-						*/
+						Time_Server++;
 
-						Time++;
+						if (Time_Server > Time + 30) Time = Time_Server;
+						else if (Time_Server > Time) Time += 2;
+						else Time++;
 
 						//ReflectorControl(Player[0].Reflector, GetAsyncKeyState(Reflector1Left), GetAsyncKeyState(Reflector1Right), GetAsyncKeyState(Reflector1Up), GetAsyncKeyState(Reflector1Down));
 
@@ -340,15 +354,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 				for (int i = 0; i < 7; i++)
 				{
 					if (Player[i].Online) {
-						DisplayReflector(Player[i].Reflector);
-
-						int Color = -1;
-						for (int k = 0; k < 6; k++) {
-							if (Player[i].Reflector.RGB == PlayerColor[k]) Color = k;
-						}
-						if (Color != -1) DisplayPlayerReflector(Player[i].Reflector, Color);
-
-						else DisplayPlayerReflector(Player[i].Reflector, i);
+						//DisplayReflector(Player[i].Reflector);
+						DisplayPlayerReflector(Player[i].Reflector, i);
 					}
 				}
 
@@ -430,7 +437,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 
 				if (Setting.Debug) UIDebugInfo();
 
-				if (true) UIDebugInfo();
+				//if (true) UIDebugInfo();
 
 				if (AnimationTime_Door != 0) {
 					DoorImg.Draw(memdc, int(Pibot_x - Controllroom_half_x), int(Pibot_y - Controllroom_half_y), Controllroom_window_x, Controllroom_window_y,

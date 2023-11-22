@@ -116,7 +116,10 @@ struct Power_Team {
 
 extern bool GameStart;
 extern double Score, Temperture, Mole, TotalScore;
-extern int Time, PreTime, ReactorEffect, OrbType, Orbcount;
+extern int PreTime, ReactorEffect, OrbType, Orbcount;
+
+extern int Time, Time_Server;
+
 extern int Button[5];
 extern int AnimationTime_Door, AnimationTime_Button[5];
 

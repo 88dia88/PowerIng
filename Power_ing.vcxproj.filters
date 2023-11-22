@@ -30,6 +30,9 @@
     <ClCompile Include="Power_Display.cpp">
       <Filter>헤더 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Power_Serverside.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Power_Math.h">

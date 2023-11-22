@@ -144,6 +144,7 @@
     <ClCompile Include="Power_Math.cpp" />
     <ClCompile Include="Power_ing.cpp" />
     <ClCompile Include="Power_Orb.cpp" />
+    <ClCompile Include="Power_Serverside.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Power_Math.h" />

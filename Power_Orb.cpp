@@ -2,7 +2,10 @@
 //--------------------------------------------------------------------------------------------------------------//
 bool GameStart;
 double Score, Temperture, Mole, TotalScore;
-int Time, PreTime, ReactorEffect, OrbType, Orbcount;
+int PreTime, ReactorEffect, OrbType, Orbcount;
+
+int Time, Time_Server;
+
 int Button[5];
 int AnimationTime_Door, AnimationTime_Button[5];
 
@@ -153,10 +156,10 @@ void CollisionDetect(struct Power_Orb* Orb)
 				if (Orb->next->major)
 				{
 					int Color = -1;
-					for (int k = 0; k < 6; k++) {
+					for (int k = 0; k < 7; k++) {
 						if (Orb->next->RGB == PlayerColor[k]) Color = k;
 					}
-					if (Color >= 0 and Color < 7) ColliderColor = Color;
+					if (Color >= 0 and Color < 8) ColliderColor = Color;
 
 					Reactor.meltdown = true;
 
@@ -512,6 +515,7 @@ struct Power_Player PlayerReset(struct Power_Player Player, int ID) {
 	Player.Score = 0, Player.CherenkovMeter = 0;
 	Player.Ready = false;
 	Player.Reflector = ReflectorReset(Player.Reflector);
+	Player.Reflector.RGB = Player.RGB;
 	return Player;
 }
 
