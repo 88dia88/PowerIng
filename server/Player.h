@@ -17,6 +17,7 @@ public:
     void SetKeyInput(KeyInput keyInput);
     void SetKeyInput(bool up, bool down, bool right, bool left, bool action);
     void SetActionKeyDwon(bool actionKey);
+    void SetPlayerData(Player player);
     KeyInput GetKeyInput();
 
     bool GetState();

@@ -67,6 +67,14 @@ void Player::SetActionKeyDwon(bool actionKey)
     mKeyInput.action = actionKey;
 }
 
+void Player::SetPlayerData(Player player)
+{
+    mReady = player.mReady;
+
+    mColor = player.mColor;
+    mModule = player.mModule;
+}
+
 KeyInput Player::GetKeyInput()
 {
     return mKeyInput;

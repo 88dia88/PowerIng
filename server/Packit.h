@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "Player.h"
 // 게임 데이터 통신에 사용할 패킷 정의
 
 // 패킷 타입
@@ -9,6 +10,7 @@ enum PacketType
     PACKET_TYPE_KEY_INPUT,
     PACKET_TYPE_LOBBY,
     PACKET_TYPE_IN_GAME,
+    PACKET_TYPE_PLAYER_DATA,
     Count
 };
 
@@ -41,30 +43,37 @@ struct KeyInputPacket
     KeyInput keyInput;
 };
 
-struct LobbyPlayerPacket
+struct LobbyDataPacket
 {
     const PacketType type = PACKET_TYPE_LOBBY;
 
-    int id;
+    int playerCount;
+    Player* players;
+};
+
+struct PlayerDataPacket
+{
+    const PacketType type = PACKET_TYPE_PLAYER_DATA;
+
+    Player player;
+};
+
+struct BallData
+{
+    double x, y;
     int color;
-    int module;
-    bool playerReady;
-    bool playerRule;
+    int type;
 };
 
 struct GameDataPacket
 {
     const PacketType type = PACKET_TYPE_IN_GAME;
 
-
+    int playerCount;
+    Player* players;
     BallData ballData;
 };
 
-struct BallData 
-{
-    double x, y;
-    int color;
-    int type;
-};
+
 
 #pragma pack()
