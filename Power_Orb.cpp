@@ -138,12 +138,27 @@ struct Power_Orb* OrbSpeed(struct Power_Orb* Orb)
 	Orb->shelly = sin(M_TU * Orb->angle) * Orb->size;
 	return Orb;
 }
+
 void CollisionDetect(struct Power_Orb* Orb)
 {
 	if (Orb->next != OrbHead)
 	{
 		OrbPosition(Orb->next);
-		if (DistanceOvercmp(Orb->next->x + Orb->next->shellx, Orb->next->y + Orb->next->shelly, 500))
+
+		int ClosestReflector = -1;
+		double ClosestPolar_x = 1;
+		for (int i = 0; i < 7; i++) {
+			if (Player[i].Online and
+				Player[i].Reflector.age <= Time and
+				Player[i].Reflector.polar_x < ClosestPolar_x and 
+				ReflectCheck(Orb->next->x + Orb->next->shellx, Orb->next->y + Orb->next->shelly,
+					Player[i].Reflector.polar_x, Player[i].Reflector.polar_y, Player[i].Reflector.size)) {
+				ClosestReflector = i;
+				ClosestPolar_x = Player[i].Reflector.polar_x;
+			}
+		}
+		if (ClosestReflector != -1) Player[ClosestReflector].Reflector = ReflectReflector(Orb, Player[ClosestReflector].Reflector);
+		else if (DistanceOvercmp(Orb->next->x + Orb->next->shellx, Orb->next->y + Orb->next->shelly, 500))
 		{
 			if (((Orb->next->major == false && Orb->next->type == 0) || Orb->next->effect == 1) 
 				&& Distancecmp(Orb->next->x + Orb->next->shellx, Orb->next->y + Orb->next->shelly, 525))
@@ -480,8 +495,10 @@ struct Power_Reflector ReflectorPosition(struct Power_Reflector Reflector, short
 
 struct Power_Reflector ReflectorProcess(struct Power_Reflector Reflector, bool Reflect)
 {
+	/*
 	if (Reflect && Reflector.age <= Time)
 		Reflector = ReflectDetect(OrbHead, Reflector);
+	*/
 
 	Reflector.polar_x = AngleOverflow(Reflector.polar_x + Reflector.polar_speedx * 0.0001 / Reflector.polar_y * 375);
 

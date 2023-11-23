@@ -264,6 +264,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 					switch (GameMode)
 					{
 					case 0:
+						Time_Server++;
+
 						if (Reactor.meltdown == false and Orbcount < 0) {
 							GameStatus = -2;
 							//게임오버
@@ -282,22 +284,22 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 							}
 						}
 
-						Time_Server++;
-
-						if (Time_Server > Time + 30) Time = Time_Server;
-						else if (Time_Server > Time) Time += 2;
-						else Time++;
-
-						//ReflectorControl(Player[0].Reflector, GetAsyncKeyState(Reflector1Left), GetAsyncKeyState(Reflector1Right), GetAsyncKeyState(Reflector1Up), GetAsyncKeyState(Reflector1Down));
-
-						Player[0].Reflector = ReflectorPosition(Player[0].Reflector, GetAsyncKeyState(Reflector1Left), GetAsyncKeyState(Reflector1Right), GetAsyncKeyState(Reflector1Up), GetAsyncKeyState(Reflector1Down));
-
 						for (int i = 0; i < 7; i++)
 						{
 							if (Player[i].Online) {
 								Player[i].Reflector = ReflectorProcess(Player[i].Reflector, (GameStatus == 1));
 							}
 						}
+
+						//이 아래는 클라이언트 사이드
+
+						if (Time_Server > Time + 30) Time = Time_Server;
+						else if (Time_Server > Time) Time += 2;
+						else Time++;
+
+						//Player[0].Reflector = ReflectorControl(Player[0].Reflector, GetAsyncKeyState(Reflector1Left), GetAsyncKeyState(Reflector1Right), GetAsyncKeyState(Reflector1Up), GetAsyncKeyState(Reflector1Down));
+
+						Player[0].Reflector = ReflectorPosition(Player[0].Reflector, GetAsyncKeyState(Reflector1Left), GetAsyncKeyState(Reflector1Right), GetAsyncKeyState(Reflector1Up), GetAsyncKeyState(Reflector1Down));
 
 						break;
 					case 1:
