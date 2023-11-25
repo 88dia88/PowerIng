@@ -45,6 +45,8 @@ CImage Pressure_Mask_Img, Cherenkov_Mask_Img, Button_Valve_Mask_Img, Button_Dial
 CImage Reflector_Module1_Img, Reflector_Module2_Img, Reflector_Module3_Img, Reflector_Module4_Img, Reflector_Module5_Img, Reflector_Module_Img, Reflector_Module_Mask_Img;
 CImage Reflector_Module1_Mask_Img, Reflector_Module2_Mask_Img, Reflector_Module3_Mask_Img, Reflector_Module4_Mask_Img, Reflector_Module5_Mask_Img;
 
+CImage ReflectorTransparentImg, ReflectorTransparent_Module_Img;
+
 CImage OrbImg[2][3][2][5];
 CImage Orb_ColorImg[7][2][8];
 
@@ -154,38 +156,21 @@ void DisplayWindow()
 
 void DisplayLoad()
 {
+	DisplayMaskLoad();
+
 	ReactorImg.Load(TEXT("Img\\Reactor.png"));
 	Reactor_EffectImg.Load(TEXT("Img\\Reactor_Effect.png"));
 	Orb_Animation_Img.Load(TEXT("Img\\Orb_Animation.png"));
-	PressureImg.Load(TEXT("Img\\Pressure.png"));
-	CherenkovImg.Load(TEXT("Img\\Cherenkov.png"));
-
-	ReflectorImg.Load(TEXT("Img\\Reflector.png"));
-	Reflector_EffectImg.Load(TEXT("Img\\Reflector_Effect.png"));
-
-	Reflector_Mask_Img.Load(TEXT("Img\\Reflector_Mask.bmp"));
-	Reflector_Effect_Mask_Img.Load(TEXT("Img\\Reflector_Effect_Mask.bmp"));
-	Reflector_Color_Mask_Img.Load(TEXT("Img\\Reflector_Color_Mask.bmp"));
-	Reflector_Light_Mask_Img.Load(TEXT("Img\\Reflector_Light_Mask.bmp"));
 
 	Button_PressureImg.Load(TEXT("Img\\Button_Pressure.png"));
-	Button_DialImg.Load(TEXT("Img\\Button_Dial.png"));
-	Button_ValveImg.Load(TEXT("Img\\Button_Valve.png"));
 	Button_OrbImg.Load(TEXT("Img\\Button_Orb.png"));
 	Button_LampImg.Load(TEXT("Img\\Button_Lamp.png"));
 	Cherenkov_LeverImg.Load(TEXT("Img\\Cherenkov_Lever.png"));
-	TempertureImg.Load(TEXT("Img\\Temperture.png"));
 	DoorImg.Load(TEXT("Img\\Door.png"));
 	Door_Light_Img.Load(TEXT("Img\\Door_Light.png"));
 
-	Pressure_Mask_Img.Load(TEXT("Img\\Pressure_Mask.bmp"));
-	Cherenkov_Mask_Img.Load(TEXT("Img\\Cherenkov_Mask.bmp"));
-	Button_Dial_Mask_Img.Load(TEXT("Img\\Button_Dial_Mask.bmp"));
-	Button_Valve_Mask_Img.Load(TEXT("Img\\Button_Valve_Mask.bmp"));
-	Temperture_Mask_Img.Load(TEXT("Img\\Temperture_Mask.bmp"));
-
-	Reflector_Module_Img.Load(TEXT("Img\\Reflector_Module.png"));
-	Reflector_Module_Mask_Img.Load(TEXT("Img\\Reflector_Module_Mask.bmp"));
+	ReflectorTransparentImg.Load(TEXT("Img\\Reflector\\UnMask\\Reflector.png"));
+	ReflectorTransparent_Module_Img.Load(TEXT("Img\\Reflector\\UnMask\\Reflector_Module.png"));
 
 	for (int i = 0; i < Door_Light_Img.GetWidth(); i++)
 	{
@@ -243,7 +228,7 @@ void DisplayLoad()
 			for (int k = 0; k < 3; k++) ptr[k] = ((ptr[k] * ptr[3]) + 127) / 255;
 		}
 	}
-	for (int i = 0; i < ReflectorImg.GetWidth(); i++)
+	for (int i = 0; i < ReflectorTransparentImg.GetWidth(); i++)
 	{
 		for (int j = 0; j < ReflectorImg.GetHeight(); j++)
 		{
@@ -251,7 +236,7 @@ void DisplayLoad()
 			for (int k = 0; k < 3; k++) ptr[k] = ((ptr[k] * ptr[3]) + 127) / 255;
 		}
 	}
-	for (int i = 0; i < Reflector_Module_Img.GetWidth(); i++)
+	for (int i = 0; i < ReflectorTransparent_Module_Img.GetWidth(); i++)
 	{
 		for (int j = 0; j < Reflector_Module_Img.GetHeight(); j++)
 		{
@@ -260,6 +245,140 @@ void DisplayLoad()
 		}
 	}
 }
+
+/*
+void DisplayLoad()
+{
+	DisplayMaskLoad();
+
+	ReactorImg.Load(TEXT("Img\\Reactor.png"));
+	Reactor_EffectImg.Load(TEXT("Img\\Reactor_Effect.png"));
+	Orb_Animation_Img.Load(TEXT("Img\\Orb_Animation.png"));
+
+	Button_PressureImg.Load(TEXT("Img\\Button_Pressure.png"));
+	Button_OrbImg.Load(TEXT("Img\\Button_Orb.png"));
+	Button_LampImg.Load(TEXT("Img\\Button_Lamp.png"));
+	Cherenkov_LeverImg.Load(TEXT("Img\\Cherenkov_Lever.png"));
+	DoorImg.Load(TEXT("Img\\Door.png"));
+	Door_Light_Img.Load(TEXT("Img\\Door_Light.png"));
+
+	ReflectorTransparentImg.Load(TEXT("Img\\Reflector\\UnMask\\Reflector.png"));
+	ReflectorTransparent_Module_Img.Load(TEXT("Img\\Reflector\\UnMask\\Reflector_Module.png"));
+
+	for (int i = 0; i < Door_Light_Img.GetWidth(); i++)
+	{
+		for (int j = 0; j < Door_Light_Img.GetHeight(); j++)
+		{
+			BYTE* ptr = (BYTE*)Door_Light_Img.GetPixelAddress(i, j);
+			for (int k = 0; k < 3; k++) ptr[k] = ((ptr[k] * ptr[3]) + 127) / 255;
+		}
+	}
+	for (int i = 0; i < Reactor_EffectImg.GetWidth(); i++)
+	{
+		for (int j = 0; j < Reactor_EffectImg.GetHeight(); j++)
+		{
+			BYTE* ptr = (BYTE*)Reactor_EffectImg.GetPixelAddress(i, j);
+			for (int k = 0; k < 3; k++) ptr[k] = ((ptr[k] * ptr[3]) + 127) / 255;
+		}
+	}
+	for (int i = 0; i < Cherenkov_LeverImg.GetWidth(); i++)
+	{
+		for (int j = 0; j < Cherenkov_LeverImg.GetHeight(); j++)
+		{
+			BYTE* ptr = (BYTE*)Cherenkov_LeverImg.GetPixelAddress(i, j);
+			for (int k = 0; k < 3; k++) ptr[k] = ((ptr[k] * ptr[3]) + 127) / 255;
+		}
+	}
+	for (int i = 0; i < Button_PressureImg.GetWidth(); i++)
+	{
+		for (int j = 0; j < Button_PressureImg.GetHeight(); j++)
+		{
+			BYTE* ptr = (BYTE*)Button_PressureImg.GetPixelAddress(i, j);
+			for (int k = 0; k < 3; k++) ptr[k] = ((ptr[k] * ptr[3]) + 127) / 255;
+		}
+	}
+	for (int i = 0; i < Button_OrbImg.GetWidth(); i++)
+	{
+		for (int j = 0; j < Button_OrbImg.GetHeight(); j++)
+		{
+			BYTE* ptr = (BYTE*)Button_OrbImg.GetPixelAddress(i, j);
+			for (int k = 0; k < 3; k++) ptr[k] = ((ptr[k] * ptr[3]) + 127) / 255;
+		}
+	}
+	for (int i = 0; i < Button_LampImg.GetWidth(); i++)
+	{
+		for (int j = 0; j < Button_LampImg.GetHeight(); j++)
+		{
+			BYTE* ptr = (BYTE*)Button_LampImg.GetPixelAddress(i, j);
+			for (int k = 0; k < 3; k++) ptr[k] = ((ptr[k] * ptr[3]) + 127) / 255;
+		}
+	}
+	for (int i = 0; i < Orb_Animation_Img.GetWidth(); i++)
+	{
+		for (int j = 0; j < Orb_Animation_Img.GetHeight(); j++)
+		{
+			BYTE* ptr = (BYTE*)Orb_Animation_Img.GetPixelAddress(i, j);
+			for (int k = 0; k < 3; k++) ptr[k] = ((ptr[k] * ptr[3]) + 127) / 255;
+		}
+	}
+	for (int i = 0; i < ReflectorTransparentImg.GetWidth(); i++)
+	{
+		for (int j = 0; j < ReflectorImg.GetHeight(); j++)
+		{
+			BYTE* ptr = (BYTE*)ReflectorImg.GetPixelAddress(i, j);
+			for (int k = 0; k < 3; k++) ptr[k] = ((ptr[k] * ptr[3]) + 127) / 255;
+		}
+	}
+	for (int i = 0; i < ReflectorTransparent_Module_Img.GetWidth(); i++)
+	{
+		for (int j = 0; j < Reflector_Module_Img.GetHeight(); j++)
+		{
+			BYTE* ptr = (BYTE*)Reflector_Module_Img.GetPixelAddress(i, j);
+			for (int k = 0; k < 3; k++) ptr[k] = ((ptr[k] * ptr[3]) + 127) / 255;
+		}
+	}
+}
+*/
+
+
+void DisplayMaskLoad()
+{
+	ReflectorImg.Load(TEXT("Img\\Reflector\\Mask\\Reflector.png"));
+	Reflector_Mask_Img.Load(TEXT("Img\\Reflector\\Mask\\Reflector_Mask.bmp"));
+	Reflector_EffectImg.Load(TEXT("Img\\Reflector\\Mask\\Reflector_Effect.png"));
+	Reflector_Effect_Mask_Img.Load(TEXT("Img\\Reflector\\Mask\\Reflector_Effect_Mask.bmp"));
+	Reflector_Module_Img.Load(TEXT("Img\\Reflector\\Mask\\Reflector_Module.png"));
+	Reflector_Module_Mask_Img.Load(TEXT("Img\\Reflector\\Mask\\Reflector_Module_Mask.bmp"));
+
+	Reflector_Color_Mask_Img.Load(TEXT("Img\\Reflector\\Mask\\Reflector_Color_Mask.bmp"));
+	Reflector_Light_Mask_Img.Load(TEXT("Img\\Reflector\\Mask\\Reflector_Light_Mask.bmp"));
+
+	PressureImg.Load(TEXT("Img\\Pressure.png"));
+	Pressure_Mask_Img.Load(TEXT("Img\\Pressure_Mask.bmp"));
+	CherenkovImg.Load(TEXT("Img\\Cherenkov.png"));
+	Cherenkov_Mask_Img.Load(TEXT("Img\\Cherenkov_Mask.bmp"));
+
+	Button_DialImg.Load(TEXT("Img\\Button_Dial.png"));
+	Button_Dial_Mask_Img.Load(TEXT("Img\\Button_Dial_Mask.bmp"));
+	Button_ValveImg.Load(TEXT("Img\\Button_Valve.png"));
+	Button_Valve_Mask_Img.Load(TEXT("Img\\Button_Valve_Mask.bmp"));
+	TempertureImg.Load(TEXT("Img\\Temperture.png"));
+	Temperture_Mask_Img.Load(TEXT("Img\\Temperture_Mask.bmp"));
+}
+
+/*
+CImage DisplayAlphaApply(CImage Image) {
+	for (int i = 0; i < Image.GetWidth(); i++)
+	{
+		for (int j = 0; j < Image.GetHeight(); j++)
+		{
+			BYTE* ptr = (BYTE*)Image.GetPixelAddress(i, j);
+			for (int k = 0; k < 3; k++) ptr[k] = ((ptr[k] * ptr[3]) + 127) / 255;
+		}
+	}
+	return Image;
+}
+*/
 
 void DisplayOrbLoad()
 {
@@ -369,7 +488,8 @@ void DisplayReflectorColorApply(int RGB)
 	{
 		if (!Reflector_ColorImg[i].IsNull())
 			Reflector_ColorImg[i].Destroy();
-		Reflector_ColorImg[i].Load(TEXT("Img\\Reflector_Color.png"));
+		if (i % 2 == 0) Reflector_ColorImg[i].Load(TEXT("Img\\Reflector\\UnMask\\Reflector_Color.png"));
+		else Reflector_ColorImg[i].Load(TEXT("Img\\Reflector\\UnMask\\Reflector_Light.png"));
 
 	}
 	int rgb[4] = { 0, 0, 0, 0 };
@@ -396,7 +516,7 @@ void DisplayPlayerColorApply(int RGB, int Num)
 	{
 		if (!Reflector_Player_ColorImg[i][Num].IsNull())
 			Reflector_Player_ColorImg[i][Num].Destroy();
-		Reflector_Player_ColorImg[i][Num].Load(TEXT("Img\\Reflector_Color.png"));
+		Reflector_Player_ColorImg[i][Num].Load(TEXT("Img\\Reflector\\Mask\\Reflector_Color_Blank.png"));
 	}
 	int rgb[4] = { 0, 0, 0, 0 };
 	for (int i = 1; i < 4; i++) rgb[i] = RGBConverter(RGB, i);
@@ -578,7 +698,6 @@ void DisplayReflector(struct Power_Reflector Reflector)
 		Reflector_Module_Img.PlgBlt(memdc, Reflector_Point, 375 * Reflector.module_charged[i] + 750 * i, (115 * (Reflector.module[i] - 1)), 375, 115, Reflector_Module_Mask_Img, 375 * Reflector.module_charged[i] + 750 * i, (115 * (Reflector.module[i] - 1)));
 	}
 
-
 	if (Reflector.Effect_effect > 0)
 	{
 		int effect = 0;
@@ -713,9 +832,11 @@ void UIRGBSlider(int Red, int Green, int Blue) {
 }
 
 void UIModule(int x, int y, bool Active, int module[5]) {
-	ReflectorImg.AlphaBlend(memdc, int(Pibot_x + x * window_size), int(Pibot_y + (y - 57.5) * window_size), int(375 * window_size), int(115 * window_size), 0, 0, 375, 115, 255);
+	ReflectorTransparentImg.AlphaBlend(memdc, int(Pibot_x + x * window_size), int(Pibot_y + (y - 57.5) * window_size), int(375 * window_size), int(115 * window_size), 0, 0, 375, 115, 255);
 	if (Active) {
 		Reflector_ColorImg[2].AlphaBlend(memdc, int(Pibot_x + x * window_size), int(Pibot_y + (y - 57.5) * window_size), int(375 * window_size), int(115 * window_size), 0, 0, 375, 115, 255);
+		Reflector_ColorImg[3].AlphaBlend(memdc, int(Pibot_x + x * window_size), int(Pibot_y + (y - 57.5) * window_size), int(375 * window_size), int(115 * window_size), 0, 0, 375, 115, 255);
+
 		/*
 		POINT Reflector_Point[3] = {
 			int(Pibot_x + x * window_size),int(Pibot_y + (y + 57.5) * window_size),
@@ -724,9 +845,10 @@ void UIModule(int x, int y, bool Active, int module[5]) {
 		};
 		Reflector_LightImg.PlgBlt(memdc, Reflector_Point, 0, 0, 375, 115, Reflector_Light_Mask_Img, 0, 0);
 		*/
-	}		
+	}
 	else {
 		Reflector_ColorImg[0].AlphaBlend(memdc, int(Pibot_x + x * window_size), int(Pibot_y + (y - 57.5) * window_size), int(375 * window_size), int(115 * window_size), 0, 0, 375, 115, 255);
+		Reflector_ColorImg[1].AlphaBlend(memdc, int(Pibot_x + x * window_size), int(Pibot_y + (y - 57.5) * window_size), int(375 * window_size), int(115 * window_size), 0, 0, 375, 115, 255);
 		/*
 		POINT Reflector_Point[3] = {
 			int(Pibot_x + x * window_size),int(Pibot_y + (y + 57.5) * window_size),
@@ -737,11 +859,9 @@ void UIModule(int x, int y, bool Active, int module[5]) {
 		*/
 	}
 	
-
-
 	for (int i = 1; i < 5; i++)
 	{
-		Reflector_Module_Img.AlphaBlend(memdc, int(Pibot_x + x * window_size), int(Pibot_y + (y - 57.5) * window_size), int(375 * window_size), int(115 * window_size), 375 * Active + 750 * i, 115 * (module[i] - 1), 375, 115, 255);
+		ReflectorTransparent_Module_Img.AlphaBlend(memdc, int(Pibot_x + x * window_size), int(Pibot_y + (y - 57.5) * window_size), int(375 * window_size), int(115 * window_size), 375 * Active + 750 * i, 115 * (module[i] - 1), 375, 115, 255);
 	}
 	/*
 	ReflectorImg.Draw(memdc, int(Pibot_x + 400 * window_size), int(Pibot_y * window_size), int(375 * window_size), int(115 * window_size), 0, 0, 375, 115);

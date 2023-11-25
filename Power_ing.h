@@ -198,7 +198,11 @@ void CreateEffect(struct Power_Effect* Effect, double x, double y, double Score)
 void RemoveEffect(struct Power_Effect* Effect, struct Power_Effect* NextEffect); // 이펙트 개체 제거
 void EffectPrint(struct Power_Effect* Effect); // 이펙트 개체 출력
 //--------------------------------------------------------------------------------------------------------------//
+//CImage DisplayAlphaApply(CImage Image);
+
 void DisplayLoad(); // 이미지 로드 및 알파 채널 적용
+void DisplayMaskLoad();
+
 
 void DisplayOrbLoad();
 void DisplayOrbColorApply(int RGB, int Num);
