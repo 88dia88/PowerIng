@@ -1,23 +1,36 @@
 #pragma once
-#include "Packit.h"
+#include <string>
 
-class Player
+
+#pragma pack(1)
+struct KeyInput
+{
+    bool up = false;
+    bool down = false;
+    bool right = false;
+    bool left = false;
+    bool action = false;
+};
+#pragma pack()
+
+
+class GamePlayer
 {
 public:
-    Player();
-    ~Player();
+    GamePlayer();
+    ~GamePlayer();
 
     // 플레이어 비활성화
     void DisablePlayer();
     // 플레이어 활성화
     void SetPlayer(int id);
-    void SetPanel(int color, int module);
+    void SetPanel(int color, int module[5]);
 
     void SetPos(float x, float y);
     void SetKeyInput(KeyInput keyInput);
     void SetKeyInput(bool up, bool down, bool right, bool left, bool action);
     void SetActionKeyDwon(bool actionKey);
-    void SetPlayerData(Player player);
+    void SetPlayerData(GamePlayer player);
     KeyInput GetKeyInput();
 
     bool GetState();
@@ -25,7 +38,7 @@ public:
 private:
     // Client Data
     int ID = -1;
-    bool mState = false; 
+    bool mState = false;
 
     // Lobby Data
     bool mReady = false;
@@ -33,11 +46,10 @@ private:
     // Panel Data
     float mPosX, mPosY;
     int mColor;
-    int mModule;
+    int mModule[5];
     float mCoolTime;
     double mSpeed;
     int mEffect;
 
     KeyInput mKeyInput;
 };
-

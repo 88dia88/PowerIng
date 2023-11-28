@@ -139,15 +139,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="server.cpp" />
+    <ClCompile Include="GameTimer.cpp" />
+    <ClCompile Include="GamePlayer.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Packet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.h" />
+    <ClInclude Include="GameTimer.h" />
     <ClInclude Include="Globals.h" />
-    <ClInclude Include="Packit.h" />
-    <ClInclude Include="Player.h" />
+    <ClInclude Include="Packet.h" />
+    <ClInclude Include="GamePlayer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

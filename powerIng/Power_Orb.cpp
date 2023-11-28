@@ -491,12 +491,13 @@ struct Power_Reflector ReflectorReset(struct Power_Reflector Reflector)
 	return Reflector;
 }
 //--------------------------------------------------------------------------------------------------------------//
-struct Power_Player PlayerReset(struct Power_Player Player, int ID) {
+struct Power_Player PlayerReset(struct Power_Player Player) {
 	Player.Online = true;
-	Player.ID = ID, Player.RGB = RGBTemplate_Yellow;
+	Player.RGB = RGBTemplate_Yellow;
 	Player.Score = 0, Player.CherenkovMeter = 0;
 	Player.Ready = false;
 	Player.Reflector = ReflectorReset(Player.Reflector);
+	
 	return Player;
 }
 

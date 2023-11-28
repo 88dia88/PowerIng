@@ -1,4 +1,9 @@
 #include "Power_ing.h"
+
+
+int gClientID = -1;
+
+
 LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 {
 	//--------------------------------------------------------------------------------------------------------------//
@@ -47,16 +52,21 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 	static int CustomRGB[4] = { RGBTemplate_Yellow, 255, 255, 0 };
 
 	static struct Power_Player MainPlayer;
-
+	
 
 	int MassSel = 1;
 	int rgb[9] = { RGBTemplate_Green, 
 		RGBTemplate_Green, RGBTemplate_Green, RGBTemplate_Green, RGBTemplate_Green,
 		RGBTemplate_Cyan, RGBTemplate_Cyan, RGBTemplate_Cyan, RGBTemplate_Cyan };
+
+	// 통신용 클라이언트 객체 생성
+	static GameClient client;
+
+	static HANDLE hRecvEvent;
+
 	// -------------------
 
-
-
+	
 	//PlgBlt = 회전하기 위한 3개(좌상,우상,좌하)의 좌표 필요
 
 	if (iMsg == WM_CREATE) {
@@ -71,11 +81,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 
 		Setting = SettingReset(Setting);
 
-		MainPlayer = PlayerReset(MainPlayer, 0);
+		MainPlayer = PlayerReset(MainPlayer);
 		
 		for (int i = 1; i < 7; i++)
 		{
-			Player[i] = PlayerReset(Player[i], i);
+			Player[i] = PlayerReset(Player[i]);
 			Player[i].Online = false;
 		}
 
@@ -95,6 +105,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 
 		AnimationTime_Door = 100;
 		SetTimer(hWnd, 0, 1000 / 60, NULL);
+		
+		// client 객체 초기화
+		client.Init();
+		//client.SetServer("server_ip", serverPort);
+
+		// 이벤트 생성
+		hRecvEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
 	}
 	if (Ingame) {
 		switch (iMsg) {
@@ -191,6 +208,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			}
 			break;
 		case WM_TIMER: //GetAsyncKeyState - 키가 눌린 상태로 진행되는함수 (끊김없이)http://www.silverwolf.co.kr/cplusplus/4842
+			client.RecvPacket(Player[gClientID]);
+			SetEvent(hRecvEvent);
 			switch (wParam)
 			{
 			case 0:
@@ -283,6 +302,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 						else {
 							//협동
 						}
+
 						break;
 					case 2:
 						if (Reactor.meltdown == false and Orbcount < 0) {
@@ -499,13 +519,18 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 					if (SelectedButton == 4) PostQuitMessage(0);
 					else Menu_Type = SelectedButton;
 					break;
-				case 1:
+				case 1:	// start button
 					if (SelectedButton != 0) {
+						// 서버 연결
+						client.Connect();
+						WaitForSingleObject(hRecvEvent, INFINITE);
+						client.SendPacket(PACKET_TYPE_CLIENT_DATA, Player[gClientID]);
+
 						Orbcount = 3;
 						EscMode = 0;
 						GameMode = 0;
 						GameStatus = -1;
-						Player[0] = MainPlayer;
+						Player[gClientID] = MainPlayer;
 						SelectedButton = 0;
 						Time = 0;
 						DisplayGame = true;

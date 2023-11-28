@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef _POWER_MATH_
 #define _POWER_MATH_
 #define _USE_MATH_DEFINES

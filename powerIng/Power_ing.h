@@ -1,5 +1,9 @@
+#pragma once
+
 #ifndef _POWER_ORB_
 #define _POWER_ORB_
+
+#include "GameClient.h"
 #include <stdlib.h>
 #include <time.h>
 #include <Windows.h>
@@ -7,6 +11,7 @@
 #include <atlImage.h>
 #include "Power_Math.h"
 #include "resource.h"
+
 //--------------------------------------------------------------------------------------------------------------//
 extern HINSTANCE g_hInst;
 extern LPCTSTR lpszClass, lpszWindowName;
@@ -37,6 +42,8 @@ extern int Reactor_half, Rail_half, Orb_half;
 extern int Controllroom_half_x, Reflector_half_x;
 extern int Controllroom_half_y, Reflector_half_y;
 
+extern int gClientID;
+
 extern HDC hdc, memdc;
 extern HBITMAP hBitmap;
 
@@ -59,27 +66,32 @@ struct Power_Setting_Player {
 
 	int Sound_Volume_Master, Sound_Volume, Sound_Alert;
 };
+
 struct Power_Setting_Game {
 	bool Debug;
 	bool GameRule_ModuleCharge;
 };
+
 struct Power_Control {
 	int Left, Right, Up, Down;
 	int Start;
 	bool Button[5];
 };
+
 struct Power_Reactor // 리엑터 구조체 - 게임 상태 관리
 {
 	bool cherenkov, meltdown;
 	int cherenkovlevel, meltdownlevel;
 	int cherenkovmeter, cherenkovcounter;
 };
+
 struct Power_Effect // 충돌 시 이펙트 구조체
 {
 	double x, y, score;
 	int age;
 	struct Power_Effect* next;
 };
+
 struct Power_Orb // 오브 구조체
 {
 	bool major;
@@ -91,6 +103,7 @@ struct Power_Orb // 오브 구조체
 	double afterx[25], aftery[25];
 	struct Power_Orb* next;
 };
+
 struct Power_Reflector // 패널 구조체
 {
 	double polar_x, polar_y;
@@ -101,9 +114,10 @@ struct Power_Reflector // 패널 구조체
 	int Effect_effect, Effect_rebound;
 	bool module_charged[5];
 };
+
 struct Power_Player {
 	bool Online, Ready;
-	int ID, RGB;
+	int RGB;
 	int Score, CherenkovMeter;
 	struct Power_Reflector Reflector;
 };
@@ -160,7 +174,7 @@ struct Power_Reflector ReflectorPosition(struct Power_Reflector Reflector, short
 struct Power_Reflector ReflectorProcess(struct Power_Reflector Reflector, bool Reflect); // 패널을 이동시키는 함수 
 struct Power_Reflector ReflectorReset(struct Power_Reflector Reflector); // 패널 값을 초기화하는 함수
 //--------------------------------------------------------------------------------------------------------------//플레이어 관련 함수
-struct Power_Player PlayerReset(struct Power_Player Player, int ID);
+struct Power_Player PlayerReset(struct Power_Player Player);
 
 struct Power_Setting_Player SettingReset(struct Power_Setting_Player Setting);
 int MenuEscape(int Menu_Type);

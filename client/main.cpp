@@ -68,7 +68,12 @@ int main(int argc, char* argv[])
 
 int SendC2SPacket(SOCKET sock, const int PacketType)
 {
+	KeyInputPacket keyInputPacket;
 
+	int retval = send(sock, reinterpret_cast<char*>(&keyInputPacket), sizeof(KeyInputPacket), 0);
+	if (retval == SOCKET_ERROR) {
+		err_display("send()");
+	}
 }
 
 int RecvS2CPacket(SOCKET sock)

@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "Player.h"
+#include "GamePlayer.h"
 // 게임 데이터 통신에 사용할 패킷 정의
 
 // 패킷 타입
@@ -10,8 +10,8 @@ enum PacketType
     PACKET_TYPE_KEY_INPUT,
     PACKET_TYPE_LOBBY,
     PACKET_TYPE_IN_GAME,
-    PACKET_TYPE_PLAYER_DATA,
-    Count
+    PACKET_TYPE_PLAYERS_DATA,
+    PACKET_TYPE_CLIENT_DATA
 };
 
 enum ModuleType
@@ -20,20 +20,10 @@ enum ModuleType
     MODULE_TYPE_MODULE_NAME1,
     MODULE_TYPE_MODULE_NAME2,
     MODULE_TYPE_MODULE_NAME3,
-    MODULE_TYPE_MODULE_NAME4,
-    Count
+    MODULE_TYPE_MODULE_NAME4
 };
 
 #pragma pack(1)
-
-struct KeyInput
-{
-    bool up = false;
-    bool down = false;
-    bool right = false;
-    bool left = false;
-    bool action = false;
-};
 
 // 사용자의 키 입력을 전송을 위한 패킷
 struct KeyInputPacket
@@ -47,31 +37,32 @@ struct LobbyDataPacket
 {
     const PacketType type = PACKET_TYPE_LOBBY;
 
+    int clientID;
     int playerCount;
-    Player* players;
+    GamePlayer* players;
 };
 
-struct PlayerDataPacket
+struct PlayersDataPacket
 {
-    const PacketType type = PACKET_TYPE_PLAYER_DATA;
+    const PacketType type = PACKET_TYPE_PLAYERS_DATA;
 
-    Player player;
+    GamePlayer player;
 };
 
-struct BallData
+struct ClientDataPacket
 {
-    double x, y;
+    const PacketType type = PACKET_TYPE_CLIENT_DATA;
+
     int color;
-    int type;
+    int module[5];
 };
+
 
 struct GameDataPacket
 {
     const PacketType type = PACKET_TYPE_IN_GAME;
 
     int playerCount;
-    Player* players;
-    BallData ballData;
 };
 
 

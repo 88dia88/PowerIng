@@ -1,29 +1,29 @@
 #include "Common.h"
-#include "Packit.h"
-#include "Player.h"
+#include "Packet.h"
+#include "GamePlayer.h"
 #include "Globals.h"
 #include "GameTimer.h"
 
 
 #define SERVERPORT 9000
-#define BUFSIZE    512
+#define BUFSIZE    1024
 
 
 LONG clientCnt = 0;
 CRITICAL_SECTION cs;
-Player players[3];
+GamePlayer players[3];
 HANDLE hLobbyThread, hProcessThread;
 HANDLE hClientKeyInputEvent[3], hProcessEvent[3];
-int gameState;
+int gameState = GAME_STATE_LOBBY;
 GameTimer gameTimer;
-
+SOCKET gClientSock[3];
 
 int GenerateClientIndex();
 DWORD WINAPI ClientThread(LPVOID arg);
 DWORD WINAPI ProcessThread(LPVOID lpParam);
 DWORD WINAPI LobbyThread(LPVOID lpParam);
-int RecvC2SPacket(SOCKET clientSock, const char* buffer, int bufferSize, int clientID);
-int SendS2CPacket(SOCKET clientSock);
+int RecvC2SPacket(SOCKET clientSock, int clientID);
+int SendS2CPacket(SOCKET clientSock, int clientID);
 
 
 int GenerateClientIndex()
@@ -67,6 +67,9 @@ DWORD WINAPI ClientThread(LPVOID arg)
 
 	//clientID 생성 (0~2사이의 값으로 clients의 인덱스로 사용)
 	int clientID = GenerateClientIndex();
+	gClientSock[clientID] = clientSock;
+
+	SendS2CPacket(clientSock, clientID);
 
 	while (1) {
 		// 패킷 받기
@@ -84,7 +87,7 @@ DWORD WINAPI ClientThread(LPVOID arg)
 		// 데이터 처리 대기
 		DWORD result = WaitForSingleObject(hProcessEvent[clientID], INFINITE);
 
-		retval = SendS2CPacket(clientSock);
+		retval = SendS2CPacket(clientSock, clientID);
 		if (retval == SOCKET_ERROR) {
 			err_display("recv()");
 			break;
@@ -135,6 +138,8 @@ DWORD WINAPI ProcessThread(LPVOID lpParam)
 			SetEvent(hProcessEvent[i]);
 		}
 	}
+
+	return 0;
 }
 
 DWORD WINAPI LobbyThread(LPVOID lpParam)
@@ -144,11 +149,21 @@ DWORD WINAPI LobbyThread(LPVOID lpParam)
 	// 로비 처리
 	while (gameState == GAME_STATE_LOBBY)
 	{
+		DWORD result = WaitForMultipleObjects(clientCnt, hClientKeyInputEvent, FALSE, INFINITE);
 		gameTimer.Tick();
+				
+		SetEvent(hProcessEvent[result]);
+
+		if (clientCnt >= 1) {
+			break;
+		}
 	}
 
 	// 프로세스 스레드 시작
+	gameState = GAME_STATE_READY;
 	ResumeThread(hProcessThread);
+
+	return 0;
 }
 
 int main(int argc, char* argv[])
@@ -157,8 +172,9 @@ int main(int argc, char* argv[])
 
 	// ProcessThread는 대기상태로 생성 LobbyThread가 종료할 때 스레드를 깨움
 	hProcessThread = CreateThread(NULL, 0, ProcessThread, NULL, CREATE_SUSPENDED, NULL);
-	hLobbyThread = CreateThread(NULL, 0, LobbyThread, NULL, 0, NULL);
+	hLobbyThread = CreateThread(NULL, 0, LobbyThread, NULL, CREATE_SUSPENDED, NULL);
 
+	InitializeCriticalSection(&cs);
 	// 이벤트 생성
 	for (int i = 0; i < MAX_NUM_CLIENTS; i++)
 	{
@@ -218,6 +234,7 @@ int main(int argc, char* argv[])
 		else { 
 			CloseHandle(hThread); 
 			InterlockedIncrement(&clientCnt); // 클라이언트 수 증가
+			ResumeThread(hLobbyThread);
 		}
 	}
 
@@ -270,16 +287,30 @@ int RecvC2SPacket(SOCKET clientSock, int clientID)
 		*/
 		break;
 	}
-	case PACKET_TYPE_PLAYER_DATA: {
-		if (retval < sizeof(PlayerDataPacket)) {
+	case PACKET_TYPE_PLAYERS_DATA: {
+		if (retval < sizeof(PlayersDataPacket)) {
 			printf("Error: 패킷 사이즈 오류 PlayerDataPacket.\n");
 			return retval;
 		}
 
-		PlayerDataPacket playerDataPacket;
-		memcpy(&playerDataPacket, buf, sizeof(PlayerDataPacket));
+		PlayersDataPacket playerDataPacket;
+		memcpy(&playerDataPacket, buf, sizeof(PlayersDataPacket));
 
 		players[clientID].SetPlayerData(playerDataPacket.player);
+		break;
+	}
+	case PACKET_TYPE_CLIENT_DATA: {
+		if (retval < sizeof(ClientDataPacket)) {
+			printf("Error: 패킷 사이즈 오류 ClientDataPacket.\n");
+			return retval;
+		}
+
+		ClientDataPacket clientDataPacket;
+		memcpy(&clientDataPacket, buf, sizeof(ClientDataPacket));
+
+		players[clientID].SetPanel(clientDataPacket.color, clientDataPacket.module);
+		printf("clientID: %d - clientColor: %d, clientModule: %d\n", 
+			clientID, clientDataPacket.color, clientDataPacket.module);
 		break;
 	}
 	default:
@@ -290,7 +321,7 @@ int RecvC2SPacket(SOCKET clientSock, int clientID)
 	return retval;
 }
 
-int SendS2CPacket(SOCKET clientSock)
+int SendS2CPacket(SOCKET clientSock, int clientID)
 {
 	char buf[BUFSIZE + 1];
 	int retval = 0;
@@ -298,44 +329,47 @@ int SendS2CPacket(SOCKET clientSock)
 	switch (gameState)
 	{
 		// InGame
-	case GAME_STATE_GAME:
+	case GAME_STATE_GAME: {
 		GameDataPacket gameDataPacket;
 
 		// GameDataPacket 채우기
 		gameDataPacket.playerCount = clientCnt;
-		gameDataPacket.players = new Player[clientCnt];
-		memcpy(gameDataPacket.players, players, sizeof(Player) * clientCnt);
+		//gameDataPacket.players = new Player[clientCnt];
+		//memcpy(gameDataPacket.players, players, sizeof(Player) * clientCnt);
 		// gameDataPacket.ballData = ballData;
 
 		// 데이터 전송
 		send(clientSock, reinterpret_cast<char*>(&gameDataPacket), sizeof(GameDataPacket), 0);
 
-		delete[] gameDataPacket.players;
+		//delete[] gameDataPacket.players;
 		return retval;
 		break;
+	}
 
 		// InLobby
-	case GAME_STATE_LOBBY:
+	case GAME_STATE_LOBBY: {
 		LobbyDataPacket lobbyDataPacket;
 
 		// GameDataPacket 채우기
 		lobbyDataPacket.playerCount = clientCnt;
-		lobbyDataPacket.players = new Player[clientCnt];
-		memcpy(lobbyDataPacket.players, players, sizeof(Player) * clientCnt);
+		lobbyDataPacket.clientID = clientID;
+
+		//lobbyDataPacket.players = new Player[clientCnt];
+		//memcpy(lobbyDataPacket.players, players, sizeof(Player) * clientCnt);
 
 		// 데이터 전송
 		send(clientSock, reinterpret_cast<char*>(&lobbyDataPacket), sizeof(LobbyDataPacket), 0);
 
-		delete[] lobbyDataPacket.players;
-		return retval;
-		break;
+		//delete[] lobbyDataPacket.players;
+		return retval; 
+		}
 
 		// ReadyRound
 	case GAME_STATE_READY:
 
 		return retval;
-		break;
+
 	default:
-		break;
+		return 0;
 	}
 }
