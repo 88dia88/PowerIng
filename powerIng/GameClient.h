@@ -24,6 +24,7 @@ public:
     void ReleseSock();
     bool Connect();
     void SetServer(const string& IP, const int port);
+    bool IsOnline();
 
     int SendPacket(const PacketType packetType, const Power_Player player);
     int RecvPacket(Power_Player& player);
@@ -40,6 +41,7 @@ private:
 
     // clientData
     int mClientID;
+    bool mOnline;
 
     // gameData
 

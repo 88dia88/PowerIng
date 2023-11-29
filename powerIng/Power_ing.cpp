@@ -2,6 +2,20 @@
 
 
 int gClientID = -1;
+GameClient client;
+HANDLE hRecvThread;
+HANDLE hRecvEvent;
+
+DWORD WINAPI RecvThread(LPVOID arg)
+{
+	while (client.IsOnline())
+	{
+		client.RecvPacket(Player[gClientID]);
+		SetEvent(hRecvEvent);
+	}
+
+	return 0;
+}
 
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
@@ -59,11 +73,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 		RGBTemplate_Green, RGBTemplate_Green, RGBTemplate_Green, RGBTemplate_Green,
 		RGBTemplate_Cyan, RGBTemplate_Cyan, RGBTemplate_Cyan, RGBTemplate_Cyan };
 
-	// 통신용 클라이언트 객체 생성
-	static GameClient client;
-
-	static HANDLE hRecvEvent;
-
 	// -------------------
 
 	
@@ -112,6 +121,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 
 		// 이벤트 생성
 		hRecvEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
+		hRecvThread = CreateThread(NULL, 0, RecvThread, NULL, CREATE_SUSPENDED, NULL);
 	}
 	if (Ingame) {
 		switch (iMsg) {
@@ -208,8 +218,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			}
 			break;
 		case WM_TIMER: //GetAsyncKeyState - 키가 눌린 상태로 진행되는함수 (끊김없이)http://www.silverwolf.co.kr/cplusplus/4842
-			client.RecvPacket(Player[gClientID]);
-			SetEvent(hRecvEvent);
 			switch (wParam)
 			{
 			case 0:
@@ -282,8 +290,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 						Time++;
 
 						//ReflectorControl(Player[0].Reflector, GetAsyncKeyState(Reflector1Left), GetAsyncKeyState(Reflector1Right), GetAsyncKeyState(Reflector1Up), GetAsyncKeyState(Reflector1Down));
-
+						// 방향키 입력
 						Player[0].Reflector = ReflectorPosition(Player[0].Reflector, GetAsyncKeyState(Reflector1Left), GetAsyncKeyState(Reflector1Right), GetAsyncKeyState(Reflector1Up), GetAsyncKeyState(Reflector1Down));
+						
+						Player[0].leftKeyDown = GetAsyncKeyState(Reflector1Left) & 0x8001;
+						Player[0].rightKeyDown = GetAsyncKeyState(Reflector1Right) & 0x8001;
+						Player[0].upKeyDown = GetAsyncKeyState(Reflector1Up) & 0x8001;
+						Player[0].downKeyDown = GetAsyncKeyState(Reflector1Down) & 0x8001;
+						client.SendPacket(PACKET_TYPE_KEY_INPUT, Player[0]);
 
 						for (int i = 0; i < 7; i++)
 						{
@@ -523,6 +537,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 					if (SelectedButton != 0) {
 						// 서버 연결
 						client.Connect();
+						ResumeThread(hRecvThread);
 						WaitForSingleObject(hRecvEvent, INFINITE);
 						client.SendPacket(PACKET_TYPE_CLIENT_DATA, Player[gClientID]);
 

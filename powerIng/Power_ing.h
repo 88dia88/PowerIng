@@ -120,6 +120,11 @@ struct Power_Player {
 	int RGB;
 	int Score, CherenkovMeter;
 	struct Power_Reflector Reflector;
+	bool upKeyDown = false;
+	bool downKeyDown = false;
+	bool rightKeyDown = false;
+	bool leftKeyDown = false;
+	bool actionKeyDown = false;
 };
 
 struct Power_Team {

@@ -277,14 +277,13 @@ int RecvC2SPacket(SOCKET clientSock, int clientID)
 		memcpy(&keyInputPacket, buf, sizeof(KeyInputPacket));
 
 		players[clientID].SetKeyInput(keyInputPacket.keyInput);
-		/*
-		printf("≈∞ ¿Œ«≤ √≥∏Æ, up=%s, down=%s, right=%s, left=%s, action=%s",
+		printf("%d client, up=%s, down=%s, right=%s, left=%s, action=%s\n",
+			clientID,
 			keyInputPacket.keyInput.up ? "true" : "false",
 			keyInputPacket.keyInput.down ? "true" : "false",
 			keyInputPacket.keyInput.right ? "true" : "false",
 			keyInputPacket.keyInput.left ? "true" : "false",
 			keyInputPacket.keyInput.action ? "true" : "false");
-		*/
 		break;
 	}
 	case PACKET_TYPE_PLAYERS_DATA: {

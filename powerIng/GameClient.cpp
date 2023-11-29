@@ -4,6 +4,8 @@
 
 GameClient::GameClient()
 {
+	mOnline = false;
+	mClientID = -1;
 }
 
 GameClient::~GameClient()
@@ -45,6 +47,7 @@ bool GameClient::Connect()
 		return false;
 	}
 
+	mOnline = true;
 	return true;
 }
 
@@ -52,6 +55,11 @@ void GameClient::SetServer(const string& IP, const int port)
 {
 	mServerIP = IP;
 	mServerPort = port;
+}
+
+bool GameClient::IsOnline()
+{
+	return mOnline;
 }
 
 int GameClient::SendPacket(const PacketType packetType, const Power_Player player)
@@ -62,6 +70,12 @@ int GameClient::SendPacket(const PacketType packetType, const Power_Player playe
 	{
 	case PACKET_TYPE_KEY_INPUT: {
 		KeyInputPacket keyInputPacket;
+
+		keyInputPacket.keyInput.up = player.upKeyDown;
+		keyInputPacket.keyInput.down = player.downKeyDown;
+		keyInputPacket.keyInput.right = player.rightKeyDown;
+		keyInputPacket.keyInput.left = player.leftKeyDown;
+		keyInputPacket.keyInput.action = player.actionKeyDown;
 
 		retval = send(mSock, reinterpret_cast<char*>(&keyInputPacket), sizeof(KeyInputPacket), 0);
 		if (retval == SOCKET_ERROR) {
