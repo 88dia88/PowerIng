@@ -1,0 +1,6 @@
+﻿  Power_ing.cpp
+D:\source\넷겜플\Term_Project\PowerIng-main\Power_ing.cpp(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+D:\source\넷겜플\Term_Project\PowerIng-main\Power_ing.cpp(3,1): fatal  error C1075: '{': 일치하는 토큰을 찾을 수 없습니다.
+  Power_Serverside.cpp
+  코드를 생성하고 있습니다...
+D:\source\넷겜플\Term_Project\PowerIng-main\Power_Serverside.cpp(32): warning C4715: 'Power_Serverside': 모든 제어 경로에서 값을 반환하지는 않습니다.

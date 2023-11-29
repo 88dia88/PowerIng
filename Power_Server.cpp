@@ -3,9 +3,6 @@
 #include "Packit.h"
 #include "Player.h"
 #include "GameTimer.h"
-#include "PowerIng-main/Power_ing.h"
-#include "PowerIng-main/Power_Math.h"
-#include "PowerIng-main/resource.h"
 
 #define SERVERPORT 9000
 #define BUFSIZE 512
@@ -20,6 +17,7 @@ HANDLE hClientKeyInputEvent[MAX_NUM_CLIENTS];  // 키 입력 이벤트
 HANDLE hLobbyEvent[MAX_NUM_CLIENTS];           // 로비 이벤트
 
 int gameState;
+bool allReady = true;
 GameTimer gameTimer;
 LONG clientCnt = 0;
 CRITICAL_SECTION cs;
@@ -123,6 +121,7 @@ int main(int argc, char* argv[])
     for (int i = 0; i < MAX_NUM_CLIENTS; i++) {
         CloseHandle(hClientKeyInputEvent[i]);
         CloseHandle(hProcessEvent[i]);
+        CloseHandle(hLobbyEvent[i]);
     }
 
     DeleteCriticalSection(&cs);
@@ -159,14 +158,19 @@ int RecvC2SPacket(SOCKET clientSock, int clientID)
         memcpy(&keyInputPacket, buf, sizeof(KeyInputPacket));
 
         players[clientID].SetKeyInput(keyInputPacket.keyInput);
-        /*
-        printf("키 인풋 처리, up=%s, down=%s, right=%s, left=%s, action=%s",
-            keyInputPacket.keyInput.up ? "true" : "false",
-            keyInputPacket.keyInput.down ? "true" : "false",
-            keyInputPacket.keyInput.right ? "true" : "false",
-            keyInputPacket.keyInput.left ? "true" : "false",
-            keyInputPacket.keyInput.action ? "true" : "false");
-        */
+        
+        break;
+    }
+    case PACKET_TYPE_LOBBY: {
+        if (retval < sizeof(LobbyDataPacket)) {
+            printf("Error: 패킷 사이즈 오류 LobbyDataPacket.\n");
+            return retval;
+        }
+
+        LobbyDataPacket lobbyDataPacket;
+        memcpy(&lobbyDataPacket, buf, sizeof(LobbyDataPacket));
+
+        players[clientID].SetPlayerData(*lobbyDataPacket.players);
         break;
     }
     case PACKET_TYPE_PLAYER_DATA: {
@@ -185,21 +189,7 @@ int RecvC2SPacket(SOCKET clientSock, int clientID)
         printf("error 패킷타입이 정의되지 않았습니다.\n");
         break;
     }
-
     return retval;
-}
-
-DWORD WINAPI LobbyThread(LPVOID lpParam)
-{
-    gameTimer.Reset();
-
-    while (gameState == GAME_STATE_LOBBY) {
-        gameTimer.Tick();
-
-    }
-    // 프로세스 스레드 시작
-    ResumeThread(hProcessThread);
-    return 0;
 }
 
 int SendS2CPacket(SOCKET clientSock)
@@ -230,7 +220,7 @@ int SendS2CPacket(SOCKET clientSock)
     case GAME_STATE_LOBBY:
         LobbyDataPacket lobbyDataPacket;
 
-        // GameDataPacket 채우기
+        // LobbyDataPacket 채우기
         lobbyDataPacket.playerCount = clientCnt;
         lobbyDataPacket.players = new Player[clientCnt];
         memcpy(lobbyDataPacket.players, players, sizeof(Player) * clientCnt);
@@ -251,6 +241,51 @@ int SendS2CPacket(SOCKET clientSock)
         break;
     }
 }
+
+DWORD WINAPI LobbyThread(LPVOID lpParam)
+{
+    WaitForMultipleObjects(MAX_NUM_CLIENTS, hLobbyEvent, TRUE, INFINITE);
+    
+    gameTimer.Reset();
+
+   while (1) {
+       gameState = GAME_STATE_LOBBY;
+
+       // 로비 설정 (색깔 및 모듈 설정)
+
+       gameTimer.Tick();
+       for (int i = 0; i < MAX_NUM_CLIENTS; ++i) {
+           if (!players[i].IsReady())
+               allReady = false;
+       }
+       if (allReady) {
+           gameState = GAME_STATE_READY;
+           while (gameState == GAME_STATE_READY) { 
+               if (1) { // 게임 시작 버튼? 누르면
+                   allReady = false;
+                   gameState = GAME_STATE_GAME;
+                   break;
+               }
+               else if (2) { // 도중 레디를 해제한다면
+                   allReady = false;
+                   gameState = GAME_STATE_LOBBY;
+                   break;
+               }
+           }
+       }
+       if (3) { // 로비 탈출? 게임 종료?
+           gameState = GAME_STATE_END;
+           break;
+       }
+   }
+    
+    ResetEvent(hLobbyEvent);
+    // 프로세스 스레드 시작
+    ResumeThread(hProcessThread);
+    return 0;
+}
+
+
 
 DWORD WINAPI ProcessThread(LPVOID lpParam)
 {
@@ -276,8 +311,6 @@ DWORD WINAPI ClientThread(LPVOID arg)
     // 클라이언트 ID 생성 (0~2사이의 값으로 clients의 인덱스로 사용)
     int clientID = GenerateClientIndex();
 
-    // SetEvent(ClientFlag[clientID]);  // 클라이언트가 준비되었음을 신호로 알림
-
     while (1) {
         // 데이터 받기
         retval = RecvC2SPacket(client_sock, clientID);
@@ -290,15 +323,10 @@ DWORD WINAPI ClientThread(LPVOID arg)
 
         // 데이터 처리
         buf[retval] = '\0';
-
-        if (retval == PACKET_TYPE_KEY_INPUT) {
-            // 클라이언트 입력완료        
-            SetEvent(hClientKeyInputEvent[clientID]);
-        }
-
-        if (retval == PACKET_TYPE_LOBBY)
-            SetEvent(hLobbyEvent[clientID]);
-
+        		
+        // 클라이언트 입력완료        
+        SetEvent(hClientKeyInputEvent[clientID]);
+        
         // 데이터 처리 대기
         DWORD result = WaitForSingleObject(hProcessEvent[clientID], INFINITE);
 

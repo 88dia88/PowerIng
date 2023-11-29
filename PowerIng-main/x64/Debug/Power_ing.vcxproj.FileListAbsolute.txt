@@ -1,0 +1,4 @@
+C:\Users\양영현\source\repos\Power_ing\x64\Debug\Power_ing.exe
+C:\Users\양영현\Desktop\git\PowerIng\x64\Debug\Power_ing.exe
+C:\Users\ggh06\Desktop\PowerIng-main\x64\Debug\Power_ing.exe
+D:\source\넷겜플\Term_Project\PowerIng-main\x64\Debug\Power_ing.exe
