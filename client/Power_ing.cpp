@@ -44,10 +44,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 
 	static bool OrbLaunch = false;
 
-	static int CustomRGB[4] = { RGBTemplate_Yellow, 255, 255, 0 };
-
 	static struct Power_Player MainPlayer;
 
+	static int CustomRGB[4] = { RGBTemplate_Yellow, 255, 255, 0 };
 
 	int MassSel = 1;
 	int rgb[9] = { RGBTemplate_Green, 
@@ -61,18 +60,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 
 	if (iMsg == WM_CREATE) {
 		GameStart = false;
-		EffectHead->next = EffectHead;
-		OrbHead->next = OrbHead;
-
-		/*
-		ReflectorHead->next = ReflectorHead;
-		ReflectorHead = ReflectorReset(ReflectorHead);
-		*/
-
 		Setting = SettingReset(Setting);
-
+		OrbHead->next = OrbHead;
 		MainPlayer = PlayerReset(MainPlayer, 0);
-		
 		for (int i = 1; i < 7; i++)
 		{
 			Player[i] = PlayerReset(Player[i], i);
@@ -99,21 +89,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			*/
 			Player[i].Reflector.RGB = Player[i].RGB;
 		}
-
 		GeneralReset();
+
 		Temperture = Kelvin, Mole = MaxMole * 0.5;
 		PreTime = -25;
 		Orbcount = 3;
 		TotalScore = 0;
-		DisplayLoad();
-		DisplayOrbLoad();
-		
-		DisplayColorApply(MainPlayer.RGB);
-		DisplayReflectorColorApply(MainPlayer.RGB);
-
-		DisplayPlayerColorApply(MainPlayer.RGB, 0);
-
-		for (int i = 1; i < 7; i++) DisplayPlayerColorApply(Player[i].RGB, i);
 
 		Control.Left = 0x25;
 		Control.Right = 0X27;
@@ -121,7 +102,26 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 		Control.Down = 0X28;
 
 		AnimationTime_Door = 100;
+
+		/*
+		ReflectorHead->next = ReflectorHead;
+		ReflectorHead = ReflectorReset(ReflectorHead);
+		*/
+
 		SetTimer(hWnd, 0, 1000 / 60, NULL);
+
+		//<디스플레이>--------------------
+
+		EffectHead->next = EffectHead;
+		DisplayLoad();
+		DisplayOrbLoad();
+
+		DisplayColorApply(MainPlayer.RGB);
+		DisplayReflectorColorApply(MainPlayer.RGB);
+
+		DisplayPlayerColorApply(MainPlayer.RGB, 0);
+
+		for (int i = 1; i < 7; i++) DisplayPlayerColorApply(Player[i].RGB, i);
 	}
 	if (Ingame) {
 		switch (iMsg) {
@@ -152,15 +152,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			}
 			else if (wParam == VK_RETURN) {
 				switch (GameStatus) {
-				case 1:
-					if (Reactor.cherenkov == false) {
-						if (Reactor.cherenkovmeter == 100) Reactor.cherenkov = true;
-						else if (Reactor.cherenkovmeter >= 875) {
-							//완전 충전 되지 않았으면 꾹 눌러서 발동
-							Reactor.cherenkov = true;
-						}
-					}
-					break;
 				case 2:
 					if (PressureCheck())
 					{
@@ -288,8 +279,38 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 						{
 							if (Player[i].Online) {
 								Player[i].Reflector = ReflectorProcess(Player[i].Reflector, (GameStatus == 1));
+								Player[i].Reflector = ReflectorPosition(Player[i].Reflector,
+									Player[i].Control[1], Player[i].Control[2], Player[i].Control[3], Player[i].Control[4]);
+
+								if (Reactor.cherenkov == false) {
+									if (Player[i].Reflector.cherenkovcounter > 0)
+									{
+										if (Player[i].CherenkovMeter < 1000) Player[i].CherenkovMeter++;
+										Player[i].Reflector.cherenkovcounter--;
+									}
+								}
+
+								if (Player[i].Control[0] & 0x8001 || Player[i].Control[0] & 0x8000) {
+									if (Reactor.cherenkov == false) {
+										if (Player[i].CherenkovMeter == 1000) {
+											Reactor.cherenkov = true;
+											Reactor.cherenkovmeter = Player[i].CherenkovMeter;
+											Player[i].CherenkovMeter = 0;
+
+										}
+										else if (Player[i].CherenkovMeter >= 8750) {
+											//완전 충전 되지 않았으면 꾹 눌러서 발동
+											Reactor.cherenkov = true;
+											Reactor.cherenkovmeter = Player[i].CherenkovMeter;
+											Player[i].CherenkovMeter = 0;
+										}
+									}
+								}
 							}
 						}
+
+						
+
 
 						//이 아래는 클라이언트 사이드
 
@@ -297,9 +318,28 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 						else if (Time_Server > Time) Time += 2;
 						else Time++;
 
-						//Player[0].Reflector = ReflectorControl(Player[0].Reflector, GetAsyncKeyState(Reflector1Left), GetAsyncKeyState(Reflector1Right), GetAsyncKeyState(Reflector1Up), GetAsyncKeyState(Reflector1Down));
+						if (Player[0].CherenkovMeter == 1000 and Setting.Game_Cherenkov_auto) Player[0].Control[0] = 0x8001;
+						else Player[0].Control[0] = GetAsyncKeyState(Setting.Control_Active);
+						Player[0].Control[1] = GetAsyncKeyState(Reflector1Left);
+						Player[0].Control[2] = GetAsyncKeyState(Reflector1Right);
+						Player[0].Control[3] = GetAsyncKeyState(Reflector1Up);
+						Player[0].Control[4] = GetAsyncKeyState(Reflector1Down);
 
-						Player[0].Reflector = ReflectorPosition(Player[0].Reflector, GetAsyncKeyState(Reflector1Left), GetAsyncKeyState(Reflector1Right), GetAsyncKeyState(Reflector1Up), GetAsyncKeyState(Reflector1Down));
+
+
+						/*컨트롤 테스트
+						for (int i = 1; i < 7; i++)
+						{
+							if (Player[i].Online) {
+								Player[i].Control[0] = GetAsyncKeyState(Setting.Control_Active);
+								Player[i].Control[1] = GetAsyncKeyState(Reflector1Left);
+								Player[i].Control[2] = GetAsyncKeyState(Reflector1Right);
+								Player[i].Control[3] = GetAsyncKeyState(Reflector1Up);
+								Player[i].Control[4] = GetAsyncKeyState(Reflector1Down);
+							}
+						}
+						*/
+
 
 						break;
 					case 1:
@@ -425,7 +465,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 				if (Time == 0) Button_LampImg.Draw(memdc, int(Pibot_x + 250 * window_size), int(Pibot_y + 550 * window_size), int(120 * window_size), int(120 * window_size), 120 - 120 * PressureCheck(), 0, 120, 120);
 
 				//UI
-				DisplayRotatedImage(-860, 0, 20, 110, Reactor.cherenkovmeter / 1500.0 - 1.0 / 3.0, 1);
+				
+				if (Reactor.cherenkov) DisplayRotatedImage(-860, 0, 20, 110, Reactor.cherenkovmeter / 1500.0 - 1.0 / 3.0, 1);
+				else DisplayRotatedImage(-860, 0, 20, 110, Player[0].CherenkovMeter / 1500.0 - 1.0 / 3.0, 1);
+
 				DisplayRotatedImage(-700, -405, 14, 80, PressureCaculate(Mole, Temperture), 2);
 				DisplayRotatedImage(-821.5, 300, 80, 80, (Temperture - Kelvin) / (MaxTemp - Kelvin), 3);
 				DisplayRotatedImage(-678.5, 300, 80, 80, Mole / MaxPressure * Kelvin / 3 - 1.0 / 6.0, 4);

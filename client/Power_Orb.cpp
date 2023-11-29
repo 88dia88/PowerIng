@@ -9,8 +9,6 @@ int Time, Time_Server;
 int Button[5];
 int AnimationTime_Door, AnimationTime_Button[5];
 
-int ColliderColor;
-
 struct Power_Setting_Player Setting;
 
 struct Power_Player Player[7];
@@ -18,6 +16,14 @@ struct Power_Player Player[7];
 struct Power_Control Control;
 struct Power_Reactor Reactor;
 struct Power_Orb* OrbHead = (Power_Orb*)malloc(sizeof(struct Power_Orb));
+
+const int RGBTemplate_Red = 0xff0000, RGBTemplate_Green = 0x00ff00, RGBTemplate_Blue = 0x0000ff,
+RGBTemplate_Magenta = 0xff00ff, RGBTemplate_Yellow = 0xffff00, RGBTemplate_Cyan = 0x00ffff,
+RGBTemplate_White = 0xffffff, RGBTemplate_Black = 0x000000, RGBTemplate_Gray = 0x808080;
+
+int ColliderColor;
+
+int PlayerColor[7];
 //--------------------------------------------------------------------------------------------------------------//
 bool ReactorMeltdown()
 {
@@ -308,17 +314,17 @@ struct Power_Reflector ReflectReflector(struct Power_Orb* Orb, struct Power_Refl
 			case 1:
 				if (Reflector.age > Time - 100) score = OrbScore(Orb->next->speed, Mole, PressureCaculate(Mole, Temperture), 1 * Energy, Reactor.cherenkov);
 				else score = OrbScore(Orb->next->speed, Mole, PressureCaculate(Mole, Temperture), 0.5, Reactor.cherenkov);
-				if (Reactor.cherenkovmeter < 1000 && Reactor.cherenkov == false) Reactor.cherenkovcounter += int(125 * Cherenks);
+				if (Reactor.cherenkovmeter < 1000 && Reactor.cherenkov == false) Reflector.cherenkovcounter += int(125 * Cherenks);
 				break;
 			case 2:
 				if (Reflector.age > Time - 100) score = OrbScore(Orb->next->speed, Mole, PressureCaculate(Mole, Temperture), 1.0125 * Energy, Reactor.cherenkov);
 				else score = OrbScore(Orb->next->speed, Mole, PressureCaculate(Mole, Temperture), 0.75 * Energy, Reactor.cherenkov);
-				if (Reactor.cherenkovmeter < 1000 && Reactor.cherenkov == false) Reactor.cherenkovcounter += int(100 * Orb->next->speed * Orb->next->speed * Cherenks);
+				if (Reactor.cherenkovmeter < 1000 && Reactor.cherenkov == false) Reflector.cherenkovcounter += int(100 * Orb->next->speed * Orb->next->speed * Cherenks);
 				break;
 			default:
 				if (Reflector.age > Time - 100) score = OrbScore(Orb->next->speed, Mole, PressureCaculate(Mole, Temperture), 1.35 * Energy, Reactor.cherenkov);
 				else score = OrbScore(Orb->next->speed, Mole, PressureCaculate(Mole, Temperture), 1 * Energy, Reactor.cherenkov);
-				if (Reactor.cherenkovmeter < 1000 && Reactor.cherenkov == false) Reactor.cherenkovcounter += int(125 * Cherenks);
+				if (Reactor.cherenkovmeter < 1000 && Reactor.cherenkov == false) Reflector.cherenkovcounter += int(125 * Cherenks);
 				break;
 			}
 			CreateEffect(EffectHead, Orb->next->x, Orb->next->y, score);
@@ -391,58 +397,6 @@ struct Power_Orb* ReflectOrb(struct Power_Orb* Orb, double Angle)
 	return Orb;
 }
 //--------------------------------------------------------------------------------------------------------------//
-struct Power_Reflector ReflectorControl(struct Power_Reflector Reflector, short Left, short Right, short Up, short Down)
-{
-	double Break = 1;
-	if ((Up & 0x8001) || (Down & 0x8001) || (Up & 0x8000) || (Down & 0x8000) && Reflector.polar_y < 455 && Reflector.polar_y > 270)
-	{
-		if (Reflector.module_charged[1])
-		{
-			switch (Reflector.module[1])
-			{
-			case 1:
-				if ((Up & 0x8000) && Reflector.speed < 2) Reflector.speed += 0.5;
-				if ((Down & 0x8000) && Reflector.speed > 0) Reflector.speed -= 0.5;
-				break;
-			case 2:
-				if ((Up & 0x8001) && Reflector.polar_y > 300)  Reflector.polar_y -= 15;
-				if ((Down & 0x8001) && Reflector.polar_y < 450) Reflector.polar_y += 15;
-				break;
-			}
-		}
-		else
-		{
-			if (Up & 0x8001) Break = 2;
-			if (Down & 0x8001) Break = 0.5;
-		}
-	}
-	else
-	{
-		if (Reflector.polar_y < 375) Reflector.polar_y += 5;
-		else if (Reflector.polar_y > 500) Reflector.polar_y -= (int)((Reflector.polar_y * 0.2 - 75) * 0.2) * 5.0;
-		else if (Reflector.polar_y > 375) Reflector.polar_y -= 5;
-	}
-
-	Reflector.polar_x = AngleOverflow(Reflector.polar_x + Reflector.polar_speedx * 0.0001 / Reflector.polar_y * 375 * Break);
-
-	if (Right & 0x8001) {
-		if (Reflector.polar_speedx > -60)
-			Reflector.polar_speedx -= int(Reflector.speed * 10);
-	}
-	else if (Reflector.polar_speedx < 0) {
-		Reflector.polar_speedx += 10;
-	}
-
-	if (Left & 0x8001) {
-		if (Reflector.polar_speedx < 60)
-			Reflector.polar_speedx += int(Reflector.speed * 10);
-	}
-	else if (Reflector.polar_speedx > 0) {
-		Reflector.polar_speedx -= 10;
-	}
-
-	return Reflector;
-}
 
 struct Power_Reflector ReflectorPosition(struct Power_Reflector Reflector, short Left, short Right, short Up, short Down)
 {
@@ -511,26 +465,16 @@ struct Power_Reflector ReflectorProcess(struct Power_Reflector Reflector, bool R
 }
 struct Power_Reflector ReflectorReset(struct Power_Reflector Reflector)
 {
-	Reflector.module[0] = 0, Reflector.module[1] = 0, Reflector.module[2] = 0, Reflector.module[3] = 0, Reflector.module[4] = 0;
-	for (int i = 0; i < 5; i++)
-	{
-		if (Reflector.module[i] != 0) Reflector.module_charged[i] = ChargedMod;
-		else Reflector.module_charged[i] = false;
-	}
+	for (int i = 0; i < 5; i++) if (Reflector.module[i] != 0) Reflector.module_charged[i] = ChargedMod;
 	Reflector.module_charged[0] = true;
-	Reflector.polar_y = 375;
 	if (Reflector.module[0] & 1) Reflector.polar_x = 0;
 	else Reflector.polar_x = 0.25;
-	Reflector.size = 375, Reflector.speed = 1, Reflector.age = 0;
-	Reflector.Effect_effect = 0, Reflector.Effect_rebound = 0;
 	return Reflector;
 }
 //--------------------------------------------------------------------------------------------------------------//
 struct Power_Player PlayerReset(struct Power_Player Player, int ID) {
 	Player.Online = true;
-	Player.ID = ID, Player.RGB = RGBTemplate_Yellow;
-	Player.Score = 0, Player.CherenkovMeter = 0;
-	Player.Ready = false;
+	Player.ID = ID;
 	Player.Reflector = ReflectorReset(Player.Reflector);
 	Player.Reflector.RGB = Player.RGB;
 	return Player;
@@ -545,7 +489,7 @@ struct Power_Setting_Player SettingReset(struct Power_Setting_Player Setting) {
 
 	Setting.Debug = false;
 
-	Setting.Game_Cherenkov_auto = false;
+	Setting.Game_Cherenkov_auto = true;
 	Setting.Game_PressureReset = false;
 	Setting.Game_ScoreType = 0;
 

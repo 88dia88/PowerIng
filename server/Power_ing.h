@@ -131,6 +131,12 @@ extern struct Power_Control Control;
 extern struct Power_Reactor Reactor;
 extern struct Power_Orb* OrbHead;
 
+extern const int RGBTemplate_Red, RGBTemplate_Green, RGBTemplate_Blue, RGBTemplate_Magenta, RGBTemplate_Yellow, RGBTemplate_Cyan, RGBTemplate_White, RGBTemplate_Black, RGBTemplate_Gray;
+
+extern int ColliderColor;
+
+extern int PlayerColor[7];
+
 //--------------------------------------------------------------------------------------------------------------//
 bool ReactorMeltdown(); // 공 충돌 효과 판정
 void ReactorCherenkov();

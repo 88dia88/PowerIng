@@ -18,6 +18,14 @@ struct Power_Player Player[7];
 struct Power_Control Control;
 struct Power_Reactor Reactor;
 struct Power_Orb* OrbHead = (Power_Orb*)malloc(sizeof(struct Power_Orb));
+
+const int RGBTemplate_Red = 0xff0000, RGBTemplate_Green = 0x00ff00, RGBTemplate_Blue = 0x0000ff,
+RGBTemplate_Magenta = 0xff00ff, RGBTemplate_Yellow = 0xffff00, RGBTemplate_Cyan = 0x00ffff,
+RGBTemplate_White = 0xffffff, RGBTemplate_Black = 0x000000, RGBTemplate_Gray = 0x808080;
+
+int ColliderColor;
+
+int PlayerColor[7];
 //--------------------------------------------------------------------------------------------------------------//
 bool ReactorMeltdown()
 {
@@ -125,7 +133,7 @@ struct Power_Orb* OrbPosition(struct Power_Orb* Orb)
 		Orb->aftery[0] = Orb->y;
 		if (Orb->effect_count < 24) Orb->effect_count++;
 	}
-	
+
 	//---------------------------------
 	return Orb;
 }
@@ -150,7 +158,7 @@ void CollisionDetect(struct Power_Orb* Orb)
 		for (int i = 0; i < 7; i++) {
 			if (Player[i].Online and
 				Player[i].Reflector.age <= Time and
-				Player[i].Reflector.polar_x < ClosestPolar_x and 
+				Player[i].Reflector.polar_x < ClosestPolar_x and
 				ReflectCheck(Orb->next->x + Orb->next->shellx, Orb->next->y + Orb->next->shelly,
 					Player[i].Reflector.polar_x, Player[i].Reflector.polar_y, Player[i].Reflector.size)) {
 				ClosestReflector = i;
@@ -160,7 +168,7 @@ void CollisionDetect(struct Power_Orb* Orb)
 		if (ClosestReflector != -1) Player[ClosestReflector].Reflector = ReflectReflector(Orb, Player[ClosestReflector].Reflector);
 		else if (DistanceOvercmp(Orb->next->x + Orb->next->shellx, Orb->next->y + Orb->next->shelly, 500))
 		{
-			if (((Orb->next->major == false && Orb->next->type == 0) || Orb->next->effect == 1) 
+			if (((Orb->next->major == false && Orb->next->type == 0) || Orb->next->effect == 1)
 				&& Distancecmp(Orb->next->x + Orb->next->shellx, Orb->next->y + Orb->next->shelly, 525))
 			{
 				ReflectOrb(Orb->next, AnglePosition(Orb->next->x, Orb->next->y));
@@ -321,7 +329,7 @@ struct Power_Reflector ReflectReflector(struct Power_Orb* Orb, struct Power_Refl
 				if (Reactor.cherenkovmeter < 1000 && Reactor.cherenkov == false) Reactor.cherenkovcounter += int(125 * Cherenks);
 				break;
 			}
-			CreateEffect(EffectHead, Orb->next->x, Orb->next->y, score);
+			//CreateEffect(EffectHead, Orb->next->x, Orb->next->y, score);
 			Score += score;
 
 			Reflector.age = Time + (int)(50 / Orb->next->speed);
@@ -349,7 +357,7 @@ struct Power_Reflector ReflectReflector(struct Power_Orb* Orb, struct Power_Refl
 			else if (Reflector.module[4] != 0 && Reflector.module_charged[4] == false) Reflector.module_charged[4] = true;
 			else {
 				double score = OrbScore(Orb->next->speed, Mole, PressureCaculate(Mole, Temperture), 1, Reactor.cherenkov);
-				CreateEffect(EffectHead, Orb->next->x, Orb->next->y, score);
+				//CreateEffect(EffectHead, Orb->next->x, Orb->next->y, score);
 				Score += score;
 			}
 			break;
@@ -483,7 +491,7 @@ struct Power_Reflector ReflectorPosition(struct Power_Reflector Reflector, short
 		Reflector.polar_speedx += 10;
 	}
 
-	if ((Left & 0x8001)&& (Reflector.polar_speedx < int(60 * Break))) {
+	if ((Left & 0x8001) && (Reflector.polar_speedx < int(60 * Break))) {
 		Reflector.polar_speedx += int(Reflector.speed * 10);
 	}
 	else if (Reflector.polar_speedx > 0) {
@@ -502,7 +510,7 @@ struct Power_Reflector ReflectorProcess(struct Power_Reflector Reflector, bool R
 
 	Reflector.polar_x = AngleOverflow(Reflector.polar_x + Reflector.polar_speedx * 0.0001 / Reflector.polar_y * 375);
 
-	if (Reflector.age <= Time -101 || Time < 1) Reflector.age = 0;
+	if (Reflector.age <= Time - 101 || Time < 1) Reflector.age = 0;
 
 	if (Reflector.Effect_effect <= Time || Time < 1 || (Reflector.Effect_effect - Time) % 100 == 0) Reflector.Effect_effect = 0;
 	if (Reflector.Effect_rebound <= Time || Time < 1) Reflector.Effect_rebound = 0;
@@ -555,7 +563,7 @@ struct Power_Setting_Player SettingReset(struct Power_Setting_Player Setting) {
 	Setting.Sound_Volume_Master = 100;
 	Setting.Sound_Volume = 100;
 	Setting.Sound_Alert = 0;
-	
+
 	return Setting;
 }
 
@@ -567,4 +575,3 @@ int MenuEscape(int Menu_Type) {
 	else Menu_Type = 0;
 	return Menu_Type;
 }
-

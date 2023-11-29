@@ -131,15 +131,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 
 	static bool OrbLaunch = false;
 
-	static int CustomRGB[4] = { RGBTemplate_Yellow, 255, 255, 0 };
-
 	static struct Power_Player MainPlayer;
 
-
 	int MassSel = 1;
-	int rgb[9] = { RGBTemplate_Green, 
-		RGBTemplate_Green, RGBTemplate_Green, RGBTemplate_Green, RGBTemplate_Green,
-		RGBTemplate_Cyan, RGBTemplate_Cyan, RGBTemplate_Cyan, RGBTemplate_Cyan };
 	// -------------------
 
 
@@ -148,7 +142,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 
 	if (iMsg == WM_CREATE) {
 		GameStart = false;
-		EffectHead->next = EffectHead;
 		OrbHead->next = OrbHead;
 
 		/*
@@ -192,15 +185,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 		PreTime = -25;
 		Orbcount = 3;
 		TotalScore = 0;
-		DisplayLoad();
-		DisplayOrbLoad();
-		
-		DisplayColorApply(MainPlayer.RGB);
-		DisplayReflectorColorApply(MainPlayer.RGB);
-
-		DisplayPlayerColorApply(MainPlayer.RGB, 0);
-
-		for (int i = 1; i < 7; i++) DisplayPlayerColorApply(Player[i].RGB, i);
 
 		Control.Left = 0x25;
 		Control.Right = 0X27;
@@ -256,16 +240,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 					}
 					break;
 				}
-			}
-			break;
-		case WM_MOUSEMOVE:
-			switch (GameStatus) {
-			case 0:
-				if (UIButtonSelected(-700, 15, 750, 150, Mouse)) SelectedButton = 2;
-				else if (UIButtonSelected(-700, 165, 750, 150, Mouse)) SelectedButton = 3;
-				else if (UIButtonSelected(-700, 315, 750, 150, Mouse)) SelectedButton = 4;
-				else SelectedButton = 0;
-				break;
 			}
 			break;
 		case WM_LBUTTONDOWN:

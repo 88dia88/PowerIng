@@ -30,12 +30,6 @@ int Reactor_half = int(Reactor_size * window_half), Rail_half = int(Rail_size * 
 int Controllroom_half_x = int(Controllroom_size_x * window_half), Reflector_half_x = int(Reflector_size_x * window_half);
 int Controllroom_half_y = int(Controllroom_size_y * window_half), Reflector_half_y = int(Reflector_size_y * window_half);
 
-const int RGBTemplate_Red = 0xff0000, RGBTemplate_Green = 0x00ff00, RGBTemplate_Blue = 0x0000ff,
-	RGBTemplate_Magenta = 0xff00ff, RGBTemplate_Yellow = 0xffff00, RGBTemplate_Cyan = 0x00ffff,
-	RGBTemplate_White = 0xffffff, RGBTemplate_Black = 0x000000, RGBTemplate_Gray = 0x808080;
-
-int PlayerColor[7];
-
 //--------------------------------------------------------------------------------------------------------------//
 CImage ReactorImg, Reactor_EffectImg, ReflectorImg, Reflector_EffectImg, Orb_Animation_Img, PressureImg, CherenkovImg;
 CImage Reactor_RailImg;
