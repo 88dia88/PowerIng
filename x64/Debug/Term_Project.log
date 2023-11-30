@@ -1,35 +1,9 @@
-﻿  GameTimer.cpp
+﻿  GamePlayer.cpp
   Packet.cpp
-D:\source\넷겜플\Term_Project\Player.h(17,22): error C2061: 구문 오류: 식별자 'KeyInput'
-D:\source\넷겜플\Term_Project\Player.h(21,14): error C3646: 'GetKeyInput': 알 수 없는 재정의 지정자입니다.
-D:\source\넷겜플\Term_Project\Player.h(21,25): error C2059: 구문 오류: '('
-D:\source\넷겜플\Term_Project\Player.h(21,27): error C2238: ';' 앞에 예기치 않은 토큰이 있습니다.
-D:\source\넷겜플\Term_Project\Player.h(41,14): error C3646: 'mKeyInput': 알 수 없는 재정의 지정자입니다.
-D:\source\넷겜플\Term_Project\Player.h(41,23): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
-D:\source\넷겜플\Term_Project\Packit.h(24,5): error C2365: 'Count': 재정의: 이전 정의는 '열거자'입니다.
-D:\source\넷겜플\Term_Project\Packit.h(14,5): message : 'Count' 선언을 참조하십시오.
-  Player.cpp
-D:\source\넷겜플\Term_Project\Packit.h(24,5): error C2365: 'Count': 재정의: 이전 정의는 '열거자'입니다.
-D:\source\넷겜플\Term_Project\Packit.h(14,5): message : 'Count' 선언을 참조하십시오.
-D:\source\넷겜플\Term_Project\Packit.h(51,11): error C2143: 구문 오류: ';'이(가) '*' 앞에 없습니다.
-D:\source\넷겜플\Term_Project\Packit.h(51,11): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
-D:\source\넷겜플\Term_Project\Packit.h(51,20): error C2238: ';' 앞에 예기치 않은 토큰이 있습니다.
-D:\source\넷겜플\Term_Project\Packit.h(58,12): error C3646: 'player': 알 수 없는 재정의 지정자입니다.
-D:\source\넷겜플\Term_Project\Packit.h(58,18): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
-D:\source\넷겜플\Term_Project\Packit.h(73,11): error C2143: 구문 오류: ';'이(가) '*' 앞에 없습니다.
-D:\source\넷겜플\Term_Project\Packit.h(73,11): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
-D:\source\넷겜플\Term_Project\Packit.h(73,20): error C2238: ';' 앞에 예기치 않은 토큰이 있습니다.
   Power_Server_2.cpp
-D:\source\넷겜플\Term_Project\Player.h(17,22): error C2061: 구문 오류: 식별자 'KeyInput'
-D:\source\넷겜플\Term_Project\Player.h(21,14): error C3646: 'GetKeyInput': 알 수 없는 재정의 지정자입니다.
-D:\source\넷겜플\Term_Project\Player.h(21,25): error C2059: 구문 오류: '('
-D:\source\넷겜플\Term_Project\Player.h(21,27): error C2238: ';' 앞에 예기치 않은 토큰이 있습니다.
-D:\source\넷겜플\Term_Project\Player.h(41,14): error C3646: 'mKeyInput': 알 수 없는 재정의 지정자입니다.
-D:\source\넷겜플\Term_Project\Player.h(41,23): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
-D:\source\넷겜플\Term_Project\Packit.h(14,5): error C2365: 'Count': 재정의: 이전 정의는 '열거자'입니다.
-D:\source\넷겜플\Term_Project\Globals.h(11,5): message : 'Count' 선언을 참조하십시오.
-D:\source\넷겜플\Term_Project\Packit.h(24,5): error C2365: 'Count': 재정의: 이전 정의는 '열거자'입니다.
-D:\source\넷겜플\Term_Project\Globals.h(11,5): message : 'Count' 선언을 참조하십시오.
-D:\source\넷겜플\Term_Project\Power_Server_2.cpp(54,25): error C2065: 'WndProc': 선언되지 않은 식별자입니다.
-D:\source\넷겜플\Term_Project\Power_Server_2.cpp(118,12): warning C4244: 'return': 'WPARAM'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\source\넷겜플\Term_Project\Power_Server_2.cpp(332,10): warning C4477: 'printf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 3의 형식이 'int *'입니다.
+D:\source\넷겜플\Term_Project\Power_Server_2.cpp(332,10): warning C4313: 'printf': 서식 문자열의 '%d'이(가) int *' 형식의 인수 3과(와) 충돌합니다.
+D:\source\넷겜플\Term_Project\Power_Server_2.cpp(347,7): warning C4101: 'buf' :참조되지 않은 지역 변수입니다.
   코드를 생성하고 있습니다...
+RC : fatal error RC1110: could not open Resource.rc
+  

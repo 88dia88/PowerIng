@@ -24,30 +24,27 @@
     <ClInclude Include="Packit.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="GameTimer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="GamePlayer.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Power_Server.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Packet.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="GameTimer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Power_Server_2.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GamePlayer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

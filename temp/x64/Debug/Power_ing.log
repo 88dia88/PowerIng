@@ -1,0 +1,1053 @@
+﻿  Power_Display.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(103,1): warning C4005: 'AF_IPX': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(457,1): message : 'AF_IPX'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(147,1): warning C4005: 'AF_MAX': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(476,1): message : 'AF_MAX'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(187,1): warning C4005: 'SO_DONTLINGER': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(399,1): message : 'SO_DONTLINGER'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(240,25): error C2011: 'sockaddr': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(482,8): message : 'sockaddr' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(442,5): error C2143: 구문 오류: '}'이(가) '상수' 앞에 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(442,5): error C2059: 구문 오류: '상수'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(496,1): error C2143: 구문 오류: ';'이(가) '}' 앞에 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(496,10): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(496,20): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(577,1): warning C4005: 'IN_CLASSA': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(284,1): message : 'IN_CLASSA'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(583,1): warning C4005: 'IN_CLASSB': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(290,1): message : 'IN_CLASSB'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(589,1): warning C4005: 'IN_CLASSC': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(296,1): message : 'IN_CLASSC'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(600,1): warning C4005: 'INADDR_ANY': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(301,1): message : 'INADDR_ANY'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(602,1): warning C4005: 'INADDR_BROADCAST': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(303,1): message : 'INADDR_BROADCAST'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(638,28): error C2011: 'sockaddr_in': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(309,8): message : 'sockaddr_in' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(136,23): error C2011: 'fd_set': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(65,16): message : 'fd_set' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(171,1): warning C4005: 'FD_SET': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(99,1): message : 'FD_SET'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(180,16): error C2011: 'timeval': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(108,8): message : 'timeval' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(236,17): error C2011: 'hostent': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(164,9): message : 'hostent' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(249,16): error C2011: 'netent': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(177,9): message : 'netent' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(256,17): error C2011: 'servent': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(184,9): message : 'servent' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(268,18): error C2011: 'protoent': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(196,9): message : 'protoent' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(364,24): error C2011: 'WSAData': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(319,16): message : 'WSAData' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(462,18): error C2011: 'sockproto': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(491,8): message : 'sockproto' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(504,16): error C2011: 'linger': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(528,9): message : 'linger' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(517,1): warning C4005: 'SOMAXCONN': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(541,1): message : 'SOMAXCONN'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(551,1): warning C4005: 'FD_READ': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(559,1): message : 'FD_READ'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(554,1): warning C4005: 'FD_WRITE': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(560,1): message : 'FD_WRITE'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(557,1): warning C4005: 'FD_OOB': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(561,1): message : 'FD_OOB'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(560,1): warning C4005: 'FD_ACCEPT': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(562,1): message : 'FD_ACCEPT'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(563,1): warning C4005: 'FD_CONNECT': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(563,1): message : 'FD_CONNECT'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(566,1): warning C4005: 'FD_CLOSE': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(564,1): message : 'FD_CLOSE'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1631,1): error C2375: 'accept': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(739,19): message : 'accept' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1653,1): error C2375: 'bind': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(744,16): message : 'bind' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1674,1): error C2375: 'closesocket': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(749,16): message : 'closesocket' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1691,1): error C2375: 'connect': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(751,16): message : 'connect' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1712,1): error C2375: 'ioctlsocket': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(756,16): message : 'ioctlsocket' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1735,1): error C2375: 'getpeername': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(761,16): message : 'getpeername' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1756,1): error C2375: 'getsockname': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(766,16): message : 'getsockname' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1777,1): error C2375: 'getsockopt': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(771,16): message : 'getsockopt' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1802,1): error C2375: 'htonl': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(778,19): message : 'htonl' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1819,1): error C2375: 'htons': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(780,20): message : 'htons' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1837,1): error C2375: 'inet_addr': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(782,26): message : 'inet_addr' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1855,1): error C2375: 'inet_ntoa': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(784,23): message : 'inet_ntoa' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1955,1): error C2375: 'listen': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(786,16): message : 'listen' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1974,1): error C2375: 'ntohl': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(790,19): message : 'ntohl' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1991,1): error C2375: 'ntohs': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(792,20): message : 'ntohs' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2008,1): error C2375: 'recv': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(794,16): message : 'recv' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2031,1): error C2375: 'recvfrom': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(800,16): message : 'recvfrom' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2058,1): error C2375: 'select': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(808,16): message : 'select' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2083,1): error C2375: 'send': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(815,16): message : 'send' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2106,1): error C2375: 'sendto': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(821,16): message : 'sendto' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2133,1): error C2375: 'setsockopt': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(829,16): message : 'setsockopt' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2158,1): error C2375: 'shutdown': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(836,16): message : 'shutdown' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2178,1): error C2375: 'socket': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(840,19): message : 'socket' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2203,1): error C2375: 'gethostbyaddr': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(847,33): message : 'gethostbyaddr' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2225,1): error C2375: 'gethostbyname': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(852,33): message : 'gethostbyname' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2242,1): error C2375: 'gethostname': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(854,16): message : 'gethostname' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2282,1): error C2375: 'getservbyport': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(858,33): message : 'getservbyport' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2301,1): error C2375: 'getservbyname': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(862,33): message : 'getservbyname' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2320,1): error C2375: 'getprotobynumber': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(866,34): message : 'getprotobynumber' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2337,1): error C2375: 'getprotobyname': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(868,34): message : 'getprotobyname' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2357,1): error C2375: 'WSAStartup': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(872,16): message : 'WSAStartup' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2377,1): error C2375: 'WSACleanup': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(876,16): message : 'WSACleanup' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2394,1): error C2375: 'WSASetLastError': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(878,17): message : 'WSASetLastError' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2411,1): error C2375: 'WSAGetLastError': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(880,16): message : 'WSAGetLastError' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2432,1): error C2375: 'WSAIsBlocking': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(882,17): message : 'WSAIsBlocking' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2450,1): error C2375: 'WSAUnhookBlockingHook': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(884,16): message : 'WSAUnhookBlockingHook' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2468,1): error C2375: 'WSASetBlockingHook': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(886,20): message : 'WSASetBlockingHook' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2486,1): error C2375: 'WSACancelBlockingCall': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(888,16): message : 'WSACancelBlockingCall' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2504,1): error C2375: 'WSAAsyncGetServByName': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(890,19): message : 'WSAAsyncGetServByName' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2532,1): error C2375: 'WSAAsyncGetServByPort': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(898,19): message : 'WSAAsyncGetServByPort' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2560,1): error C2375: 'WSAAsyncGetProtoByName': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(906,19): message : 'WSAAsyncGetProtoByName' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2586,1): error C2375: 'WSAAsyncGetProtoByNumber': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(913,19): message : 'WSAAsyncGetProtoByNumber' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2612,1): error C2375: 'WSAAsyncGetHostByName': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(920,19): message : 'WSAAsyncGetHostByName' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2638,1): error C2375: 'WSAAsyncGetHostByAddr': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(927,19): message : 'WSAAsyncGetHostByAddr' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2668,1): error C2375: 'WSACancelAsyncRequest': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(936,16): message : 'WSACancelAsyncRequest' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2686,1): error C2375: 'WSAAsyncSelect': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(938,16): message : 'WSAAsyncSelect' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(4318,1): error C2059: 구문 오류: '}'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(4318,1): error C2143: 구문 오류: ';'이(가) '}' 앞에 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(42,12): error C2143: 구문 오류: ';'이(가) '{' 앞에 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(42,12): error C2447: '{': 함수 헤더가 없습니다. 이전 스타일의 형식 목록입니까?
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(135,1): warning C4005: 'IP_TOS': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(349,1): message : 'IP_TOS'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(136,1): warning C4005: 'IP_TTL': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(348,1): message : 'IP_TTL'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(137,1): warning C4005: 'IP_MULTICAST_IF': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(343,1): message : 'IP_MULTICAST_IF'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(138,1): warning C4005: 'IP_MULTICAST_TTL': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(344,1): message : 'IP_MULTICAST_TTL'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(139,1): warning C4005: 'IP_MULTICAST_LOOP': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(345,1): message : 'IP_MULTICAST_LOOP'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(140,1): warning C4005: 'IP_ADD_MEMBERSHIP': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(346,1): message : 'IP_ADD_MEMBERSHIP'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(141,1): warning C4005: 'IP_DROP_MEMBERSHIP': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(347,1): message : 'IP_DROP_MEMBERSHIP'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(142,1): warning C4005: 'IP_DONTFRAGMENT': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(350,1): message : 'IP_DONTFRAGMENT'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(733,10): error C2061: 구문 오류: 식별자 'MULTICAST_MODE_TYPE'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(740,5): error C2065: 'PIP_MSFILTER': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(740,18): error C2146: 구문 오류: ';'이(가) 'Filter' 식별자 앞에 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(740,18): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(742,9): error C2065: 'SourceCount': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(743,40): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(743,60): error C2065: 'SourceList': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(744,9): error C2065: 'WSASetLastError': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(748,12): error C2065: 'IP_MSFILTER': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(748,12): error C2065: 'SourceCount': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(749,5): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(749,15): error C2065: 'PIP_MSFILTER': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(749,29): error C2146: 구문 오류: ';'이(가) 'HeapAlloc' 식별자 앞에 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(750,9): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(751,9): error C2065: 'WSASetLastError': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(755,5): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(756,5): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(757,5): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(757,26): error C2065: 'FilterMode': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(758,5): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(758,27): error C2065: 'SourceCount': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(759,9): error C2065: 'SourceCount': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(760,9): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(760,9): error C2065: 'SourceList': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(760,9): error C2065: 'SourceCount': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(760,9): error C2660: 'memcpy': 함수는 2개의 인수를 사용하지 않습니다.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\vcruntime_string.h(43,15): message : 'memcpy' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(760,9): message : 인수 목록 '()'을(를) 일치시키는 동안
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(764,47): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(767,35): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(779,11): error C2061: 구문 오류: 식별자 'MULTICAST_MODE_TYPE'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(786,5): error C2065: 'PIP_MSFILTER': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(786,18): error C2146: 구문 오류: ';'이(가) 'Filter' 식별자 앞에 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(786,18): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(788,10): error C2065: 'SourceCount': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(789,40): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(789,60): error C2065: 'SourceList': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(789,1): fatal  error C1003: 오류 수가 100개를 초과했습니다. 컴파일을 중지합니다.
+  Power_Main.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(103,1): warning C4005: 'AF_IPX': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(457,1): message : 'AF_IPX'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(147,1): warning C4005: 'AF_MAX': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(476,1): message : 'AF_MAX'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(187,1): warning C4005: 'SO_DONTLINGER': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(399,1): message : 'SO_DONTLINGER'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(240,25): error C2011: 'sockaddr': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(482,8): message : 'sockaddr' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(442,5): error C2143: 구문 오류: '}'이(가) '상수' 앞에 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(442,5): error C2059: 구문 오류: '상수'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(496,1): error C2143: 구문 오류: ';'이(가) '}' 앞에 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(496,10): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(496,20): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(577,1): warning C4005: 'IN_CLASSA': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(284,1): message : 'IN_CLASSA'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(583,1): warning C4005: 'IN_CLASSB': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(290,1): message : 'IN_CLASSB'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(589,1): warning C4005: 'IN_CLASSC': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(296,1): message : 'IN_CLASSC'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(600,1): warning C4005: 'INADDR_ANY': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(301,1): message : 'INADDR_ANY'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(602,1): warning C4005: 'INADDR_BROADCAST': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(303,1): message : 'INADDR_BROADCAST'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(638,28): error C2011: 'sockaddr_in': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(309,8): message : 'sockaddr_in' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(136,23): error C2011: 'fd_set': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(65,16): message : 'fd_set' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(171,1): warning C4005: 'FD_SET': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(99,1): message : 'FD_SET'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(180,16): error C2011: 'timeval': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(108,8): message : 'timeval' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(236,17): error C2011: 'hostent': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(164,9): message : 'hostent' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(249,16): error C2011: 'netent': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(177,9): message : 'netent' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(256,17): error C2011: 'servent': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(184,9): message : 'servent' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(268,18): error C2011: 'protoent': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(196,9): message : 'protoent' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(364,24): error C2011: 'WSAData': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(319,16): message : 'WSAData' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(462,18): error C2011: 'sockproto': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(491,8): message : 'sockproto' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(504,16): error C2011: 'linger': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(528,9): message : 'linger' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(517,1): warning C4005: 'SOMAXCONN': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(541,1): message : 'SOMAXCONN'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(551,1): warning C4005: 'FD_READ': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(559,1): message : 'FD_READ'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(554,1): warning C4005: 'FD_WRITE': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(560,1): message : 'FD_WRITE'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(557,1): warning C4005: 'FD_OOB': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(561,1): message : 'FD_OOB'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(560,1): warning C4005: 'FD_ACCEPT': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(562,1): message : 'FD_ACCEPT'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(563,1): warning C4005: 'FD_CONNECT': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(563,1): message : 'FD_CONNECT'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(566,1): warning C4005: 'FD_CLOSE': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(564,1): message : 'FD_CLOSE'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1631,1): error C2375: 'accept': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(739,19): message : 'accept' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1653,1): error C2375: 'bind': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(744,16): message : 'bind' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1674,1): error C2375: 'closesocket': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(749,16): message : 'closesocket' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1691,1): error C2375: 'connect': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(751,16): message : 'connect' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1712,1): error C2375: 'ioctlsocket': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(756,16): message : 'ioctlsocket' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1735,1): error C2375: 'getpeername': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(761,16): message : 'getpeername' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1756,1): error C2375: 'getsockname': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(766,16): message : 'getsockname' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1777,1): error C2375: 'getsockopt': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(771,16): message : 'getsockopt' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1802,1): error C2375: 'htonl': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(778,19): message : 'htonl' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1819,1): error C2375: 'htons': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(780,20): message : 'htons' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1837,1): error C2375: 'inet_addr': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(782,26): message : 'inet_addr' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1855,1): error C2375: 'inet_ntoa': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(784,23): message : 'inet_ntoa' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1955,1): error C2375: 'listen': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(786,16): message : 'listen' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1974,1): error C2375: 'ntohl': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(790,19): message : 'ntohl' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1991,1): error C2375: 'ntohs': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(792,20): message : 'ntohs' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2008,1): error C2375: 'recv': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(794,16): message : 'recv' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2031,1): error C2375: 'recvfrom': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(800,16): message : 'recvfrom' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2058,1): error C2375: 'select': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(808,16): message : 'select' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2083,1): error C2375: 'send': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(815,16): message : 'send' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2106,1): error C2375: 'sendto': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(821,16): message : 'sendto' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2133,1): error C2375: 'setsockopt': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(829,16): message : 'setsockopt' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2158,1): error C2375: 'shutdown': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(836,16): message : 'shutdown' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2178,1): error C2375: 'socket': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(840,19): message : 'socket' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2203,1): error C2375: 'gethostbyaddr': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(847,33): message : 'gethostbyaddr' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2225,1): error C2375: 'gethostbyname': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(852,33): message : 'gethostbyname' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2242,1): error C2375: 'gethostname': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(854,16): message : 'gethostname' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2282,1): error C2375: 'getservbyport': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(858,33): message : 'getservbyport' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2301,1): error C2375: 'getservbyname': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(862,33): message : 'getservbyname' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2320,1): error C2375: 'getprotobynumber': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(866,34): message : 'getprotobynumber' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2337,1): error C2375: 'getprotobyname': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(868,34): message : 'getprotobyname' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2357,1): error C2375: 'WSAStartup': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(872,16): message : 'WSAStartup' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2377,1): error C2375: 'WSACleanup': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(876,16): message : 'WSACleanup' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2394,1): error C2375: 'WSASetLastError': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(878,17): message : 'WSASetLastError' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2411,1): error C2375: 'WSAGetLastError': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(880,16): message : 'WSAGetLastError' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2432,1): error C2375: 'WSAIsBlocking': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(882,17): message : 'WSAIsBlocking' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2450,1): error C2375: 'WSAUnhookBlockingHook': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(884,16): message : 'WSAUnhookBlockingHook' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2468,1): error C2375: 'WSASetBlockingHook': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(886,20): message : 'WSASetBlockingHook' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2486,1): error C2375: 'WSACancelBlockingCall': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(888,16): message : 'WSACancelBlockingCall' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2504,1): error C2375: 'WSAAsyncGetServByName': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(890,19): message : 'WSAAsyncGetServByName' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2532,1): error C2375: 'WSAAsyncGetServByPort': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(898,19): message : 'WSAAsyncGetServByPort' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2560,1): error C2375: 'WSAAsyncGetProtoByName': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(906,19): message : 'WSAAsyncGetProtoByName' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2586,1): error C2375: 'WSAAsyncGetProtoByNumber': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(913,19): message : 'WSAAsyncGetProtoByNumber' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2612,1): error C2375: 'WSAAsyncGetHostByName': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(920,19): message : 'WSAAsyncGetHostByName' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2638,1): error C2375: 'WSAAsyncGetHostByAddr': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(927,19): message : 'WSAAsyncGetHostByAddr' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2668,1): error C2375: 'WSACancelAsyncRequest': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(936,16): message : 'WSACancelAsyncRequest' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2686,1): error C2375: 'WSAAsyncSelect': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(938,16): message : 'WSAAsyncSelect' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(4318,1): error C2059: 구문 오류: '}'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(4318,1): error C2143: 구문 오류: ';'이(가) '}' 앞에 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(42,12): error C2143: 구문 오류: ';'이(가) '{' 앞에 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(42,12): error C2447: '{': 함수 헤더가 없습니다. 이전 스타일의 형식 목록입니까?
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(135,1): warning C4005: 'IP_TOS': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(349,1): message : 'IP_TOS'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(136,1): warning C4005: 'IP_TTL': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(348,1): message : 'IP_TTL'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(137,1): warning C4005: 'IP_MULTICAST_IF': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(343,1): message : 'IP_MULTICAST_IF'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(138,1): warning C4005: 'IP_MULTICAST_TTL': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(344,1): message : 'IP_MULTICAST_TTL'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(139,1): warning C4005: 'IP_MULTICAST_LOOP': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(345,1): message : 'IP_MULTICAST_LOOP'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(140,1): warning C4005: 'IP_ADD_MEMBERSHIP': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(346,1): message : 'IP_ADD_MEMBERSHIP'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(141,1): warning C4005: 'IP_DROP_MEMBERSHIP': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(347,1): message : 'IP_DROP_MEMBERSHIP'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(142,1): warning C4005: 'IP_DONTFRAGMENT': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(350,1): message : 'IP_DONTFRAGMENT'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(733,10): error C2061: 구문 오류: 식별자 'MULTICAST_MODE_TYPE'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(740,5): error C2065: 'PIP_MSFILTER': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(740,18): error C2146: 구문 오류: ';'이(가) 'Filter' 식별자 앞에 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(740,18): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(742,9): error C2065: 'SourceCount': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(743,40): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(743,60): error C2065: 'SourceList': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(744,9): error C2065: 'WSASetLastError': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(748,12): error C2065: 'IP_MSFILTER': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(748,12): error C2065: 'SourceCount': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(749,5): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(749,15): error C2065: 'PIP_MSFILTER': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(749,29): error C2146: 구문 오류: ';'이(가) 'HeapAlloc' 식별자 앞에 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(750,9): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(751,9): error C2065: 'WSASetLastError': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(755,5): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(756,5): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(757,5): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(757,26): error C2065: 'FilterMode': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(758,5): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(758,27): error C2065: 'SourceCount': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(759,9): error C2065: 'SourceCount': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(760,9): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(760,9): error C2065: 'SourceList': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(760,9): error C2065: 'SourceCount': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(760,9): error C2660: 'memcpy': 함수는 2개의 인수를 사용하지 않습니다.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\vcruntime_string.h(43,15): message : 'memcpy' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(760,9): message : 인수 목록 '()'을(를) 일치시키는 동안
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(764,47): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(767,35): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(779,11): error C2061: 구문 오류: 식별자 'MULTICAST_MODE_TYPE'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(786,5): error C2065: 'PIP_MSFILTER': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(786,18): error C2146: 구문 오류: ';'이(가) 'Filter' 식별자 앞에 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(786,18): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(788,10): error C2065: 'SourceCount': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(789,40): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(789,60): error C2065: 'SourceList': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(789,1): fatal  error C1003: 오류 수가 100개를 초과했습니다. 컴파일을 중지합니다.
+  Power_ing.cpp
+D:\source\넷겜플\Term_Project\temp\Power_ing.cpp(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(103,1): warning C4005: 'AF_IPX': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(457,1): message : 'AF_IPX'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(147,1): warning C4005: 'AF_MAX': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(476,1): message : 'AF_MAX'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(187,1): warning C4005: 'SO_DONTLINGER': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(399,1): message : 'SO_DONTLINGER'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(240,25): error C2011: 'sockaddr': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(482,8): message : 'sockaddr' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(442,5): error C2143: 구문 오류: '}'이(가) '상수' 앞에 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(442,5): error C2059: 구문 오류: '상수'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(496,1): error C2143: 구문 오류: ';'이(가) '}' 앞에 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(496,10): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(496,20): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(577,1): warning C4005: 'IN_CLASSA': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(284,1): message : 'IN_CLASSA'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(583,1): warning C4005: 'IN_CLASSB': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(290,1): message : 'IN_CLASSB'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(589,1): warning C4005: 'IN_CLASSC': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(296,1): message : 'IN_CLASSC'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(600,1): warning C4005: 'INADDR_ANY': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(301,1): message : 'INADDR_ANY'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(602,1): warning C4005: 'INADDR_BROADCAST': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(303,1): message : 'INADDR_BROADCAST'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(638,28): error C2011: 'sockaddr_in': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(309,8): message : 'sockaddr_in' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(136,23): error C2011: 'fd_set': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(65,16): message : 'fd_set' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(171,1): warning C4005: 'FD_SET': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(99,1): message : 'FD_SET'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(180,16): error C2011: 'timeval': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(108,8): message : 'timeval' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(236,17): error C2011: 'hostent': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(164,9): message : 'hostent' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(249,16): error C2011: 'netent': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(177,9): message : 'netent' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(256,17): error C2011: 'servent': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(184,9): message : 'servent' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(268,18): error C2011: 'protoent': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(196,9): message : 'protoent' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(364,24): error C2011: 'WSAData': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(319,16): message : 'WSAData' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(462,18): error C2011: 'sockproto': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(491,8): message : 'sockproto' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(504,16): error C2011: 'linger': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(528,9): message : 'linger' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(517,1): warning C4005: 'SOMAXCONN': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(541,1): message : 'SOMAXCONN'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(551,1): warning C4005: 'FD_READ': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(559,1): message : 'FD_READ'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(554,1): warning C4005: 'FD_WRITE': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(560,1): message : 'FD_WRITE'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(557,1): warning C4005: 'FD_OOB': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(561,1): message : 'FD_OOB'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(560,1): warning C4005: 'FD_ACCEPT': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(562,1): message : 'FD_ACCEPT'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(563,1): warning C4005: 'FD_CONNECT': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(563,1): message : 'FD_CONNECT'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(566,1): warning C4005: 'FD_CLOSE': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(564,1): message : 'FD_CLOSE'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1631,1): error C2375: 'accept': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(739,19): message : 'accept' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1653,1): error C2375: 'bind': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(744,16): message : 'bind' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1674,1): error C2375: 'closesocket': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(749,16): message : 'closesocket' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1691,1): error C2375: 'connect': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(751,16): message : 'connect' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1712,1): error C2375: 'ioctlsocket': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(756,16): message : 'ioctlsocket' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1735,1): error C2375: 'getpeername': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(761,16): message : 'getpeername' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1756,1): error C2375: 'getsockname': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(766,16): message : 'getsockname' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1777,1): error C2375: 'getsockopt': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(771,16): message : 'getsockopt' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1802,1): error C2375: 'htonl': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(778,19): message : 'htonl' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1819,1): error C2375: 'htons': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(780,20): message : 'htons' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1837,1): error C2375: 'inet_addr': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(782,26): message : 'inet_addr' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1855,1): error C2375: 'inet_ntoa': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(784,23): message : 'inet_ntoa' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1955,1): error C2375: 'listen': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(786,16): message : 'listen' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1974,1): error C2375: 'ntohl': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(790,19): message : 'ntohl' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1991,1): error C2375: 'ntohs': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(792,20): message : 'ntohs' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2008,1): error C2375: 'recv': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(794,16): message : 'recv' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2031,1): error C2375: 'recvfrom': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(800,16): message : 'recvfrom' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2058,1): error C2375: 'select': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(808,16): message : 'select' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2083,1): error C2375: 'send': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(815,16): message : 'send' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2106,1): error C2375: 'sendto': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(821,16): message : 'sendto' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2133,1): error C2375: 'setsockopt': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(829,16): message : 'setsockopt' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2158,1): error C2375: 'shutdown': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(836,16): message : 'shutdown' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2178,1): error C2375: 'socket': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(840,19): message : 'socket' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2203,1): error C2375: 'gethostbyaddr': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(847,33): message : 'gethostbyaddr' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2225,1): error C2375: 'gethostbyname': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(852,33): message : 'gethostbyname' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2242,1): error C2375: 'gethostname': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(854,16): message : 'gethostname' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2282,1): error C2375: 'getservbyport': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(858,33): message : 'getservbyport' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2301,1): error C2375: 'getservbyname': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(862,33): message : 'getservbyname' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2320,1): error C2375: 'getprotobynumber': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(866,34): message : 'getprotobynumber' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2337,1): error C2375: 'getprotobyname': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(868,34): message : 'getprotobyname' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2357,1): error C2375: 'WSAStartup': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(872,16): message : 'WSAStartup' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2377,1): error C2375: 'WSACleanup': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(876,16): message : 'WSACleanup' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2394,1): error C2375: 'WSASetLastError': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(878,17): message : 'WSASetLastError' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2411,1): error C2375: 'WSAGetLastError': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(880,16): message : 'WSAGetLastError' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2432,1): error C2375: 'WSAIsBlocking': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(882,17): message : 'WSAIsBlocking' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2450,1): error C2375: 'WSAUnhookBlockingHook': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(884,16): message : 'WSAUnhookBlockingHook' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2468,1): error C2375: 'WSASetBlockingHook': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(886,20): message : 'WSASetBlockingHook' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2486,1): error C2375: 'WSACancelBlockingCall': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(888,16): message : 'WSACancelBlockingCall' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2504,1): error C2375: 'WSAAsyncGetServByName': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(890,19): message : 'WSAAsyncGetServByName' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2532,1): error C2375: 'WSAAsyncGetServByPort': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(898,19): message : 'WSAAsyncGetServByPort' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2560,1): error C2375: 'WSAAsyncGetProtoByName': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(906,19): message : 'WSAAsyncGetProtoByName' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2586,1): error C2375: 'WSAAsyncGetProtoByNumber': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(913,19): message : 'WSAAsyncGetProtoByNumber' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2612,1): error C2375: 'WSAAsyncGetHostByName': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(920,19): message : 'WSAAsyncGetHostByName' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2638,1): error C2375: 'WSAAsyncGetHostByAddr': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(927,19): message : 'WSAAsyncGetHostByAddr' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2668,1): error C2375: 'WSACancelAsyncRequest': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(936,16): message : 'WSACancelAsyncRequest' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2686,1): error C2375: 'WSAAsyncSelect': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(938,16): message : 'WSAAsyncSelect' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(4318,1): error C2059: 구문 오류: '}'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(4318,1): error C2143: 구문 오류: ';'이(가) '}' 앞에 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(42,12): error C2143: 구문 오류: ';'이(가) '{' 앞에 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(42,12): error C2447: '{': 함수 헤더가 없습니다. 이전 스타일의 형식 목록입니까?
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(135,1): warning C4005: 'IP_TOS': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(349,1): message : 'IP_TOS'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(136,1): warning C4005: 'IP_TTL': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(348,1): message : 'IP_TTL'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(137,1): warning C4005: 'IP_MULTICAST_IF': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(343,1): message : 'IP_MULTICAST_IF'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(138,1): warning C4005: 'IP_MULTICAST_TTL': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(344,1): message : 'IP_MULTICAST_TTL'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(139,1): warning C4005: 'IP_MULTICAST_LOOP': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(345,1): message : 'IP_MULTICAST_LOOP'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(140,1): warning C4005: 'IP_ADD_MEMBERSHIP': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(346,1): message : 'IP_ADD_MEMBERSHIP'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(141,1): warning C4005: 'IP_DROP_MEMBERSHIP': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(347,1): message : 'IP_DROP_MEMBERSHIP'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(142,1): warning C4005: 'IP_DONTFRAGMENT': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(350,1): message : 'IP_DONTFRAGMENT'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(733,10): error C2061: 구문 오류: 식별자 'MULTICAST_MODE_TYPE'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(740,5): error C2065: 'PIP_MSFILTER': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(740,18): error C2146: 구문 오류: ';'이(가) 'Filter' 식별자 앞에 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(740,18): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(742,9): error C2065: 'SourceCount': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(743,40): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(743,60): error C2065: 'SourceList': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(744,9): error C2065: 'WSASetLastError': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(748,12): error C2065: 'IP_MSFILTER': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(748,12): error C2065: 'SourceCount': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(749,5): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(749,15): error C2065: 'PIP_MSFILTER': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(749,29): error C2146: 구문 오류: ';'이(가) 'HeapAlloc' 식별자 앞에 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(750,9): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(751,9): error C2065: 'WSASetLastError': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(755,5): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(756,5): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(757,5): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(757,26): error C2065: 'FilterMode': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(758,5): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(758,27): error C2065: 'SourceCount': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(759,9): error C2065: 'SourceCount': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(760,9): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(760,9): error C2065: 'SourceList': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(760,9): error C2065: 'SourceCount': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(760,9): error C2660: 'memcpy': 함수는 2개의 인수를 사용하지 않습니다.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\vcruntime_string.h(43,15): message : 'memcpy' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(760,9): message : 인수 목록 '()'을(를) 일치시키는 동안
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(764,47): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(767,35): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(779,11): error C2061: 구문 오류: 식별자 'MULTICAST_MODE_TYPE'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(786,5): error C2065: 'PIP_MSFILTER': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(786,18): error C2146: 구문 오류: ';'이(가) 'Filter' 식별자 앞에 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(786,18): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(788,10): error C2065: 'SourceCount': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(789,40): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(789,60): error C2065: 'SourceList': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(789,1): fatal  error C1003: 오류 수가 100개를 초과했습니다. 컴파일을 중지합니다.
+  Power_Orb.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(103,1): warning C4005: 'AF_IPX': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(457,1): message : 'AF_IPX'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(147,1): warning C4005: 'AF_MAX': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(476,1): message : 'AF_MAX'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(187,1): warning C4005: 'SO_DONTLINGER': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(399,1): message : 'SO_DONTLINGER'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(240,25): error C2011: 'sockaddr': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(482,8): message : 'sockaddr' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(442,5): error C2143: 구문 오류: '}'이(가) '상수' 앞에 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(442,5): error C2059: 구문 오류: '상수'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(496,1): error C2143: 구문 오류: ';'이(가) '}' 앞에 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(496,10): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(496,20): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(577,1): warning C4005: 'IN_CLASSA': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(284,1): message : 'IN_CLASSA'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(583,1): warning C4005: 'IN_CLASSB': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(290,1): message : 'IN_CLASSB'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(589,1): warning C4005: 'IN_CLASSC': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(296,1): message : 'IN_CLASSC'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(600,1): warning C4005: 'INADDR_ANY': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(301,1): message : 'INADDR_ANY'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(602,1): warning C4005: 'INADDR_BROADCAST': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(303,1): message : 'INADDR_BROADCAST'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(638,28): error C2011: 'sockaddr_in': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(309,8): message : 'sockaddr_in' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(136,23): error C2011: 'fd_set': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(65,16): message : 'fd_set' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(171,1): warning C4005: 'FD_SET': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(99,1): message : 'FD_SET'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(180,16): error C2011: 'timeval': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(108,8): message : 'timeval' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(236,17): error C2011: 'hostent': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(164,9): message : 'hostent' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(249,16): error C2011: 'netent': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(177,9): message : 'netent' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(256,17): error C2011: 'servent': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(184,9): message : 'servent' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(268,18): error C2011: 'protoent': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(196,9): message : 'protoent' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(364,24): error C2011: 'WSAData': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(319,16): message : 'WSAData' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(462,18): error C2011: 'sockproto': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(491,8): message : 'sockproto' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(504,16): error C2011: 'linger': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(528,9): message : 'linger' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(517,1): warning C4005: 'SOMAXCONN': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(541,1): message : 'SOMAXCONN'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(551,1): warning C4005: 'FD_READ': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(559,1): message : 'FD_READ'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(554,1): warning C4005: 'FD_WRITE': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(560,1): message : 'FD_WRITE'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(557,1): warning C4005: 'FD_OOB': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(561,1): message : 'FD_OOB'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(560,1): warning C4005: 'FD_ACCEPT': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(562,1): message : 'FD_ACCEPT'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(563,1): warning C4005: 'FD_CONNECT': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(563,1): message : 'FD_CONNECT'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(566,1): warning C4005: 'FD_CLOSE': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(564,1): message : 'FD_CLOSE'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1631,1): error C2375: 'accept': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(739,19): message : 'accept' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1653,1): error C2375: 'bind': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(744,16): message : 'bind' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1674,1): error C2375: 'closesocket': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(749,16): message : 'closesocket' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1691,1): error C2375: 'connect': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(751,16): message : 'connect' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1712,1): error C2375: 'ioctlsocket': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(756,16): message : 'ioctlsocket' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1735,1): error C2375: 'getpeername': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(761,16): message : 'getpeername' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1756,1): error C2375: 'getsockname': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(766,16): message : 'getsockname' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1777,1): error C2375: 'getsockopt': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(771,16): message : 'getsockopt' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1802,1): error C2375: 'htonl': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(778,19): message : 'htonl' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1819,1): error C2375: 'htons': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(780,20): message : 'htons' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1837,1): error C2375: 'inet_addr': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(782,26): message : 'inet_addr' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1855,1): error C2375: 'inet_ntoa': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(784,23): message : 'inet_ntoa' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1955,1): error C2375: 'listen': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(786,16): message : 'listen' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1974,1): error C2375: 'ntohl': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(790,19): message : 'ntohl' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1991,1): error C2375: 'ntohs': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(792,20): message : 'ntohs' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2008,1): error C2375: 'recv': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(794,16): message : 'recv' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2031,1): error C2375: 'recvfrom': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(800,16): message : 'recvfrom' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2058,1): error C2375: 'select': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(808,16): message : 'select' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2083,1): error C2375: 'send': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(815,16): message : 'send' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2106,1): error C2375: 'sendto': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(821,16): message : 'sendto' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2133,1): error C2375: 'setsockopt': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(829,16): message : 'setsockopt' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2158,1): error C2375: 'shutdown': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(836,16): message : 'shutdown' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2178,1): error C2375: 'socket': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(840,19): message : 'socket' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2203,1): error C2375: 'gethostbyaddr': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(847,33): message : 'gethostbyaddr' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2225,1): error C2375: 'gethostbyname': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(852,33): message : 'gethostbyname' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2242,1): error C2375: 'gethostname': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(854,16): message : 'gethostname' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2282,1): error C2375: 'getservbyport': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(858,33): message : 'getservbyport' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2301,1): error C2375: 'getservbyname': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(862,33): message : 'getservbyname' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2320,1): error C2375: 'getprotobynumber': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(866,34): message : 'getprotobynumber' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2337,1): error C2375: 'getprotobyname': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(868,34): message : 'getprotobyname' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2357,1): error C2375: 'WSAStartup': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(872,16): message : 'WSAStartup' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2377,1): error C2375: 'WSACleanup': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(876,16): message : 'WSACleanup' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2394,1): error C2375: 'WSASetLastError': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(878,17): message : 'WSASetLastError' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2411,1): error C2375: 'WSAGetLastError': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(880,16): message : 'WSAGetLastError' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2432,1): error C2375: 'WSAIsBlocking': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(882,17): message : 'WSAIsBlocking' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2450,1): error C2375: 'WSAUnhookBlockingHook': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(884,16): message : 'WSAUnhookBlockingHook' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2468,1): error C2375: 'WSASetBlockingHook': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(886,20): message : 'WSASetBlockingHook' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2486,1): error C2375: 'WSACancelBlockingCall': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(888,16): message : 'WSACancelBlockingCall' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2504,1): error C2375: 'WSAAsyncGetServByName': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(890,19): message : 'WSAAsyncGetServByName' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2532,1): error C2375: 'WSAAsyncGetServByPort': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(898,19): message : 'WSAAsyncGetServByPort' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2560,1): error C2375: 'WSAAsyncGetProtoByName': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(906,19): message : 'WSAAsyncGetProtoByName' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2586,1): error C2375: 'WSAAsyncGetProtoByNumber': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(913,19): message : 'WSAAsyncGetProtoByNumber' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2612,1): error C2375: 'WSAAsyncGetHostByName': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(920,19): message : 'WSAAsyncGetHostByName' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2638,1): error C2375: 'WSAAsyncGetHostByAddr': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(927,19): message : 'WSAAsyncGetHostByAddr' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2668,1): error C2375: 'WSACancelAsyncRequest': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(936,16): message : 'WSACancelAsyncRequest' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2686,1): error C2375: 'WSAAsyncSelect': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(938,16): message : 'WSAAsyncSelect' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(4318,1): error C2059: 구문 오류: '}'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(4318,1): error C2143: 구문 오류: ';'이(가) '}' 앞에 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(42,12): error C2143: 구문 오류: ';'이(가) '{' 앞에 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(42,12): error C2447: '{': 함수 헤더가 없습니다. 이전 스타일의 형식 목록입니까?
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(135,1): warning C4005: 'IP_TOS': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(349,1): message : 'IP_TOS'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(136,1): warning C4005: 'IP_TTL': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(348,1): message : 'IP_TTL'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(137,1): warning C4005: 'IP_MULTICAST_IF': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(343,1): message : 'IP_MULTICAST_IF'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(138,1): warning C4005: 'IP_MULTICAST_TTL': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(344,1): message : 'IP_MULTICAST_TTL'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(139,1): warning C4005: 'IP_MULTICAST_LOOP': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(345,1): message : 'IP_MULTICAST_LOOP'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(140,1): warning C4005: 'IP_ADD_MEMBERSHIP': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(346,1): message : 'IP_ADD_MEMBERSHIP'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(141,1): warning C4005: 'IP_DROP_MEMBERSHIP': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(347,1): message : 'IP_DROP_MEMBERSHIP'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(142,1): warning C4005: 'IP_DONTFRAGMENT': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(350,1): message : 'IP_DONTFRAGMENT'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(733,10): error C2061: 구문 오류: 식별자 'MULTICAST_MODE_TYPE'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(740,5): error C2065: 'PIP_MSFILTER': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(740,18): error C2146: 구문 오류: ';'이(가) 'Filter' 식별자 앞에 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(740,18): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(742,9): error C2065: 'SourceCount': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(743,40): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(743,60): error C2065: 'SourceList': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(744,9): error C2065: 'WSASetLastError': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(748,12): error C2065: 'IP_MSFILTER': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(748,12): error C2065: 'SourceCount': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(749,5): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(749,15): error C2065: 'PIP_MSFILTER': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(749,29): error C2146: 구문 오류: ';'이(가) 'HeapAlloc' 식별자 앞에 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(750,9): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(751,9): error C2065: 'WSASetLastError': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(755,5): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(756,5): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(757,5): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(757,26): error C2065: 'FilterMode': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(758,5): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(758,27): error C2065: 'SourceCount': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(759,9): error C2065: 'SourceCount': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(760,9): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(760,9): error C2065: 'SourceList': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(760,9): error C2065: 'SourceCount': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(760,9): error C2660: 'memcpy': 함수는 2개의 인수를 사용하지 않습니다.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\vcruntime_string.h(43,15): message : 'memcpy' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(760,9): message : 인수 목록 '()'을(를) 일치시키는 동안
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(764,47): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(767,35): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(779,11): error C2061: 구문 오류: 식별자 'MULTICAST_MODE_TYPE'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(786,5): error C2065: 'PIP_MSFILTER': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(786,18): error C2146: 구문 오류: ';'이(가) 'Filter' 식별자 앞에 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(786,18): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(788,10): error C2065: 'SourceCount': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(789,40): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(789,60): error C2065: 'SourceList': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(789,1): fatal  error C1003: 오류 수가 100개를 초과했습니다. 컴파일을 중지합니다.
+  Power_Serverside.cpp
+D:\source\넷겜플\Term_Project\temp\Power_Serverside.cpp(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(103,1): warning C4005: 'AF_IPX': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(457,1): message : 'AF_IPX'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(147,1): warning C4005: 'AF_MAX': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(476,1): message : 'AF_MAX'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(187,1): warning C4005: 'SO_DONTLINGER': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(399,1): message : 'SO_DONTLINGER'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(240,25): error C2011: 'sockaddr': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(482,8): message : 'sockaddr' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(442,5): error C2143: 구문 오류: '}'이(가) '상수' 앞에 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(442,5): error C2059: 구문 오류: '상수'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(496,1): error C2143: 구문 오류: ';'이(가) '}' 앞에 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(496,10): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(496,20): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(577,1): warning C4005: 'IN_CLASSA': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(284,1): message : 'IN_CLASSA'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(583,1): warning C4005: 'IN_CLASSB': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(290,1): message : 'IN_CLASSB'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(589,1): warning C4005: 'IN_CLASSC': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(296,1): message : 'IN_CLASSC'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(600,1): warning C4005: 'INADDR_ANY': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(301,1): message : 'INADDR_ANY'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(602,1): warning C4005: 'INADDR_BROADCAST': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(303,1): message : 'INADDR_BROADCAST'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2def.h(638,28): error C2011: 'sockaddr_in': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(309,8): message : 'sockaddr_in' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(136,23): error C2011: 'fd_set': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(65,16): message : 'fd_set' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(171,1): warning C4005: 'FD_SET': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(99,1): message : 'FD_SET'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(180,16): error C2011: 'timeval': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(108,8): message : 'timeval' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(236,17): error C2011: 'hostent': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(164,9): message : 'hostent' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(249,16): error C2011: 'netent': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(177,9): message : 'netent' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(256,17): error C2011: 'servent': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(184,9): message : 'servent' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(268,18): error C2011: 'protoent': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(196,9): message : 'protoent' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(364,24): error C2011: 'WSAData': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(319,16): message : 'WSAData' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(462,18): error C2011: 'sockproto': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(491,8): message : 'sockproto' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(504,16): error C2011: 'linger': 'struct' 형식 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(528,9): message : 'linger' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(517,1): warning C4005: 'SOMAXCONN': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(541,1): message : 'SOMAXCONN'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(551,1): warning C4005: 'FD_READ': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(559,1): message : 'FD_READ'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(554,1): warning C4005: 'FD_WRITE': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(560,1): message : 'FD_WRITE'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(557,1): warning C4005: 'FD_OOB': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(561,1): message : 'FD_OOB'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(560,1): warning C4005: 'FD_ACCEPT': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(562,1): message : 'FD_ACCEPT'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(563,1): warning C4005: 'FD_CONNECT': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(563,1): message : 'FD_CONNECT'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(566,1): warning C4005: 'FD_CLOSE': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(564,1): message : 'FD_CLOSE'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1631,1): error C2375: 'accept': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(739,19): message : 'accept' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1653,1): error C2375: 'bind': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(744,16): message : 'bind' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1674,1): error C2375: 'closesocket': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(749,16): message : 'closesocket' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1691,1): error C2375: 'connect': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(751,16): message : 'connect' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1712,1): error C2375: 'ioctlsocket': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(756,16): message : 'ioctlsocket' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1735,1): error C2375: 'getpeername': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(761,16): message : 'getpeername' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1756,1): error C2375: 'getsockname': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(766,16): message : 'getsockname' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1777,1): error C2375: 'getsockopt': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(771,16): message : 'getsockopt' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1802,1): error C2375: 'htonl': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(778,19): message : 'htonl' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1819,1): error C2375: 'htons': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(780,20): message : 'htons' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1837,1): error C2375: 'inet_addr': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(782,26): message : 'inet_addr' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1855,1): error C2375: 'inet_ntoa': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(784,23): message : 'inet_ntoa' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1955,1): error C2375: 'listen': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(786,16): message : 'listen' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1974,1): error C2375: 'ntohl': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(790,19): message : 'ntohl' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(1991,1): error C2375: 'ntohs': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(792,20): message : 'ntohs' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2008,1): error C2375: 'recv': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(794,16): message : 'recv' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2031,1): error C2375: 'recvfrom': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(800,16): message : 'recvfrom' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2058,1): error C2375: 'select': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(808,16): message : 'select' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2083,1): error C2375: 'send': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(815,16): message : 'send' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2106,1): error C2375: 'sendto': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(821,16): message : 'sendto' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2133,1): error C2375: 'setsockopt': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(829,16): message : 'setsockopt' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2158,1): error C2375: 'shutdown': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(836,16): message : 'shutdown' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2178,1): error C2375: 'socket': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(840,19): message : 'socket' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2203,1): error C2375: 'gethostbyaddr': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(847,33): message : 'gethostbyaddr' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2225,1): error C2375: 'gethostbyname': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(852,33): message : 'gethostbyname' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2242,1): error C2375: 'gethostname': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(854,16): message : 'gethostname' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2282,1): error C2375: 'getservbyport': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(858,33): message : 'getservbyport' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2301,1): error C2375: 'getservbyname': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(862,33): message : 'getservbyname' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2320,1): error C2375: 'getprotobynumber': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(866,34): message : 'getprotobynumber' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2337,1): error C2375: 'getprotobyname': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(868,34): message : 'getprotobyname' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2357,1): error C2375: 'WSAStartup': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(872,16): message : 'WSAStartup' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2377,1): error C2375: 'WSACleanup': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(876,16): message : 'WSACleanup' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2394,1): error C2375: 'WSASetLastError': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(878,17): message : 'WSASetLastError' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2411,1): error C2375: 'WSAGetLastError': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(880,16): message : 'WSAGetLastError' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2432,1): error C2375: 'WSAIsBlocking': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(882,17): message : 'WSAIsBlocking' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2450,1): error C2375: 'WSAUnhookBlockingHook': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(884,16): message : 'WSAUnhookBlockingHook' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2468,1): error C2375: 'WSASetBlockingHook': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(886,20): message : 'WSASetBlockingHook' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2486,1): error C2375: 'WSACancelBlockingCall': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(888,16): message : 'WSACancelBlockingCall' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2504,1): error C2375: 'WSAAsyncGetServByName': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(890,19): message : 'WSAAsyncGetServByName' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2532,1): error C2375: 'WSAAsyncGetServByPort': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(898,19): message : 'WSAAsyncGetServByPort' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2560,1): error C2375: 'WSAAsyncGetProtoByName': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(906,19): message : 'WSAAsyncGetProtoByName' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2586,1): error C2375: 'WSAAsyncGetProtoByNumber': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(913,19): message : 'WSAAsyncGetProtoByNumber' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2612,1): error C2375: 'WSAAsyncGetHostByName': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(920,19): message : 'WSAAsyncGetHostByName' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2638,1): error C2375: 'WSAAsyncGetHostByAddr': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(927,19): message : 'WSAAsyncGetHostByAddr' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2668,1): error C2375: 'WSACancelAsyncRequest': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(936,16): message : 'WSACancelAsyncRequest' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(2686,1): error C2375: 'WSAAsyncSelect': 재정의. 연결이 다릅니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(938,16): message : 'WSAAsyncSelect' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(4318,1): error C2059: 구문 오류: '}'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock2.h(4318,1): error C2143: 구문 오류: ';'이(가) '}' 앞에 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(42,12): error C2143: 구문 오류: ';'이(가) '{' 앞에 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(42,12): error C2447: '{': 함수 헤더가 없습니다. 이전 스타일의 형식 목록입니까?
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(135,1): warning C4005: 'IP_TOS': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(349,1): message : 'IP_TOS'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(136,1): warning C4005: 'IP_TTL': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(348,1): message : 'IP_TTL'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(137,1): warning C4005: 'IP_MULTICAST_IF': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(343,1): message : 'IP_MULTICAST_IF'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(138,1): warning C4005: 'IP_MULTICAST_TTL': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(344,1): message : 'IP_MULTICAST_TTL'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(139,1): warning C4005: 'IP_MULTICAST_LOOP': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(345,1): message : 'IP_MULTICAST_LOOP'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(140,1): warning C4005: 'IP_ADD_MEMBERSHIP': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(346,1): message : 'IP_ADD_MEMBERSHIP'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(141,1): warning C4005: 'IP_DROP_MEMBERSHIP': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(347,1): message : 'IP_DROP_MEMBERSHIP'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\ws2ipdef.h(142,1): warning C4005: 'IP_DONTFRAGMENT': 매크로 재정의
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winsock.h(350,1): message : 'IP_DONTFRAGMENT'의 이전 정의를 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(733,10): error C2061: 구문 오류: 식별자 'MULTICAST_MODE_TYPE'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(740,5): error C2065: 'PIP_MSFILTER': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(740,18): error C2146: 구문 오류: ';'이(가) 'Filter' 식별자 앞에 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(740,18): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(742,9): error C2065: 'SourceCount': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(743,40): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(743,60): error C2065: 'SourceList': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(744,9): error C2065: 'WSASetLastError': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(748,12): error C2065: 'IP_MSFILTER': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(748,12): error C2065: 'SourceCount': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(749,5): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(749,15): error C2065: 'PIP_MSFILTER': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(749,29): error C2146: 구문 오류: ';'이(가) 'HeapAlloc' 식별자 앞에 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(750,9): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(751,9): error C2065: 'WSASetLastError': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(755,5): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(756,5): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(757,5): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(757,26): error C2065: 'FilterMode': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(758,5): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(758,27): error C2065: 'SourceCount': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(759,9): error C2065: 'SourceCount': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(760,9): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(760,9): error C2065: 'SourceList': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(760,9): error C2065: 'SourceCount': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(760,9): error C2660: 'memcpy': 함수는 2개의 인수를 사용하지 않습니다.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\vcruntime_string.h(43,15): message : 'memcpy' 선언을 참조하십시오.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(760,9): message : 인수 목록 '()'을(를) 일치시키는 동안
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(764,47): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(767,35): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(779,11): error C2061: 구문 오류: 식별자 'MULTICAST_MODE_TYPE'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(786,5): error C2065: 'PIP_MSFILTER': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(786,18): error C2146: 구문 오류: ';'이(가) 'Filter' 식별자 앞에 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(786,18): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(788,10): error C2065: 'SourceCount': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(789,40): error C2065: 'Filter': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(789,60): error C2065: 'SourceList': 선언되지 않은 식별자입니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\ws2tcpip.h(789,1): fatal  error C1003: 오류 수가 100개를 초과했습니다. 컴파일을 중지합니다.
+  코드를 생성하고 있습니다...

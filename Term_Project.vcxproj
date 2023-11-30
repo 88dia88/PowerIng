@@ -20,19 +20,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.h" />
+    <ClInclude Include="GamePlayer.h" />
     <ClInclude Include="GameTimer.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Packit.h" />
-    <ClInclude Include="Player.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GamePlayer.cpp" />
     <ClCompile Include="GameTimer.cpp" />
     <ClCompile Include="Packet.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Power_Server.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="Power_Server_2.cpp" />
   </ItemGroup>
   <ItemGroup>
