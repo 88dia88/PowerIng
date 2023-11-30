@@ -140,16 +140,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GameTimer.cpp" />
-    <ClCompile Include="GamePlayer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Packet.cpp" />
+    <ClCompile Include="Power_Display.cpp" />
+    <ClCompile Include="Power_Math.cpp" />
+    <ClCompile Include="Power_Orb.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.h" />
     <ClInclude Include="GameTimer.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Packet.h" />
-    <ClInclude Include="GamePlayer.h" />
+    <ClInclude Include="Power_ing.h" />
+    <ClInclude Include="Power_Math.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

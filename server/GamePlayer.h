@@ -2,16 +2,6 @@
 #include <string>
 
 
-#pragma pack(1)
-struct KeyInput
-{
-    bool up = false;
-    bool down = false;
-    bool right = false;
-    bool left = false;
-    bool action = false;
-};
-#pragma pack()
 
 
 class GamePlayer

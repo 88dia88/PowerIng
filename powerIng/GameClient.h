@@ -2,16 +2,12 @@
 
 #include "Common.h"
 #include "Packet.h"
-#include "GamePlayer.h"
 
 
 #define BUFSIZE 1024
 
 
 using namespace std;
-
-
-struct Power_Player;
 
 
 class GameClient

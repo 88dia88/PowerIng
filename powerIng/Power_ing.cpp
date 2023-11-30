@@ -293,10 +293,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 						// 방향키 입력
 						Player[0].Reflector = ReflectorPosition(Player[0].Reflector, GetAsyncKeyState(Reflector1Left), GetAsyncKeyState(Reflector1Right), GetAsyncKeyState(Reflector1Up), GetAsyncKeyState(Reflector1Down));
 						
-						Player[0].leftKeyDown = GetAsyncKeyState(Reflector1Left) & 0x8001;
-						Player[0].rightKeyDown = GetAsyncKeyState(Reflector1Right) & 0x8001;
-						Player[0].upKeyDown = GetAsyncKeyState(Reflector1Up) & 0x8001;
-						Player[0].downKeyDown = GetAsyncKeyState(Reflector1Down) & 0x8001;
+						Player[0].leftKeyDown = GetAsyncKeyState(Reflector1Left);
+						Player[0].rightKeyDown = GetAsyncKeyState(Reflector1Right);
+						Player[0].upKeyDown = GetAsyncKeyState(Reflector1Up);
+						Player[0].downKeyDown = GetAsyncKeyState(Reflector1Down);
+
 						client.SendPacket(PACKET_TYPE_KEY_INPUT, Player[0]);
 
 						for (int i = 0; i < 7; i++)

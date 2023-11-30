@@ -3,14 +3,15 @@
 #ifndef _POWER_ORB_
 #define _POWER_ORB_
 
-#include "GameClient.h"
+//#include "GameClient.h"
 #include <stdlib.h>
 #include <time.h>
 #include <Windows.h>
 #include <tchar.h>
 #include <atlImage.h>
 #include "Power_Math.h"
-#include "resource.h"
+#include "Packet.h"
+//#include "resource.h"
 
 //--------------------------------------------------------------------------------------------------------------//
 extern HINSTANCE g_hInst;
@@ -61,7 +62,7 @@ struct Power_Setting_Player {
 
 	bool Game_Cherenkov_auto, Game_PressureReset;
 	int Game_ScoreType;
-	
+
 	int Display_Resolution, Display_Trail_Quality;
 
 	int Sound_Volume_Master, Sound_Volume, Sound_Alert;
@@ -139,10 +140,13 @@ struct Power_Reflector ReflectorProcess(struct Power_Reflector Reflector, bool R
 struct Power_Reflector ReflectorReset(struct Power_Reflector Reflector); // 패널 값을 초기화하는 함수
 //--------------------------------------------------------------------------------------------------------------//플레이어 관련 함수
 struct Power_Player PlayerReset(struct Power_Player Player);
+struct Power_Player DisablePlayer(struct Power_Player Player);
 
 struct Power_Setting_Player SettingReset(struct Power_Setting_Player Setting);
 int MenuEscape(int Menu_Type);
 
+extern const int RGBTemplate_Red, RGBTemplate_Green, RGBTemplate_Blue, RGBTemplate_Magenta, RGBTemplate_Yellow, RGBTemplate_Cyan, RGBTemplate_White, RGBTemplate_Black, RGBTemplate_Gray;
+/*
 //--------------------------------------------------------------------------------------------------------------//
 // 
 // Power_Display
@@ -167,6 +171,7 @@ Reflector_Player_ColorOffImg[7],
 Reflector_Player_LightOffImg[7];
 
 extern struct Power_Effect* EffectHead; // 이펙트용 구조체
+
 //--------------------------------------------------------------------------------------------------------------//
 void CreateEffect(struct Power_Effect* Effect, double x, double y, double Score); // 이펙트 개체 생성
 void RemoveEffect(struct Power_Effect* Effect, struct Power_Effect* NextEffect); // 이펙트 개체 제거
@@ -197,7 +202,7 @@ void UIScore(); // 점수를 출력하는 함수
 void UIDebugInfo(); // 게임플레이 디버그를 위한 정보를 출력하는 함수
 
 //--------------------------------------------------------------------------------------------------------------// 이미지 회전 출력용 함수
-POINT RotatePaint1(double x, double y, double sizex, double sizey, double angle); 
+POINT RotatePaint1(double x, double y, double sizex, double sizey, double angle);
 POINT RotatePaint2(double x, double y, double sizex, double sizey, double angle);
 POINT RotatePaint3(double x, double y, double sizex, double sizey, double angle);
 //-----------------------------------------------------// 패널 회전 출력용 함수
@@ -205,4 +210,5 @@ POINT ReflectorPaint1(struct Power_Reflector Reflector, double Vertical);
 POINT ReflectorPaint2(struct Power_Reflector Reflector, double Vertical);
 POINT ReflectorPaint3(struct Power_Reflector Reflector, double Vertical);
 //--------------------------------------------------------------------------------------------------------------//
+*/
 #endif

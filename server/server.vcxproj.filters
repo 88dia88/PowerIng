@@ -21,10 +21,16 @@
     <ClCompile Include="Packet.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="GamePlayer.cpp">
+    <ClCompile Include="GameTimer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="GameTimer.cpp">
+    <ClCompile Include="Power_Orb.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Power_Math.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Power_Display.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,13 +41,16 @@
     <ClInclude Include="Packet.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="GamePlayer.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Globals.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="GameTimer.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Power_ing.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Power_Math.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

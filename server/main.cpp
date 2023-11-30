@@ -3,6 +3,7 @@
 #include "GamePlayer.h"
 #include "Globals.h"
 #include "GameTimer.h"
+#include "Power_ing.h"
 
 
 #define SERVERPORT 9000
@@ -11,7 +12,6 @@
 
 LONG clientCnt = 0;
 CRITICAL_SECTION cs;
-GamePlayer players[3];
 HANDLE hLobbyThread, hProcessThread;
 HANDLE hClientKeyInputEvent[3], hProcessEvent[3];
 int gameState = GAME_STATE_LOBBY;
@@ -34,11 +34,10 @@ int GenerateClientIndex()
 	for (int i = 0; i < MAX_NUM_CLIENTS; i++)
 	{
 		// 비활성화된 플레이어에 새로운 클라이언트를 할당한다.
-		if (!players[i].GetState()) {
+		if (!Player[i].Online) {
 			userID = i;
 			// 초기화
-			players[i].DisablePlayer();
-			players[i].SetPlayer(userID);
+			Player[i] = PlayerReset(Player[i]);
 			break;
 		}
 	}
@@ -99,7 +98,7 @@ DWORD WINAPI ClientThread(LPVOID arg)
 	// 클라이언트 수 감소
 	InterlockedDecrement(&clientCnt);
 	// player 비활성화
-	players[clientID].DisablePlayer();
+	Player[clientID] = DisablePlayer(Player[clientID]);
 	printf("[TCP 서버] 클라이언트 종료: ID=%d, IP 주소=%s, 포트 번호=%d\n",
 		clientID, addr, ntohs(clientaddr.sin_port));
 
@@ -108,6 +107,9 @@ DWORD WINAPI ClientThread(LPVOID arg)
 
 DWORD WINAPI ProcessThread(LPVOID lpParam)
 {
+	// init player
+	
+
 	gameTimer.Reset();
 
 	while (gameState != GAME_STATE_END)
@@ -124,13 +126,24 @@ DWORD WINAPI ProcessThread(LPVOID lpParam)
 			{
 				if (WaitForSingleObject(hClientKeyInputEvent[i], 0) != WAIT_OBJECT_0) {
 					// action키만 비활성화
-					players[i].SetActionKeyDwon(false);
+					Player[i].actionKeyDown = false;
+					//players[i].SetActionKeyDwon(false);
 				}
 			}
 		}
 		// 데이터 처리
 		gameTimer.Tick();
 		// gameloop 
+		// 플레이어 이동
+		for (int i = 0; i < clientCnt; i++)
+		{
+			if (Player[i].Online) {
+				Player[i].Reflector = ReflectorPosition(Player[i].Reflector,
+					Player[i].leftKeyDown, Player[i].rightKeyDown, Player[i].upKeyDown, Player[i].downKeyDown);
+
+				Player[i].Reflector = ReflectorProcess(Player[i].Reflector, gameState == GAME_STATE_GAME);
+			}
+		}
 
 		// 데이터 처리 완료
 		for (int i = 0; i < MAX_NUM_CLIENTS; i++)
@@ -154,7 +167,7 @@ DWORD WINAPI LobbyThread(LPVOID lpParam)
 				
 		SetEvent(hProcessEvent[result]);
 
-		if (clientCnt >= 1) {
+		if (clientCnt >= 2) {
 			break;
 		}
 	}
@@ -238,6 +251,8 @@ int main(int argc, char* argv[])
 		}
 	}
 
+	WaitForSingleObject(hProcessThread, INFINITE);
+
 	for (int i = 0; i < MAX_NUM_CLIENTS; i++)
 	{
 		CloseHandle(hClientKeyInputEvent[i]);
@@ -275,15 +290,23 @@ int RecvC2SPacket(SOCKET clientSock, int clientID)
 
 		KeyInputPacket keyInputPacket;
 		memcpy(&keyInputPacket, buf, sizeof(KeyInputPacket));
+		
+		//SetKeyInput(keyInputPacket.keyInput);
+		Player[clientID].upKeyDown = keyInputPacket.keyInput.up;
+		Player[clientID].downKeyDown = keyInputPacket.keyInput.down;
+		Player[clientID].rightKeyDown = keyInputPacket.keyInput.right;
+		Player[clientID].leftKeyDown = keyInputPacket.keyInput.left;
+		Player[clientID].actionKeyDown = keyInputPacket.keyInput.action;
 
-		players[clientID].SetKeyInput(keyInputPacket.keyInput);
+		/*
 		printf("%d client, up=%s, down=%s, right=%s, left=%s, action=%s\n",
 			clientID,
-			keyInputPacket.keyInput.up ? "true" : "false",
-			keyInputPacket.keyInput.down ? "true" : "false",
-			keyInputPacket.keyInput.right ? "true" : "false",
-			keyInputPacket.keyInput.left ? "true" : "false",
-			keyInputPacket.keyInput.action ? "true" : "false");
+			keyInputPacket.keyInput.up & 0x8001 ? "true" : "false",
+			keyInputPacket.keyInput.down & 0x8001 ? "true" : "false",
+			keyInputPacket.keyInput.right & 0x8001 ? "true" : "false",
+			keyInputPacket.keyInput.left & 0x8001 ? "true" : "false",
+			keyInputPacket.keyInput.action & 0x8001 ? "true" : "false");
+		*/
 		break;
 	}
 	case PACKET_TYPE_PLAYERS_DATA: {
@@ -295,7 +318,7 @@ int RecvC2SPacket(SOCKET clientSock, int clientID)
 		PlayersDataPacket playerDataPacket;
 		memcpy(&playerDataPacket, buf, sizeof(PlayersDataPacket));
 
-		players[clientID].SetPlayerData(playerDataPacket.player);
+		//player[clientID].SetPlayerData(playerDataPacket.player);
 		break;
 	}
 	case PACKET_TYPE_CLIENT_DATA: {
@@ -307,9 +330,12 @@ int RecvC2SPacket(SOCKET clientSock, int clientID)
 		ClientDataPacket clientDataPacket;
 		memcpy(&clientDataPacket, buf, sizeof(ClientDataPacket));
 
-		players[clientID].SetPanel(clientDataPacket.color, clientDataPacket.module);
+		for (int i = 0; i < 5; i++)
+			Player[clientID].Reflector.module[i] = clientDataPacket.module[i];
+		Player[clientID].Reflector.RGB = clientDataPacket.color;
+
 		printf("clientID: %d - clientColor: %d, clientModule: %d\n", 
-			clientID, clientDataPacket.color, clientDataPacket.module);
+			clientID, clientDataPacket.color, clientDataPacket.module[0]);
 		break;
 	}
 	default:
@@ -328,19 +354,27 @@ int SendS2CPacket(SOCKET clientSock, int clientID)
 	switch (gameState)
 	{
 		// InGame
+	case GAME_STATE_READY:
 	case GAME_STATE_GAME: {
 		GameDataPacket gameDataPacket;
 
 		// GameDataPacket 채우기
 		gameDataPacket.playerCount = clientCnt;
-		//gameDataPacket.players = new Player[clientCnt];
-		//memcpy(gameDataPacket.players, players, sizeof(Player) * clientCnt);
+		for (int i = 0; i < clientCnt; i++)
+			if (Player[i].Online) {
+				gameDataPacket.players[i].Reflector.polar_x = Player[i].Reflector.polar_x;
+				gameDataPacket.players[i].Reflector.polar_y = Player[i].Reflector.polar_y;
+			}
 		// gameDataPacket.ballData = ballData;
+
+		for (int i = 0; i < clientCnt; i++)
+		{
+			printf("%d player - x: %f, y: %f\n", i, Player[i].Reflector.polar_x, Player[i].Reflector.polar_y);
+		}
 
 		// 데이터 전송
 		send(clientSock, reinterpret_cast<char*>(&gameDataPacket), sizeof(GameDataPacket), 0);
 
-		//delete[] gameDataPacket.players;
 		return retval;
 		break;
 	}
@@ -362,11 +396,6 @@ int SendS2CPacket(SOCKET clientSock, int clientID)
 		//delete[] lobbyDataPacket.players;
 		return retval; 
 		}
-
-		// ReadyRound
-	case GAME_STATE_READY:
-
-		return retval;
 
 	default:
 		return 0;

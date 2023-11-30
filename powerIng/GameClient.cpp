@@ -134,6 +134,7 @@ int GameClient::RecvPacket(Power_Player& player)
 		players[clientID].SetPlayerData(playersDataPacket.player);
 		break;
 	}*/
+	// 클라이언트 생성 초기 클라이언트가 부여받는 아이디 전달
 	case PACKET_TYPE_LOBBY: {
 		if (retval < sizeof(LobbyDataPacket)) {
 			printf("Error: 패킷 사이즈 오류 LobbyDataPacket.\n");
@@ -149,6 +150,26 @@ int GameClient::RecvPacket(Power_Player& player)
 		// 다른 플레이어 정보
 		if (lobbyDataPacket.playerCount > 1) {
 			//처리
+		}
+		break;
+	}
+
+	// 인게임 데이터 전달
+	case PACKET_TYPE_IN_GAME: {
+		if (retval < sizeof(GameDataPacket)) {
+			printf("Error: 패킷 사이즈 오류 GameDataPacket.\n");
+			return retval;
+		}
+		GameDataPacket gameDataPacket;
+		memcpy(&gameDataPacket, buf, sizeof(GameDataPacket));
+
+		int playerCnt = gameDataPacket.playerCount;
+		for (int i = 0; i < playerCnt; i++)
+		{
+			if (Player[i].Online) {
+				Player[i].Reflector.polar_x = gameDataPacket.players[i].Reflector.polar_x;
+				Player[i].Reflector.polar_y = gameDataPacket.players[i].Reflector.polar_y;
+			}
 		}
 		break;
 	}

@@ -141,7 +141,6 @@
   <ItemGroup>
     <ClCompile Include="Common.cpp" />
     <ClCompile Include="GameClient.cpp" />
-    <ClCompile Include="GamePlayer.cpp" />
     <ClCompile Include="Power_Display.cpp" />
     <ClCompile Include="Power_Main.cpp" />
     <ClCompile Include="Power_Math.cpp" />
@@ -151,7 +150,6 @@
   <ItemGroup>
     <ClInclude Include="Common.h" />
     <ClInclude Include="GameClient.h" />
-    <ClInclude Include="GamePlayer.h" />
     <ClInclude Include="Packet.h" />
     <ClInclude Include="Power_Math.h" />
     <ClInclude Include="Power_ing.h" />
