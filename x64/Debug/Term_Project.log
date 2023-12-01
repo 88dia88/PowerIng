@@ -1,0 +1,9 @@
+﻿  GamePlayer.cpp
+  Packet.cpp
+  Power_Server_2.cpp
+D:\source\넷겜플\Term_Project\Power_Server_2.cpp(332,10): warning C4477: 'printf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 3의 형식이 'int *'입니다.
+D:\source\넷겜플\Term_Project\Power_Server_2.cpp(332,10): warning C4313: 'printf': 서식 문자열의 '%d'이(가) int *' 형식의 인수 3과(와) 충돌합니다.
+D:\source\넷겜플\Term_Project\Power_Server_2.cpp(347,7): warning C4101: 'buf' :참조되지 않은 지역 변수입니다.
+  코드를 생성하고 있습니다...
+RC : fatal error RC1110: could not open Resource.rc
+  
