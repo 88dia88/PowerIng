@@ -5,6 +5,7 @@
 
 // 게임 데이터 통신에 사용할 패킷 정의
 
+#pragma pack(1)
 // 패킷 타입
 enum PacketType
 {
@@ -13,7 +14,8 @@ enum PacketType
     PACKET_TYPE_LOBBY,
     PACKET_TYPE_IN_GAME,
     PACKET_TYPE_PLAYERS_DATA,
-    PACKET_TYPE_CLIENT_DATA
+    PACKET_TYPE_CLIENT_DATA,
+    PACKET_TYPE_CHANGE_GAME_STATE
 };
 
 enum ModuleType
@@ -25,14 +27,20 @@ enum ModuleType
     MODULE_TYPE_MODULE_NAME4
 };
 
-#pragma pack(1)
+enum GameState
+{
+    GAME_STATE_LOBBY,
+    GAME_STATE_READY,
+    GAME_STATE_GAME,
+    GAME_STATE_END,
+};
 
 struct KeyInput
 {
-    short up = false;
-    short down = false;
-    short right = false;
-    short left = false;
+    short up = 0x0000;
+    short down = 0x0000;
+    short right = 0x0000;
+    short left = 0x0000;
     bool action = false;
 };
 
@@ -57,6 +65,13 @@ struct Power_Reflector // 패널 구조체
     int module[5], age;
     int Effect_effect, Effect_rebound;
     bool module_charged[5];
+};
+
+struct Power_Reactor // 리엑터 구조체 - 게임 상태 관리
+{
+    bool cherenkov, meltdown;
+    int cherenkovlevel, meltdownlevel;
+    int cherenkovmeter, cherenkovcounter;
 };
 
 struct Power_Player {
@@ -117,8 +132,17 @@ struct GameDataPacket
 
     int playerCount;
     Power_Player players[MAX_NUM_CLIENTS];
+
+    Power_Reactor reactor;
+    Power_Orb orb;
 };
 
+struct ChangeGameStatePacket
+{
+    const PacketType type = PACKET_TYPE_CHANGE_GAME_STATE;
+
+    GameState gameState;
+};
 
 
 #pragma pack()

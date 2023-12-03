@@ -11,6 +11,7 @@
 #include <atlImage.h>
 #include "Power_Math.h"
 #include "resource.h"
+#include "Packet.h"
 
 //--------------------------------------------------------------------------------------------------------------//
 extern HINSTANCE g_hInst;
@@ -76,13 +77,6 @@ struct Power_Control {
 	int Left, Right, Up, Down;
 	int Start;
 	bool Button[5];
-};
-
-struct Power_Reactor // 리엑터 구조체 - 게임 상태 관리
-{
-	bool cherenkov, meltdown;
-	int cherenkovlevel, meltdownlevel;
-	int cherenkovmeter, cherenkovcounter;
 };
 
 struct Power_Effect // 충돌 시 이펙트 구조체

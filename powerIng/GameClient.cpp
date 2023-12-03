@@ -12,6 +12,16 @@ GameClient::~GameClient()
 {
 }
 
+SOCKET GameClient::Sock()
+{
+	return mSock;
+}
+
+WSADATA GameClient::Wsa()
+{
+	return mWsa;
+}
+
 int GameClient::Init()
 {
 	// 윈속 초기화
@@ -102,84 +112,6 @@ int GameClient::SendPacket(const PacketType packetType, const Power_Player playe
 
 
 	return 0;
-}
-
-int GameClient::RecvPacket(Power_Player& player)
-{
-	char buf[BUFSIZE + 1];
-	int retval = recv(mSock, buf, BUFSIZE, 0);
-
-	if (retval == SOCKET_ERROR || retval == 0) {
-		return retval;
-	}
-	else if (retval < sizeof(PacketType)) {
-		printf("error 패킷 사이즈가 너무 작습니다. %s\n", buf);
-		return retval;
-	}
-
-	PacketType type;
-	memcpy(&type, buf, sizeof(PacketType));
-
-	switch (type) {
-		/*
-	case PACKET_TYPE_PLAYERS_DATA: {
-		if (retval < sizeof(PlayerDataPacket)) {
-			printf("Error: 패킷 사이즈 오류 PlayerDataPacket.\n");
-			return retval;
-		}
-
-		PlayersDataPacket playersDataPacket;
-		memcpy(&playersDataPacket, buf, sizeof(PlayersDataPacket));
-
-		players[clientID].SetPlayerData(playersDataPacket.player);
-		break;
-	}*/
-	// 클라이언트 생성 초기 클라이언트가 부여받는 아이디 전달
-	case PACKET_TYPE_LOBBY: {
-		if (retval < sizeof(LobbyDataPacket)) {
-			printf("Error: 패킷 사이즈 오류 LobbyDataPacket.\n");
-			return retval;
-		}
-		LobbyDataPacket lobbyDataPacket;
-		memcpy(&lobbyDataPacket, buf, sizeof(LobbyDataPacket));
-
-		mClientID = lobbyDataPacket.clientID;
-		gClientID = lobbyDataPacket.clientID;
-
-		printf("ClientID: %d\n", mClientID);
-		// 다른 플레이어 정보
-		if (lobbyDataPacket.playerCount > 1) {
-			//처리
-		}
-		break;
-	}
-
-	// 인게임 데이터 전달
-	case PACKET_TYPE_IN_GAME: {
-		if (retval < sizeof(GameDataPacket)) {
-			printf("Error: 패킷 사이즈 오류 GameDataPacket.\n");
-			return retval;
-		}
-		GameDataPacket gameDataPacket;
-		memcpy(&gameDataPacket, buf, sizeof(GameDataPacket));
-
-		int playerCnt = gameDataPacket.playerCount;
-		for (int i = 0; i < playerCnt; i++)
-		{
-			if (Player[i].Online) {
-				Player[i].Reflector.polar_x = gameDataPacket.players[i].Reflector.polar_x;
-				Player[i].Reflector.polar_y = gameDataPacket.players[i].Reflector.polar_y;
-			}
-		}
-		break;
-	}
-
-	default:
-		printf("error 패킷타입이 정의되지 않았습니다.\n");
-		break;
-	}
-
-	return retval;
 }
 
 void GameClient::SetClientID(int id)

@@ -16,6 +16,9 @@ public:
     GameClient();
     ~GameClient();
 
+    SOCKET Sock();
+    WSADATA Wsa();
+    
     int Init();
     void ReleseSock();
     bool Connect();

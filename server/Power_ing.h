@@ -79,13 +79,6 @@ struct Power_Control {
 	bool Button[5];
 };
 
-struct Power_Reactor // 리엑터 구조체 - 게임 상태 관리
-{
-	bool cherenkov, meltdown;
-	int cherenkovlevel, meltdownlevel;
-	int cherenkovmeter, cherenkovcounter;
-};
-
 struct Power_Effect // 충돌 시 이펙트 구조체
 {
 	double x, y, score;

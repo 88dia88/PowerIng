@@ -6,6 +6,7 @@
 #include "Power_ing.h"
 
 
+#define DEBUG
 #define SERVERPORT 9000
 #define BUFSIZE    1024
 
@@ -14,7 +15,7 @@ LONG clientCnt = 0;
 CRITICAL_SECTION cs;
 HANDLE hLobbyThread, hProcessThread;
 HANDLE hClientKeyInputEvent[3], hProcessEvent[3];
-int gameState = GAME_STATE_LOBBY;
+GameState gameState = GAME_STATE_LOBBY;
 GameTimer gameTimer;
 SOCKET gClientSock[3];
 
@@ -24,6 +25,7 @@ DWORD WINAPI ProcessThread(LPVOID lpParam);
 DWORD WINAPI LobbyThread(LPVOID lpParam);
 int RecvC2SPacket(SOCKET clientSock, int clientID);
 int SendS2CPacket(SOCKET clientSock, int clientID);
+int SendS2CPacketAllPlayer(PacketType packetType);
 
 
 int GenerateClientIndex()
@@ -86,11 +88,13 @@ DWORD WINAPI ClientThread(LPVOID arg)
 		// 데이터 처리 대기
 		DWORD result = WaitForSingleObject(hProcessEvent[clientID], INFINITE);
 
+		/*
 		retval = SendS2CPacket(clientSock, clientID);
 		if (retval == SOCKET_ERROR) {
 			err_display("recv()");
 			break;
 		}
+		*/
 	}
 
 	// 소켓 닫기
@@ -107,6 +111,19 @@ DWORD WINAPI ClientThread(LPVOID arg)
 
 DWORD WINAPI ProcessThread(LPVOID lpParam)
 {
+	bool orbLaunch = false;
+	double score = 0, Temperture = 0, Mole = 0, TotalScore = 0;
+	int time = 0, PreTime = 0, ReactorEffect = 0, orbType = 0, orbcount = 0;
+	// setGame
+	OrbHead->next = OrbHead;
+	GeneralReset();
+	Temperture = Kelvin, Mole = MaxMole * 0.5;
+	PreTime = -25;
+	Orbcount = 3;
+	TotalScore = 0;
+	GameStart = false;
+	//EffectHead->next = EffectHead;
+	
 	// init player
 	
 
@@ -131,10 +148,28 @@ DWORD WINAPI ProcessThread(LPVOID lpParam)
 				}
 			}
 		}
-		// 데이터 처리
+		//---------------------------------------------------------------------데이터 처리
 		gameTimer.Tick();
 		// gameloop 
-		// 플레이어 이동
+		// 클라이언트 action키 처리 - 게임 시작 & 스킬 발동
+		for (int i = 0; i < clientCnt; i++)
+			if (Player[i].actionKeyDown) {
+				if (gameState == GAME_STATE_READY) {
+					orbLaunch = true;
+					gameState = GAME_STATE_GAME;
+					SendS2CPacketAllPlayer(PACKET_TYPE_CHANGE_GAME_STATE);
+				}
+				else if (gameState == GAME_STATE_GAME) {
+					if (Reactor.cherenkovmeter == 100) Reactor.cherenkov = true;
+					else if (Reactor.cherenkovmeter >= 875) {
+						//완전 충전 되지 않았으면 꾹 눌러서 발동
+						Reactor.cherenkov = true;
+					}
+				}
+				break;
+			}
+
+		// 클라이언트 방향키 처리 - 패널 이동
 		for (int i = 0; i < clientCnt; i++)
 		{
 			if (Player[i].Online) {
@@ -145,7 +180,36 @@ DWORD WINAPI ProcessThread(LPVOID lpParam)
 			}
 		}
 
+		// 종료조건에 만족 하는가?
+		if (gameState != GAME_STATE_END and Reactor.meltdown == false and Orbcount < 0) {
+			gameState = GAME_STATE_END;
+			SendS2CPacketAllPlayer(PACKET_TYPE_CHANGE_GAME_STATE);
+		}
+		// 게임 진행
+		else {
+			if (ReactorMeltdown() and gameState == GAME_STATE_GAME) {
+				gameState = GAME_STATE_READY;
+			}
+			else {
+				ReactorCherenkov();
+
+				// orb 충돌체크
+				if (gameState == GAME_STATE_GAME) {
+					CollisionDetect(OrbHead);
+					if (orbLaunch) {
+						orbLaunch = false;
+						//ColliderColor = 0;
+						OrbCreate(OrbHead, OrbType, true, 0, 0, 0.25);
+					}
+				}
+			}
+		}
+		Time++;
 		// 데이터 처리 완료
+
+		// 데이터 전송
+		SendS2CPacketAllPlayer(PACKET_TYPE_IN_GAME);
+
 		for (int i = 0; i < MAX_NUM_CLIENTS; i++)
 		{
 			SetEvent(hProcessEvent[i]);
@@ -164,16 +228,16 @@ DWORD WINAPI LobbyThread(LPVOID lpParam)
 	{
 		DWORD result = WaitForMultipleObjects(clientCnt, hClientKeyInputEvent, FALSE, INFINITE);
 		gameTimer.Tick();
-				
+		
 		SetEvent(hProcessEvent[result]);
 
-		if (clientCnt >= 2) {
+		if (clientCnt >= 1)
 			break;
-		}
 	}
 
 	// 프로세스 스레드 시작
 	gameState = GAME_STATE_READY;
+	SendS2CPacketAllPlayer(PACKET_TYPE_CHANGE_GAME_STATE);
 	ResumeThread(hProcessThread);
 
 	return 0;
@@ -346,6 +410,70 @@ int RecvC2SPacket(SOCKET clientSock, int clientID)
 	return retval;
 }
 
+int SendS2CPacketAllPlayer(PacketType packetType)
+{
+	char buf[BUFSIZE + 1];
+	int retval = 0;
+
+	switch (packetType)
+	{
+	// InGame
+	case PACKET_TYPE_IN_GAME: {
+		GameDataPacket gameDataPacket;
+
+		// GameDataPacket 채우기
+		gameDataPacket.playerCount = clientCnt;
+		for (int i = 0; i < clientCnt; i++)
+			if (Player[i].Online)
+				gameDataPacket.players[i] = Player[i];
+
+		if (OrbHead != nullptr)
+			gameDataPacket.orb = *OrbHead;
+
+		gameDataPacket.reactor = Reactor;
+
+		/*
+		for (int i = 0; i < clientCnt; i++)
+		{
+			printf("%d player - x: %f, y: %f\n", i, Player[i].Reflector.polar_x, Player[i].Reflector.polar_y);
+		}
+		*/
+
+		for (int i = 0; i < clientCnt; i++)
+			if (Player[i].Online)
+				send(gClientSock[i], reinterpret_cast<char*>(&gameDataPacket), 
+					sizeof(GameDataPacket), 0);
+
+		return retval;
+	}
+
+	// GameStatusChange
+	case PACKET_TYPE_CHANGE_GAME_STATE: {
+		ChangeGameStatePacket gameStatePacket;
+
+		gameStatePacket.gameState = gameState;
+	
+#ifdef DEBUG
+		printf("gameStateChange - %s\n", 
+			gameState == GAME_STATE_LOBBY ? "GameLobby" : 
+			gameState == GAME_STATE_READY ? "GameReady" :
+			gameState == GAME_STATE_GAME ? "InGame" :
+			gameState == GAME_STATE_END ? "GameEnd" : "Defalt");
+#endif // DEBUG
+
+		for (int i = 0; i < clientCnt; i++)
+			if (Player[i].Online)
+				send(gClientSock[i], reinterpret_cast<char*>(&gameStatePacket),
+					sizeof(gameStatePacket), 0);
+
+		return retval;
+	}
+
+	default:
+		return 0;
+	}
+}
+
 int SendS2CPacket(SOCKET clientSock, int clientID)
 {
 	char buf[BUFSIZE + 1];
@@ -353,7 +481,7 @@ int SendS2CPacket(SOCKET clientSock, int clientID)
 
 	switch (gameState)
 	{
-		// InGame
+	// InGame
 	case GAME_STATE_READY:
 	case GAME_STATE_GAME: {
 		GameDataPacket gameDataPacket;
@@ -362,16 +490,18 @@ int SendS2CPacket(SOCKET clientSock, int clientID)
 		gameDataPacket.playerCount = clientCnt;
 		for (int i = 0; i < clientCnt; i++)
 			if (Player[i].Online) {
-				gameDataPacket.players[i].Reflector.polar_x = Player[i].Reflector.polar_x;
-				gameDataPacket.players[i].Reflector.polar_y = Player[i].Reflector.polar_y;
+				//gameDataPacket.players[i].Reflector.polar_x = Player[i].Reflector.polar_x;
+				//gameDataPacket.players[i].Reflector.polar_y = Player[i].Reflector.polar_y;
+				gameDataPacket.players[i] = Player[i];
 			}
 		// gameDataPacket.ballData = ballData;
 
+		/*
 		for (int i = 0; i < clientCnt; i++)
 		{
 			printf("%d player - x: %f, y: %f\n", i, Player[i].Reflector.polar_x, Player[i].Reflector.polar_y);
 		}
-
+		*/
 		// 데이터 전송
 		send(clientSock, reinterpret_cast<char*>(&gameDataPacket), sizeof(GameDataPacket), 0);
 

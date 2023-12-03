@@ -8,13 +8,13 @@ int AnimationTime_Door, AnimationTime_Button[5];
 bool WASD = false, RestartPressure = false, ChargedMod = false, keyboard = true;
 int PlayerRGB = RGBTemplate_Yellow;
 
-struct Power_Setting_Player Setting;
+Power_Setting_Player Setting;
 
-struct Power_Player Player[7];
+Power_Player Player[7];
 
-struct Power_Control Control;
-struct Power_Reactor Reactor;
-struct Power_Orb* OrbHead = (Power_Orb*)malloc(sizeof(struct Power_Orb));
+Power_Control Control;
+Power_Reactor Reactor;
+Power_Orb* OrbHead = new Power_Orb;
 
 //--------------------------------------------------------------------------------------------------------------//
 bool ReactorMeltdown()

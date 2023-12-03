@@ -197,7 +197,7 @@ void OrbClear()
 		OrbRemove(OrbHead->next, OrbHead);
 		OrbClear();
 	}
-	else return;
+	return;
 }
 struct Power_Orb* OrbApply(struct Power_Orb* Orb, int Type, bool Major, double x, double y, double Angle)
 {

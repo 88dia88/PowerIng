@@ -4,13 +4,88 @@
 int gClientID = -1;
 GameClient client;
 HANDLE hRecvThread;
-HANDLE hRecvEvent;
+HANDLE hRecvEvent, hLoadingEvent;
+
 
 DWORD WINAPI RecvThread(LPVOID arg)
 {
 	while (client.IsOnline())
 	{
-		client.RecvPacket(Player[gClientID]);
+		char buf[BUFSIZE + 1];
+		int retval = recv(client.Sock(), buf, BUFSIZE, 0);
+
+		if (retval == SOCKET_ERROR || retval == 0) {
+			return retval;
+		}
+		else if (retval < sizeof(PacketType)) {
+			printf("error 패킷 사이즈가 너무 작습니다. %s\n", buf);
+			return retval;
+		}
+
+		PacketType type;
+		memcpy(&type, buf, sizeof(PacketType));
+
+		switch (type) {
+		// 클라이언트 생성 초기 클라이언트가 부여받는 아이디 전달
+		case PACKET_TYPE_LOBBY: {
+			if (retval < sizeof(LobbyDataPacket)) {
+				printf("Error: 패킷 사이즈 오류 LobbyDataPacket.\n");
+				return retval;
+			}
+			LobbyDataPacket lobbyDataPacket;
+			memcpy(&lobbyDataPacket, buf, sizeof(LobbyDataPacket));
+
+			gClientID = lobbyDataPacket.clientID;
+			// 다른 플레이어 정보
+			if (lobbyDataPacket.playerCount > 1) {
+				//처리
+			}
+			break;
+		}
+
+		// 인게임 데이터 전달
+		case PACKET_TYPE_IN_GAME: {
+			if (retval < sizeof(GameDataPacket)) {
+				printf("Error: 패킷 사이즈 오류 GameDataPacket.\n");
+				return retval;
+			}
+			GameDataPacket gameDataPacket;
+			memcpy(&gameDataPacket, buf, sizeof(GameDataPacket));
+
+			int playerCnt = gameDataPacket.playerCount;
+			for (int i = 0; i < playerCnt; i++)
+				if (Player[i].Online)
+					Player[i] = gameDataPacket.players[i];
+
+			Reactor = gameDataPacket.reactor;
+			*OrbHead = gameDataPacket.orb;
+
+			break;
+		}
+		
+		case PACKET_TYPE_CHANGE_GAME_STATE: {
+			if (retval < sizeof(ChangeGameStatePacket)) {
+				printf("Error: 패킷 사이즈 오류 GameDataPacket.\n");
+				return retval;
+			}
+			ChangeGameStatePacket gameStatePacket;
+			memcpy(&gameStatePacket, buf, sizeof(ChangeGameStatePacket));
+
+			switch (gameStatePacket.gameState)
+			{
+			case GAME_STATE_READY:
+				SetEvent(hLoadingEvent);
+				break;
+			}
+
+			break;
+		}
+
+		// 정의되지 않은 패킷 타입 오류
+		default:
+			printf("error 패킷타입이 정의되지 않았습니다.\n");
+			break;
+		}
 		SetEvent(hRecvEvent);
 	}
 
@@ -29,7 +104,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 	static bool Ingame = false;
 	// 추가변수-메뉴-------
 	static int SelectedButton = 0; // 각 버튼위에 마우스가 올라가 있으면 값이 변경됨
-	static int Menu_Type = 0; // 메뉴 종류
 	/*
 	0 : 메인메뉴
 	1 : 게임모드
@@ -39,10 +113,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 	32 : 비디오
 	33 : 오디오
 	*/
+	static int Menu_Type = 0; // 메뉴 종류
+	
 	// -------------------
 	
 	// 추가변수-게임-------
-	static int GameMode = 0;
 	/*
 	0 : 싱글플레이
 	1 : 협동모드
@@ -50,7 +125,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 	11 : 경쟁 모드
 	12 : 진영 모드
 	*/
-	static int GameStatus = -1;
+	static int GameMode = 0;
+
 	/*
 	0 : ESC
 	1 : 플레이 상태
@@ -58,6 +134,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 	-1 : 시작/종료 애니메이션
 	-2 : 종료 화면
 	*/
+	static int GameStatus = -1;
+	
 	static int EscMode = 0;
 	static bool DisplayGame = false;
 
@@ -121,6 +199,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 
 		// 이벤트 생성
 		hRecvEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
+		hLoadingEvent = CreateEvent(NULL, TRUE, FALSE, NULL);
 		hRecvThread = CreateThread(NULL, 0, RecvThread, NULL, CREATE_SUSPENDED, NULL);
 	}
 	if (Ingame) {
@@ -166,6 +245,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 					{
 						OrbLaunch = true;
 						GameStatus = 1;
+
+						Player[0].actionKeyDown = true;
 					}
 					break;
 				}
@@ -224,7 +305,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 				switch (GameStatus) {
 				case -2:
 					if (DisplayGame) {
-						if (AnimationTime_Door < 100) AnimationTime_Door += 2;
+						if (AnimationTime_Door < 100) {
+							AnimationTime_Door += 2;
+						}
 						else {
 							AnimationTime_Door = 100;
 							DisplayGame = false;
@@ -232,11 +315,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 					}
 				case -1:
 					if (DisplayGame and GameStatus != -2) {
-						if (AnimationTime_Door > 0) AnimationTime_Door -= 2;
+						if (AnimationTime_Door > 0) {
+							AnimationTime_Door -= 2;
+						}
 						else {
 							AnimationTime_Door = 0;
 							GameStatus = 2;
 						}
+						WaitForSingleObject(hLoadingEvent, INFINITE);
 					}
 				case 0:
 					if (EscMode != 0) {
@@ -291,22 +377,23 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 
 						//ReflectorControl(Player[0].Reflector, GetAsyncKeyState(Reflector1Left), GetAsyncKeyState(Reflector1Right), GetAsyncKeyState(Reflector1Up), GetAsyncKeyState(Reflector1Down));
 						// 방향키 입력
+						/*
 						Player[0].Reflector = ReflectorPosition(Player[0].Reflector, GetAsyncKeyState(Reflector1Left), GetAsyncKeyState(Reflector1Right), GetAsyncKeyState(Reflector1Up), GetAsyncKeyState(Reflector1Down));
 						
-						Player[0].leftKeyDown = GetAsyncKeyState(Reflector1Left);
-						Player[0].rightKeyDown = GetAsyncKeyState(Reflector1Right);
-						Player[0].upKeyDown = GetAsyncKeyState(Reflector1Up);
-						Player[0].downKeyDown = GetAsyncKeyState(Reflector1Down);
-
-						client.SendPacket(PACKET_TYPE_KEY_INPUT, Player[0]);
-
 						for (int i = 0; i < 7; i++)
 						{
 							if (Player[i].Online) {
 								Player[i].Reflector = ReflectorProcess(Player[i].Reflector, (GameStatus == 1));
 							}
 						}
+						*/
+						Player[0].leftKeyDown = GetAsyncKeyState(Reflector1Left);
+						Player[0].rightKeyDown = GetAsyncKeyState(Reflector1Right);
+						Player[0].upKeyDown = GetAsyncKeyState(Reflector1Up);
+						Player[0].downKeyDown = GetAsyncKeyState(Reflector1Down);
 
+						client.SendPacket(PACKET_TYPE_KEY_INPUT, Player[0]);
+						Player[0].actionKeyDown = false;
 						break;
 					case 1:
 						if (Reactor.meltdown == false and Orbcount < 0) {
@@ -541,7 +628,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 						ResumeThread(hRecvThread);
 						WaitForSingleObject(hRecvEvent, INFINITE);
 						client.SendPacket(PACKET_TYPE_CLIENT_DATA, Player[gClientID]);
-
 						Orbcount = 3;
 						EscMode = 0;
 						GameMode = 0;

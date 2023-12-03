@@ -4,6 +4,7 @@
 
 const int MAX_NUM_CLIENTS = 3;
 
+#pragma pack(1)
 // 패킷 타입
 enum PacketType
 {
@@ -12,7 +13,8 @@ enum PacketType
     PACKET_TYPE_LOBBY,
     PACKET_TYPE_IN_GAME,
     PACKET_TYPE_PLAYERS_DATA,
-    PACKET_TYPE_CLIENT_DATA
+    PACKET_TYPE_CLIENT_DATA,
+    PACKET_TYPE_CHANGE_GAME_STATE
 };
 
 enum ModuleType
@@ -24,7 +26,23 @@ enum ModuleType
     MODULE_TYPE_MODULE_NAME4
 };
 
-#pragma pack(1)
+enum GameState
+{
+    GAME_STATE_LOBBY,
+    GAME_STATE_READY,
+    GAME_STATE_GAME,
+    GAME_STATE_END,
+};
+
+struct KeyInput
+{
+    short up = 0x0000;
+    short down = 0x0000;
+    short right = 0x0000;
+    short left = 0x0000;
+    bool action = false;
+};
+
 struct Power_Orb // 오브 구조체
 {
     bool major;
@@ -48,8 +66,15 @@ struct Power_Reflector // 패널 구조체
     bool module_charged[5];
 };
 
+struct Power_Reactor // 리엑터 구조체 - 게임 상태 관리
+{
+    bool cherenkov, meltdown;
+    int cherenkovlevel, meltdownlevel;
+    int cherenkovmeter, cherenkovcounter;
+};
+
 struct Power_Player {
-    bool Online, Ready;
+    bool Online = false, Ready = false;
     int RGB;
     int Score, CherenkovMeter;
     struct Power_Reflector Reflector;
@@ -66,15 +91,6 @@ struct Power_Team {
     int life;
 };
 
-struct KeyInput
-{
-    short up = 0x0000;
-    short down = 0x0000;
-    short right = 0x0000;
-    short left = 0x0000;
-    bool action = false;
-};
-
 // 사용자의 키 입력을 전송을 위한 패킷
 struct KeyInputPacket
 {
@@ -89,7 +105,8 @@ struct LobbyDataPacket
 
     int clientID;
     int playerCount;
-    //GamePlayer* players;
+
+    //GamePlayer players[3];
 };
 
 struct PlayersDataPacket
@@ -114,6 +131,16 @@ struct GameDataPacket
 
     int playerCount;
     Power_Player players[MAX_NUM_CLIENTS];
+
+    Power_Reactor reactor;
+    Power_Orb orb;
+};
+
+struct ChangeGameStatePacket
+{
+    const PacketType type = PACKET_TYPE_CHANGE_GAME_STATE;
+
+    GameState gameState;
 };
 
 
