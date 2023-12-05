@@ -14,7 +14,7 @@ Power_Player Player[7];
 
 Power_Control Control;
 Power_Reactor Reactor;
-Power_Orb* OrbHead = new Power_Orb;
+struct Power_Orb* OrbHead = new Power_Orb;
 
 //--------------------------------------------------------------------------------------------------------------//
 bool ReactorMeltdown()
@@ -138,8 +138,7 @@ struct Power_Orb* OrbSpeed(struct Power_Orb* Orb)
 }
 void CollisionDetect(struct Power_Orb* Orb)
 {
-	if (Orb->next != OrbHead)
-	{
+	if (Orb->next != OrbHead) {
 		OrbPosition(Orb->next);
 		if (DistanceOvercmp(Orb->next->x + Orb->next->shellx, Orb->next->y + Orb->next->shelly, 500))
 		{
@@ -165,7 +164,8 @@ void CollisionDetect(struct Power_Orb* Orb)
 		}
 		CollisionDetect(Orb->next);
 	}
-	else return;
+	else 
+		return;
 }
 bool OrbMajorCheck(struct Power_Orb* Orb)
 {
@@ -185,7 +185,8 @@ void OrbCreate(struct Power_Orb* Orb, int Type, bool Major, double x, double y, 
 		Orb->next->next = OrbHead;
 		return;
 	}
-	else OrbCreate(Orb->next, Type, Major, x, y, Angle);
+	else 
+		OrbCreate(Orb->next, Type, Major, x, y, Angle);
 }
 void OrbRemove(struct Power_Orb* NextOrb, struct Power_Orb* Orb)
 {

@@ -54,11 +54,28 @@ DWORD WINAPI RecvThread(LPVOID arg)
 
 			int playerCnt = gameDataPacket.playerCount;
 			for (int i = 0; i < playerCnt; i++)
-				if (Player[i].Online)
-					Player[i] = gameDataPacket.players[i];
+			{
+				Player[i] = gameDataPacket.players[i];
+				Player[i].actionKeyDown = false;
+			}
 
 			Reactor = gameDataPacket.reactor;
-			*OrbHead = gameDataPacket.orb;
+			int orbCount = gameDataPacket.orbCount;
+			OrbClear();
+			if (orbCount == 0) {
+				OrbHead->next = OrbHead;
+			}
+			else {
+				Power_Orb* orb = OrbHead;
+				for (int i = 0; i < orbCount; i++)
+				{
+					Power_Orb* newOrb = new Power_Orb;
+					*newOrb = gameDataPacket.orbs[i];
+					orb->next = newOrb;
+					orb = orb->next;
+				}
+				orb->next = OrbHead;
+			}
 
 			break;
 		}
@@ -230,26 +247,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 				}
 			}
 			else if (wParam == VK_RETURN) {
-				switch (GameStatus) {
-				case 1:
-					if (Reactor.cherenkov == false) {
-						if (Reactor.cherenkovmeter == 100) Reactor.cherenkov = true;
-						else if (Reactor.cherenkovmeter >= 875) {
-							//완전 충전 되지 않았으면 꾹 눌러서 발동
-							Reactor.cherenkov = true;
-						}
-					}
-					break;
-				case 2:
-					if (PressureCheck())
-					{
-						OrbLaunch = true;
-						GameStatus = 1;
-
-						Player[0].actionKeyDown = true;
-					}
-					break;
-				}
+				Player[0].actionKeyDown = true;
 			}
 			break;
 		case WM_MOUSEMOVE:
@@ -356,10 +354,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 						}
 						else
 						{
-							if (ReactorMeltdown() and GameStatus == 1) GameStatus = 2;
+							if (ReactorMeltdown() and GameStatus == 1) 
+								GameStatus = 2;
 							ReactorCherenkov();
 							if (GameStatus == 1) {
-								CollisionDetect(OrbHead);
+								//CollisionDetect(OrbHead);
 								if (OrbLaunch) {
 									OrbLaunch = false;
 									OrbCreate(OrbHead, OrbType, true, 0, 0, 0.25);
@@ -375,18 +374,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 
 						Time++;
 
-						//ReflectorControl(Player[0].Reflector, GetAsyncKeyState(Reflector1Left), GetAsyncKeyState(Reflector1Right), GetAsyncKeyState(Reflector1Up), GetAsyncKeyState(Reflector1Down));
-						// 방향키 입력
-						/*
-						Player[0].Reflector = ReflectorPosition(Player[0].Reflector, GetAsyncKeyState(Reflector1Left), GetAsyncKeyState(Reflector1Right), GetAsyncKeyState(Reflector1Up), GetAsyncKeyState(Reflector1Down));
-						
-						for (int i = 0; i < 7; i++)
-						{
-							if (Player[i].Online) {
-								Player[i].Reflector = ReflectorProcess(Player[i].Reflector, (GameStatus == 1));
-							}
-						}
-						*/
 						Player[0].leftKeyDown = GetAsyncKeyState(Reflector1Left);
 						Player[0].rightKeyDown = GetAsyncKeyState(Reflector1Right);
 						Player[0].upKeyDown = GetAsyncKeyState(Reflector1Up);

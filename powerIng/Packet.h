@@ -3,6 +3,7 @@
 // 게임 데이터 통신에 사용할 패킷 정의
 
 const int MAX_NUM_CLIENTS = 3;
+const int MAX_NUM_ORBS = 10;
 
 #pragma pack(1)
 // 패킷 타입
@@ -133,7 +134,8 @@ struct GameDataPacket
     Power_Player players[MAX_NUM_CLIENTS];
 
     Power_Reactor reactor;
-    Power_Orb orb;
+    int orbCount;
+    Power_Orb orbs[MAX_NUM_ORBS];
 };
 
 struct ChangeGameStatePacket

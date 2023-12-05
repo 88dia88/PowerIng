@@ -12,7 +12,7 @@ struct Power_Player Player[7];
 
 struct Power_Control Control;
 struct Power_Reactor Reactor;
-struct Power_Orb* OrbHead = (Power_Orb*)malloc(sizeof(struct Power_Orb));
+struct Power_Orb* OrbHead = new Power_Orb;
 //--------------------------------------------------------------------------------------------------------------//
 bool ReactorMeltdown()
 {

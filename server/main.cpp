@@ -8,7 +8,7 @@
 
 #define DEBUG
 #define SERVERPORT 9000
-#define BUFSIZE    1024
+#define BUFSIZE    10000
 
 
 LONG clientCnt = 0;
@@ -119,7 +119,7 @@ DWORD WINAPI ProcessThread(LPVOID lpParam)
 	GeneralReset();
 	Temperture = Kelvin, Mole = MaxMole * 0.5;
 	PreTime = -25;
-	Orbcount = 3;
+	Orbcount = 0;
 	TotalScore = 0;
 	GameStart = false;
 	//EffectHead->next = EffectHead;
@@ -160,9 +160,10 @@ DWORD WINAPI ProcessThread(LPVOID lpParam)
 					SendS2CPacketAllPlayer(PACKET_TYPE_CHANGE_GAME_STATE);
 				}
 				else if (gameState == GAME_STATE_GAME) {
-					if (Reactor.cherenkovmeter == 100) Reactor.cherenkov = true;
+					if (Reactor.cherenkovmeter == 100) 
+						Reactor.cherenkov = true;
+					//완전 충전 되지 않았으면 꾹 눌러서 발동
 					else if (Reactor.cherenkovmeter >= 875) {
-						//완전 충전 되지 않았으면 꾹 눌러서 발동
 						Reactor.cherenkov = true;
 					}
 				}
@@ -181,7 +182,8 @@ DWORD WINAPI ProcessThread(LPVOID lpParam)
 		}
 
 		// 종료조건에 만족 하는가?
-		if (gameState != GAME_STATE_END and Reactor.meltdown == false and Orbcount < 0) {
+		if (gameState != GAME_STATE_READY and Reactor.meltdown == false and Orbcount < 0) {
+			OrbClear();
 			gameState = GAME_STATE_END;
 			SendS2CPacketAllPlayer(PACKET_TYPE_CHANGE_GAME_STATE);
 		}
@@ -189,6 +191,7 @@ DWORD WINAPI ProcessThread(LPVOID lpParam)
 		else {
 			if (ReactorMeltdown() and gameState == GAME_STATE_GAME) {
 				gameState = GAME_STATE_READY;
+				OrbClear();
 			}
 			else {
 				ReactorCherenkov();
@@ -362,7 +365,7 @@ int RecvC2SPacket(SOCKET clientSock, int clientID)
 		Player[clientID].leftKeyDown = keyInputPacket.keyInput.left;
 		Player[clientID].actionKeyDown = keyInputPacket.keyInput.action;
 
-		/*
+		
 		printf("%d client, up=%s, down=%s, right=%s, left=%s, action=%s\n",
 			clientID,
 			keyInputPacket.keyInput.up & 0x8001 ? "true" : "false",
@@ -370,7 +373,7 @@ int RecvC2SPacket(SOCKET clientSock, int clientID)
 			keyInputPacket.keyInput.right & 0x8001 ? "true" : "false",
 			keyInputPacket.keyInput.left & 0x8001 ? "true" : "false",
 			keyInputPacket.keyInput.action & 0x8001 ? "true" : "false");
-		*/
+		
 		break;
 	}
 	case PACKET_TYPE_PLAYERS_DATA: {
@@ -427,8 +430,19 @@ int SendS2CPacketAllPlayer(PacketType packetType)
 			if (Player[i].Online)
 				gameDataPacket.players[i] = Player[i];
 
-		if (OrbHead != nullptr)
-			gameDataPacket.orb = *OrbHead;
+		// 게임내 orb가 있을 때
+		gameDataPacket.orbCount = 0;
+		if (OrbHead->next != OrbHead) {
+			Power_Orb* orb = OrbHead;
+			int orbIdx = 0;
+			while (orb->next != OrbHead)
+			{
+				orb = orb->next;
+				gameDataPacket.orbs[orbIdx] = *orb;
+				orbIdx++;
+			}
+			gameDataPacket.orbCount = orbIdx;
+		}
 
 		gameDataPacket.reactor = Reactor;
 

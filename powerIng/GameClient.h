@@ -4,7 +4,7 @@
 #include "Packet.h"
 
 
-#define BUFSIZE 1024
+#define BUFSIZE 10000
 
 
 using namespace std;

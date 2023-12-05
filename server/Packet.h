@@ -134,7 +134,8 @@ struct GameDataPacket
     Power_Player players[MAX_NUM_CLIENTS];
 
     Power_Reactor reactor;
-    Power_Orb orb;
+    int orbCount;
+    Power_Orb orbs[MAX_NUM_ORBS];
 };
 
 struct ChangeGameStatePacket
