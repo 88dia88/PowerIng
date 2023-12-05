@@ -36,10 +36,10 @@ DWORD WINAPI RecvThread(LPVOID arg)
 			memcpy(&lobbyDataPacket, buf, sizeof(LobbyDataPacket));
 
 			gClientID = lobbyDataPacket.clientID;
-			// 다른 플레이어 정보
-			if (lobbyDataPacket.playerCount > 1) {
-				//처리
-			}
+			int clientCnt = lobbyDataPacket.playerCount;
+			for (int i = 0; i < clientCnt; i++)
+				Player[i] = lobbyDataPacket.players[i];
+
 			break;
 		}
 
@@ -247,7 +247,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 				}
 			}
 			else if (wParam == VK_RETURN) {
-				Player[0].actionKeyDown = true;
+				Player[gClientID].actionKeyDown = true;
 			}
 			break;
 		case WM_MOUSEMOVE:
@@ -374,13 +374,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 
 						Time++;
 
-						Player[0].leftKeyDown = GetAsyncKeyState(Reflector1Left);
-						Player[0].rightKeyDown = GetAsyncKeyState(Reflector1Right);
-						Player[0].upKeyDown = GetAsyncKeyState(Reflector1Up);
-						Player[0].downKeyDown = GetAsyncKeyState(Reflector1Down);
+						Player[gClientID].leftKeyDown = GetAsyncKeyState(Reflector1Left);
+						Player[gClientID].rightKeyDown = GetAsyncKeyState(Reflector1Right);
+						Player[gClientID].upKeyDown = GetAsyncKeyState(Reflector1Up);
+						Player[gClientID].downKeyDown = GetAsyncKeyState(Reflector1Down);
 
-						client.SendPacket(PACKET_TYPE_KEY_INPUT, Player[0]);
-						Player[0].actionKeyDown = false;
+						client.SendPacket(PACKET_TYPE_KEY_INPUT, Player[gClientID]);
+						Player[gClientID].actionKeyDown = false;
 						break;
 					case 1:
 						if (Reactor.meltdown == false and Orbcount < 0) {
@@ -613,8 +613,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 						// 서버 연결
 						client.Connect();
 						ResumeThread(hRecvThread);
-						WaitForSingleObject(hRecvEvent, INFINITE);
 						client.SendPacket(PACKET_TYPE_CLIENT_DATA, Player[gClientID]);
+						WaitForSingleObject(hRecvEvent, INFINITE);
 						Orbcount = 3;
 						EscMode = 0;
 						GameMode = 0;

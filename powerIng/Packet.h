@@ -107,8 +107,9 @@ struct LobbyDataPacket
     int clientID;
     int playerCount;
 
-    //GamePlayer players[3];
+    Power_Player players[MAX_NUM_CLIENTS];
 };
+
 
 struct PlayersDataPacket
 {

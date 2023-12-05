@@ -70,7 +70,7 @@ DWORD WINAPI ClientThread(LPVOID arg)
 	int clientID = GenerateClientIndex();
 	gClientSock[clientID] = clientSock;
 
-	SendS2CPacket(clientSock, clientID);
+	//SendS2CPacket(clientSock, clientID);
 
 	while (1) {
 		// 패킷 받기
@@ -232,6 +232,8 @@ DWORD WINAPI LobbyThread(LPVOID lpParam)
 		DWORD result = WaitForMultipleObjects(clientCnt, hClientKeyInputEvent, FALSE, INFINITE);
 		gameTimer.Tick();
 		
+		SendS2CPacketAllPlayer(PACKET_TYPE_LOBBY);
+
 		SetEvent(hProcessEvent[result]);
 
 		if (clientCnt >= 1)
@@ -440,6 +442,8 @@ int SendS2CPacketAllPlayer(PacketType packetType)
 				orb = orb->next;
 				gameDataPacket.orbs[orbIdx] = *orb;
 				orbIdx++;
+				if (orbIdx >= 10)
+					break;
 			}
 			gameDataPacket.orbCount = orbIdx;
 		}
@@ -478,7 +482,25 @@ int SendS2CPacketAllPlayer(PacketType packetType)
 		for (int i = 0; i < clientCnt; i++)
 			if (Player[i].Online)
 				send(gClientSock[i], reinterpret_cast<char*>(&gameStatePacket),
-					sizeof(gameStatePacket), 0);
+					sizeof(ChangeGameStatePacket), 0);
+
+		return retval;
+	}
+
+	case PACKET_TYPE_LOBBY: {
+		LobbyDataPacket lobbyDataPacket;
+
+		lobbyDataPacket.playerCount = clientCnt;
+		for (int i = 0; i < clientCnt; i++)
+			lobbyDataPacket.players[i] = Player[i];
+
+		for (int i = 0; i < clientCnt; i++)
+			if (Player[i].Online) {
+				// clientID == player idx
+				lobbyDataPacket.clientID = i;
+				send(gClientSock[i], reinterpret_cast<char*>(&lobbyDataPacket),
+					sizeof(LobbyDataPacket), 0);
+			}
 
 		return retval;
 	}
