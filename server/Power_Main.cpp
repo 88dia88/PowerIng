@@ -29,18 +29,20 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hprevlnstance, LPSTR lpszCmdPa
 	WndClass.lpszMenuName = NULL;
 	WndClass.lpszClassName = lpszClass;
 	WndClass.hIconSm = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ICON1));
-	RegisterClassEx(&WndClass);
+	if (!RegisterClassEx(&WndClass)) return 1;
 
-	HWND hWnd = CreateWindow(lpszClass, lpszWindowName, 
+	HWND hWnd = CreateWindow(lpszClass, lpszWindowName,
 		WS_POPUP, 0, 0, (int)(window_size_x), (int)(window_size_y),
 		NULL, (HMENU)NULL, hInstance, NULL);
+	if (hWnd == NULL) return 1;
 	ShowWindow(hWnd, nCmdShow);
 	UpdateWindow(hWnd);
-	
+
 	MSG Message;
-	while (GetMessage(&Message, 0, 0, 0)) {
+	while (GetMessage(&Message, 0, 0, 0) > 0) {
 		TranslateMessage(&Message);
 		DispatchMessage(&Message);
 	}
+
 	return Message.wParam;
 }

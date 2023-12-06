@@ -44,8 +44,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 
 	static bool OrbLaunch = false;
 
-	static struct Power_Player MainPlayer;
-
 	static int CustomRGB[4] = { RGBTemplate_Yellow, 255, 255, 0 };
 
 	int MassSel = 1;
@@ -62,15 +60,17 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 		GameStart = false;
 		Setting = SettingReset(Setting);
 		OrbHead->next = OrbHead;
-		MainPlayer = PlayerReset(MainPlayer, 0);
+		Player[0] = PlayerReset(Player[0], 0);
 		for (int i = 1; i < 7; i++)
 		{
 			Player[i] = PlayerReset(Player[i], i);
 			Player[i].Reflector.polar_x = i / 6.0;
-			Player[i].Online = false; // 주석 처리하면 추가 패널이 활성화됨
-			//if (i % 2 == 0) Player[i].Online = false; // 주석 처리하면 6개의 패널이 활성화됨
+			//Player[i].Online = false; // 주석 처리하면 추가 패널이 활성화됨
+			if (i % 2 == 0) Player[i].Online = false; // 주석 처리하면 6개의 패널이 활성화됨
 
-			/* //아래 코드의 주석 처리를 해제하면 플레이어에 9가지중 무작위 색상이 적용됨
+			 //아래 코드의 주석 처리를 해제하면 플레이어에 9가지중 무작위 색상이 적용됨
+			/*
+			*/
 			while (true) {
 				if (rand() % 9 == 1) Player[i].RGB = RGBTemplate_Red;
 				else if (rand() % 9 == 2) Player[i].RGB = RGBTemplate_Green;
@@ -83,23 +83,16 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 				else if (rand() % 9 == 6) Player[i].RGB = RGBTemplate_White;
 
 				int ColorDupe = 0;
-				for (int j = 1; j < i; j++) if (Player[i].RGB == Player[j].RGB) ColorDupe++;
+				for (int j = 0; j < i; j++) if (Player[i].RGB == Player[j].RGB) ColorDupe++;
 				if (ColorDupe == 0) break;
 			}
-			*/
+			
 			Player[i].Reflector.RGB = Player[i].RGB;
 		}
 		GeneralReset();
 
 		Temperture = Kelvin, Mole = MaxMole * 0.5;
-		PreTime = -25;
 		Orbcount = 3;
-		TotalScore = 0;
-
-		Control.Left = 0x25;
-		Control.Right = 0X27;
-		Control.Up = 0X26;
-		Control.Down = 0X28;
 
 		AnimationTime_Door = 100;
 
@@ -116,10 +109,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 		DisplayLoad();
 		DisplayOrbLoad();
 
-		DisplayColorApply(MainPlayer.RGB);
-		DisplayReflectorColorApply(MainPlayer.RGB);
+		DisplayColorApply(Player[0].RGB);
+		DisplayReflectorColorApply(Player[0].RGB);
 
-		DisplayPlayerColorApply(MainPlayer.RGB, 0);
+		DisplayPlayerColorApply(Player[0].RGB, 0);
 
 		for (int i = 1; i < 7; i++) DisplayPlayerColorApply(Player[i].RGB, i);
 	}
@@ -131,7 +124,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 					Menu_Type = 0;
 					EscMode = 0;
 					Ingame = false;
-					TotalScore = 0;
 					GeneralReset();
 					break;
 				}
@@ -179,7 +171,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 					Menu_Type = 0;
 					EscMode = 0;	
 					Ingame = false;
-					TotalScore = 0;
 					GeneralReset();
 					break;
 				}
@@ -198,7 +189,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 							Menu_Type = 0;
 							EscMode = 0;
 							Ingame = false;
-							TotalScore = 0;
 							GeneralReset();
 							break;
 						}
@@ -208,7 +198,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 				break;
 			}
 			break;
-		case WM_TIMER: //GetAsyncKeyState - 키가 눌린 상태로 진행되는함수 (끊김없이)http://www.silverwolf.co.kr/cplusplus/4842
+		case WM_TIMER:
 			switch (wParam)
 			{
 			case 0:
@@ -218,6 +208,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 						if (AnimationTime_Door < 100) AnimationTime_Door += 2;
 						else {
 							AnimationTime_Door = 100;
+							for (int i = 0; i < 7; i++) {
+								if (Player[i].Count < 3) Player[i].Count = 3;
+							}
 							DisplayGame = false;
 						}
 					}
@@ -257,7 +250,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 					case 0:
 						Time_Server++;
 
-						if (Reactor.meltdown == false and Orbcount < 0) {
+						if (Reactor.meltdown == false and Player[0].Count <= 0) {
+							Player[0].Count--;
 							GameStatus = -2;
 							//게임오버
 						}
@@ -320,10 +314,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 
 						if (Player[0].CherenkovMeter == 1000 and Setting.Game_Cherenkov_auto) Player[0].Control[0] = 0x8001;
 						else Player[0].Control[0] = GetAsyncKeyState(Setting.Control_Active);
-						Player[0].Control[1] = GetAsyncKeyState(Reflector1Left);
-						Player[0].Control[2] = GetAsyncKeyState(Reflector1Right);
-						Player[0].Control[3] = GetAsyncKeyState(Reflector1Up);
-						Player[0].Control[4] = GetAsyncKeyState(Reflector1Down);
+						Player[0].Control[1] = GetAsyncKeyState(Setting.Control_Left);
+						Player[0].Control[2] = GetAsyncKeyState(Setting.Control_Right);
+						Player[0].Control[3] = GetAsyncKeyState(Setting.Control_Up);
+						Player[0].Control[4] = GetAsyncKeyState(Setting.Control_Down);
 
 
 
@@ -332,10 +326,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 						{
 							if (Player[i].Online) {
 								Player[i].Control[0] = GetAsyncKeyState(Setting.Control_Active);
-								Player[i].Control[1] = GetAsyncKeyState(Reflector1Left);
-								Player[i].Control[2] = GetAsyncKeyState(Reflector1Right);
-								Player[i].Control[3] = GetAsyncKeyState(Reflector1Up);
-								Player[i].Control[4] = GetAsyncKeyState(Reflector1Down);
+							Player[i].Control[1] = GetAsyncKeyState(Setting.Control_Left);
+							Player[i].Control[2] = GetAsyncKeyState(Setting.Control_Right);
+							Player[i].Control[3] = GetAsyncKeyState(Setting.Control_Up);
+							Player[i].Control[4] = GetAsyncKeyState(Setting.Control_Down);
 							}
 						}
 						*/
@@ -343,7 +337,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 
 						break;
 					case 1:
-						if (Reactor.meltdown == false and Orbcount < 0) {
+						if (Reactor.meltdown == false and Player[0].Count < 0) {
 							Orbcount = 0;
 							GameStatus = -2;
 							//게임오버
@@ -353,7 +347,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 						}
 						break;
 					case 2:
-						if (Reactor.meltdown == false and Orbcount < 0) {
+						if (Reactor.meltdown == false and Player[0].Count < 0) {
 							Orbcount = 0;
 							GameStatus = -2;
 							//게임오버
@@ -615,7 +609,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 						EscMode = 0;
 						GameMode = 0;
 						GameStatus = -1;
-						Player[0] = MainPlayer;
 						SelectedButton = 0;
 						Time = 0;
 						DisplayGame = true;
@@ -692,12 +685,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 				case 231: case 232: case 233: case 234:
 					int SelectedModule = Menu_Type % 230;
 					if (SelectedButton == 1) {
-						if (MainPlayer.Reflector.module[SelectedModule] == 1) MainPlayer.Reflector.module[SelectedModule] = 0;
-						else MainPlayer.Reflector.module[SelectedModule] = 1;
+						if (Player[0].Reflector.module[SelectedModule] == 1) Player[0].Reflector.module[SelectedModule] = 0;
+						else Player[0].Reflector.module[SelectedModule] = 1;
 					}
 					else if (SelectedButton == 3) {
-						if (MainPlayer.Reflector.module[SelectedModule] == 2) MainPlayer.Reflector.module[SelectedModule] = 0;
-						else MainPlayer.Reflector.module[SelectedModule] = 2;
+						if (Player[0].Reflector.module[SelectedModule] == 2) Player[0].Reflector.module[SelectedModule] = 0;
+						else Player[0].Reflector.module[SelectedModule] = 2;
 					}
 					break;
 				}
@@ -736,8 +729,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 				rgb[6] = RGBTemplate_Gray;
 				rgb[4] = RGBTemplate_Gray;
 				rgb[8] = RGBTemplate_Gray;
-				UIModule(400, 100, true, MainPlayer.Reflector.module);
-				UIModule(400, -100, false, MainPlayer.Reflector.module);
+				UIModule(400, 100, true, Player[0].Reflector.module);
+				UIModule(400, -100, false, Player[0].Reflector.module);
 				UIMenu(SelectedButton, L"Module", L"Color", L"", L"Module", L"", rgb);
 				UIBack(SelectedButton == -1);
 			}
@@ -757,14 +750,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 				rgb[4] = CustomRGB[0];
 				rgb[8] = CustomRGB[0];
 
-				UIModule(350, 400, SelectedButton == 4, MainPlayer.Reflector.module);
+				UIModule(350, 400, SelectedButton == 4, Player[0].Reflector.module);
 				UIRGBSlider(CustomRGB[1], CustomRGB[2], CustomRGB[3]);
 				UIMenu(SelectedButton, L"Color", L"Red", L"Green", L"Blue", L"Apply", rgb);
 				UIBack(SelectedButton == -1);
 			}
 			else if (Menu_Type == 23) {
-				UIModule(400, 100, true, MainPlayer.Reflector.module);
-				UIModule(400, -100, false, MainPlayer.Reflector.module);
+				UIModule(400, 100, true, Player[0].Reflector.module);
+				UIModule(400, -100, false, Player[0].Reflector.module);
 				UIMenu(SelectedButton, L"Module", L"Movement", L"Energy", L"Reactive", L"Divider", rgb);
 				UIBack(SelectedButton == -1);
 			}
@@ -791,17 +784,17 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			else if (Menu_Type / 10 == 23) {
 				int SelectedModule = Menu_Type % 230;
 				if (SelectedModule < 5) {
-					if (MainPlayer.Reflector.module[SelectedModule] == 1) {
+					if (Player[0].Reflector.module[SelectedModule] == 1) {
 						rgb[1] = RGBTemplate_Yellow;
 						rgb[5] = RGBTemplate_Red;
 					}
-					else if (MainPlayer.Reflector.module[SelectedModule] == 2) {
+					else if (Player[0].Reflector.module[SelectedModule] == 2) {
 						rgb[3] = RGBTemplate_Yellow;
 						rgb[7] = RGBTemplate_Red;
 					}
 				}
-				UIModule(400, 100, true, MainPlayer.Reflector.module);
-				UIModule(400, -100, false, MainPlayer.Reflector.module);
+				UIModule(400, 100, true, Player[0].Reflector.module);
+				UIModule(400, -100, false, Player[0].Reflector.module);
 				if (SelectedModule == 1) UIMenu(SelectedButton, L"Movement", L"Gear", L"", L"Magnet", L"", rgb);
 				else if (SelectedModule == 2) UIMenu(SelectedButton, L"Energy", L"Electric", L"", L"Cherenkov", L"", rgb);
 				else if (SelectedModule == 3) UIMenu(SelectedButton, L"Reactive", L"Acceleration", L"", L"Decceleration", L"", rgb);
@@ -828,3 +821,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 	}
 	return DefWindowProc(hWnd, iMsg, wParam, lParam); //--- 위의 세 메시지 외의 나머지 메시지는 OS로
 }
+
+
+
+

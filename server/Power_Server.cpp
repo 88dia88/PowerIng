@@ -23,32 +23,36 @@ bool AddSocketInfo(SOCKET sock);
 SOCKETINFO* GetSocketInfo(SOCKET sock);
 void RemoveSocketInfo(SOCKET sock);
 
-int main(int argc, char* argv[])
+
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hprevlnstance, LPSTR lpszCmdParam, int nCmdShow)
 {
 	int retval;
 
-	// 윈도우 클래스 등록
-	WNDCLASS wndclass;
-	wndclass.style = CS_HREDRAW | CS_VREDRAW;
-	wndclass.lpfnWndProc = WndProc;
-	wndclass.cbClsExtra = 0;
-	wndclass.cbWndExtra = 0;
-	wndclass.hInstance = NULL;
-	wndclass.hIcon = LoadIcon(NULL, IDI_APPLICATION);
-	wndclass.hCursor = LoadCursor(NULL, IDC_ARROW);
-	wndclass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
-	wndclass.lpszMenuName = NULL;
-	wndclass.lpszClassName = _T("MyWndClass");
-	if (!RegisterClass(&wndclass)) return 1;
+	g_hInst = hInstance;
 
-	// 윈도우 생성
-	HWND hWnd = CreateWindow(_T("MyWndClass"), _T("TCP 서버"),
-		WS_OVERLAPPEDWINDOW, 0, 0, 600, 200, NULL, NULL, NULL, NULL);
+	WNDCLASSEX WndClass;
+	WndClass.cbSize = sizeof(WndClass);
+	WndClass.style = CS_HREDRAW | CS_VREDRAW;
+	WndClass.lpfnWndProc = (WNDPROC)WndProc;
+	WndClass.cbClsExtra = 0;
+	WndClass.cbWndExtra = 0;
+	WndClass.hInstance = hInstance;
+	WndClass.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ICON1));
+	WndClass.hCursor = LoadCursor(NULL, IDC_ARROW);
+	WndClass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
+	WndClass.lpszMenuName = NULL;
+	WndClass.lpszClassName = lpszClass;
+	WndClass.hIconSm = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ICON1));
+	if (!RegisterClassEx(&WndClass)) return 1;
+
+	HWND hWnd = CreateWindow(lpszClass, lpszWindowName,
+		WS_POPUP, 0, 0, (int)(window_size_x), (int)(window_size_y),
+		NULL, (HMENU)NULL, hInstance, NULL);
 	if (hWnd == NULL) return 1;
-	ShowWindow(hWnd, SW_SHOWNORMAL);
+	ShowWindow(hWnd, nCmdShow);
 	UpdateWindow(hWnd);
 
-	// 윈속 초기화
+
 	WSADATA wsa;
 	if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0)
 		return 1;
@@ -74,16 +78,14 @@ int main(int argc, char* argv[])
 	retval = WSAAsyncSelect(listen_sock, hWnd, WM_SOCKET, FD_ACCEPT | FD_CLOSE);
 	if (retval == SOCKET_ERROR) err_quit("WSAAsyncSelect()");
 
-	// 메시지 루프
-	MSG msg;
-	while (GetMessage(&msg, 0, 0, 0) > 0) {
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
+	MSG Message;
+	while (GetMessage(&Message, 0, 0, 0) > 0) {
+		TranslateMessage(&Message);
+		DispatchMessage(&Message);
 	}
 
-	// 윈속 종료
 	WSACleanup();
-	return msg.wParam;
+	return Message.wParam;
 }
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
@@ -94,7 +96,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 
 	POINTS Mouse = MAKEPOINTS(lParam);
 
-	static bool Ingame = true;
+	static bool Ingame = false;
 	// 추가변수-메뉴-------
 	static int SelectedButton = 0; // 각 버튼위에 마우스가 올라가 있으면 값이 변경됨
 	static int Menu_Type = 0; // 메뉴 종류
@@ -108,7 +110,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 	33 : 오디오
 	*/
 	// -------------------
-	
+
 	// 추가변수-게임-------
 	static int GameMode = 0;
 	/*
@@ -133,7 +135,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 
 	static struct Power_Player MainPlayer;
 
+	static int CustomRGB[4] = { RGBTemplate_Yellow, 255, 255, 0 };
+
 	int MassSel = 1;
+	int rgb[9] = { RGBTemplate_Green,
+		RGBTemplate_Green, RGBTemplate_Green, RGBTemplate_Green, RGBTemplate_Green,
+		RGBTemplate_Cyan, RGBTemplate_Cyan, RGBTemplate_Cyan, RGBTemplate_Cyan };
 	// -------------------
 
 
@@ -142,17 +149,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 
 	if (iMsg == WM_CREATE) {
 		GameStart = false;
-		OrbHead->next = OrbHead;
-
-		/*
-		ReflectorHead->next = ReflectorHead;
-		ReflectorHead = ReflectorReset(ReflectorHead);
-		*/
-
 		Setting = SettingReset(Setting);
-
+		OrbHead->next = OrbHead;
 		MainPlayer = PlayerReset(MainPlayer, 0);
-		
 		for (int i = 1; i < 7; i++)
 		{
 			Player[i] = PlayerReset(Player[i], i);
@@ -179,8 +178,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			*/
 			Player[i].Reflector.RGB = Player[i].RGB;
 		}
-
 		GeneralReset();
+
 		Temperture = Kelvin, Mole = MaxMole * 0.5;
 		PreTime = -25;
 		Orbcount = 3;
@@ -192,7 +191,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 		Control.Down = 0X28;
 
 		AnimationTime_Door = 100;
+
+		/*
+		ReflectorHead->next = ReflectorHead;
+		ReflectorHead = ReflectorReset(ReflectorHead);
+		*/
+
 		SetTimer(hWnd, 0, 1000 / 60, NULL);
+
 	}
 	if (Ingame) {
 		switch (iMsg) {
@@ -217,21 +223,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 					GameStatus = 0;
 				}
 				else if (GameStatus == 0 and EscMode % 100 == 2) {
-					EscMode ++;
+					EscMode++;
 					DisplayGame = true;
 				}
 			}
 			else if (wParam == VK_RETURN) {
 				switch (GameStatus) {
-				case 1:
-					if (Reactor.cherenkov == false) {
-						if (Reactor.cherenkovmeter == 100) Reactor.cherenkov = true;
-						else if (Reactor.cherenkovmeter >= 875) {
-							//완전 충전 되지 않았으면 꾹 눌러서 발동
-							Reactor.cherenkov = true;
-						}
-					}
-					break;
 				case 2:
 					if (PressureCheck())
 					{
@@ -247,7 +244,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			case -2:
 				if (DisplayGame == false) {
 					Menu_Type = 0;
-					EscMode = 0;	
+					EscMode = 0;
 					Ingame = false;
 					TotalScore = 0;
 					GeneralReset();
@@ -281,7 +278,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 		case WM_SOCKET: // 소켓 관련 윈도우 메시지
 			ProcessSocketMessage(hWnd, iMsg, wParam, lParam);
 			break;
-		case WM_TIMER: //GetAsyncKeyState - 키가 눌린 상태로 진행되는함수 (끊김없이)http://www.silverwolf.co.kr/cplusplus/4842
+		case WM_TIMER:
 			switch (wParam)
 			{
 			case 0:
@@ -352,8 +349,38 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 						{
 							if (Player[i].Online) {
 								Player[i].Reflector = ReflectorProcess(Player[i].Reflector, (GameStatus == 1));
+								Player[i].Reflector = ReflectorPosition(Player[i].Reflector,
+									Player[i].Control[1], Player[i].Control[2], Player[i].Control[3], Player[i].Control[4]);
+
+								if (Reactor.cherenkov == false) {
+									if (Player[i].Reflector.cherenkovcounter > 0)
+									{
+										if (Player[i].CherenkovMeter < 1000) Player[i].CherenkovMeter++;
+										Player[i].Reflector.cherenkovcounter--;
+									}
+								}
+
+								if (Player[i].Control[0] & 0x8001 || Player[i].Control[0] & 0x8000) {
+									if (Reactor.cherenkov == false) {
+										if (Player[i].CherenkovMeter == 1000) {
+											Reactor.cherenkov = true;
+											Reactor.cherenkovmeter = Player[i].CherenkovMeter;
+											Player[i].CherenkovMeter = 0;
+
+										}
+										else if (Player[i].CherenkovMeter >= 8750) {
+											//완전 충전 되지 않았으면 꾹 눌러서 발동
+											Reactor.cherenkov = true;
+											Reactor.cherenkovmeter = Player[i].CherenkovMeter;
+											Player[i].CherenkovMeter = 0;
+										}
+									}
+								}
 							}
 						}
+
+
+
 
 						//이 아래는 클라이언트 사이드
 
@@ -361,9 +388,28 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 						else if (Time_Server > Time) Time += 2;
 						else Time++;
 
-						//Player[0].Reflector = ReflectorControl(Player[0].Reflector, GetAsyncKeyState(Reflector1Left), GetAsyncKeyState(Reflector1Right), GetAsyncKeyState(Reflector1Up), GetAsyncKeyState(Reflector1Down));
+						if (Player[0].CherenkovMeter == 1000 and Setting.Game_Cherenkov_auto) Player[0].Control[0] = 0x8001;
+						else Player[0].Control[0] = GetAsyncKeyState(Setting.Control_Active);
+						Player[0].Control[1] = GetAsyncKeyState(Reflector1Left);
+						Player[0].Control[2] = GetAsyncKeyState(Reflector1Right);
+						Player[0].Control[3] = GetAsyncKeyState(Reflector1Up);
+						Player[0].Control[4] = GetAsyncKeyState(Reflector1Down);
 
-						Player[0].Reflector = ReflectorPosition(Player[0].Reflector, GetAsyncKeyState(Reflector1Left), GetAsyncKeyState(Reflector1Right), GetAsyncKeyState(Reflector1Up), GetAsyncKeyState(Reflector1Down));
+
+
+						/*컨트롤 테스트
+						for (int i = 1; i < 7; i++)
+						{
+							if (Player[i].Online) {
+								Player[i].Control[0] = GetAsyncKeyState(Setting.Control_Active);
+								Player[i].Control[1] = GetAsyncKeyState(Reflector1Left);
+								Player[i].Control[2] = GetAsyncKeyState(Reflector1Right);
+								Player[i].Control[3] = GetAsyncKeyState(Reflector1Up);
+								Player[i].Control[4] = GetAsyncKeyState(Reflector1Down);
+							}
+						}
+						*/
+
 
 						break;
 					case 1:

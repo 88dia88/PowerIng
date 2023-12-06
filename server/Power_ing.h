@@ -48,16 +48,20 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam); //
 //--------------------------------------------------------------------------------------------------------------//
 
 struct Power_Setting_Player {
-	int Control_Active, Control_Left, Control_Up, Control_Right, Control_Down;
+	int Control_Active = 0x0D,
+		Control_Left = 0x25,
+		Control_Up = 0X26,
+		Control_Right = 0X27,
+		Control_Down = 0X28;
 
-	bool Debug;
+	bool Debug = false;
 
-	bool Game_Cherenkov_auto, Game_PressureReset;
-	int Game_ScoreType;
-	
-	int Display_Resolution, Display_Trail_Quality;
+	bool Game_Cherenkov_auto = true, Game_PressureReset = false;
+	int Game_ScoreType = 0;
 
-	int Sound_Volume_Master, Sound_Volume, Sound_Alert;
+	int Display_Resolution = 0.8, Display_Trail_Quality = 0;
+
+	int Sound_Volume_Master = 100, Sound_Volume = 100, Sound_Alert = 0;
 };
 struct Power_Setting_Game {
 	bool Debug;
@@ -70,9 +74,9 @@ struct Power_Control {
 };
 struct Power_Reactor // 리엑터 구조체 - 게임 상태 관리
 {
-	bool cherenkov, meltdown;
-	int cherenkovlevel, meltdownlevel;
-	int cherenkovmeter, cherenkovcounter;
+	bool cherenkov = false, meltdown = false;
+	int cherenkovlevel = 0, meltdownlevel = 0;
+	int cherenkovmeter = 0, cherenkovcounter = 0;
 };
 struct Power_Effect // 충돌 시 이펙트 구조체
 {
@@ -93,18 +97,21 @@ struct Power_Orb // 오브 구조체
 };
 struct Power_Reflector // 패널 구조체
 {
-	double polar_x, polar_y;
-	int polar_speedx, polar_speedy;
-	double size, speed;
-	int RGB;
-	int module[5], age;
-	int Effect_effect, Effect_rebound;
-	bool module_charged[5];
+	double polar_x = 0, polar_y = 375;
+	int polar_speedx = 0, polar_speedy = 0;
+	double size = 375, speed = 1;
+	int age = 0, cherenkovcounter = 0;
+	int RGB = 0xffff00;
+	int module[5] = { 0, 0, 0, 0, 0 };
+	bool module_charged[5] = { false, false, false, false, false };
+	int Effect_effect = 0, Effect_rebound = 0;
 };
 struct Power_Player {
-	bool Online, Ready;
-	int ID, RGB;
-	int Score, CherenkovMeter;
+	bool Online = false, Ready = false;
+	int ID = 0;
+	int RGB = 0xffff00;
+	int Score = 0, CherenkovMeter = 0;
+	short Control[5] = { 0, 0, 0, 0, 0 };
 	struct Power_Reflector Reflector;
 };
 

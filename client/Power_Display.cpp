@@ -224,17 +224,17 @@ void DisplayLoad()
 	}
 	for (int i = 0; i < ReflectorTransparentImg.GetWidth(); i++)
 	{
-		for (int j = 0; j < ReflectorImg.GetHeight(); j++)
+		for (int j = 0; j < ReflectorTransparentImg.GetHeight(); j++)
 		{
-			BYTE* ptr = (BYTE*)ReflectorImg.GetPixelAddress(i, j);
+			BYTE* ptr = (BYTE*)ReflectorTransparentImg.GetPixelAddress(i, j);
 			for (int k = 0; k < 3; k++) ptr[k] = ((ptr[k] * ptr[3]) + 127) / 255;
 		}
 	}
 	for (int i = 0; i < ReflectorTransparent_Module_Img.GetWidth(); i++)
 	{
-		for (int j = 0; j < Reflector_Module_Img.GetHeight(); j++)
+		for (int j = 0; j < ReflectorTransparent_Module_Img.GetHeight(); j++)
 		{
-			BYTE* ptr = (BYTE*)Reflector_Module_Img.GetPixelAddress(i, j);
+			BYTE* ptr = (BYTE*)ReflectorTransparent_Module_Img.GetPixelAddress(i, j);
 			for (int k = 0; k < 3; k++) ptr[k] = ((ptr[k] * ptr[3]) + 127) / 255;
 		}
 	}
@@ -964,28 +964,28 @@ void UIEndMessage()
 	hFont = CreateFont((int)(200 * window_size), 0, 0, 0, FW_ULTRABOLD, FALSE, FALSE, FALSE, DEFAULT_CHARSET, OUT_DEVICE_PRECIS, CLIP_CHARACTER_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_ROMAN, L"PowerIngElectric");
 	oldFont = (HFONT)SelectObject(memdc, hFont);
 
-	if (TotalScore < 1000)
+	if (Player[0].Statistic.TotalScore < 1000)
 	{
 		SetTextColor(memdc, RGB(0, 255, 0));
-		swprintf_s(lpOut, 100, L"Score:\\%.0f ", TotalScore);
+		swprintf_s(lpOut, 100, L"Score:\\%.0f ", Player[0].Statistic.TotalScore);
 	}
-	else if (TotalScore < 1000000)
+	else if (Player[0].Statistic.TotalScore < 1000000)
 	{
-		if (TotalScore < 10000) SetTextColor(memdc, RGB(255, 255, 255));
-		else if (TotalScore < 100000)  SetTextColor(memdc, RGB(255, 255, 0));
-		else if (TotalScore < 500000)  SetTextColor(memdc, RGB(0, 255, 255));
+		if (Player[0].Statistic.TotalScore < 10000) SetTextColor(memdc, RGB(255, 255, 255));
+		else if (Player[0].Statistic.TotalScore < 100000)  SetTextColor(memdc, RGB(255, 255, 0));
+		else if (Player[0].Statistic.TotalScore < 500000)  SetTextColor(memdc, RGB(0, 255, 255));
 		else  SetTextColor(memdc, RGB(255, 0, 255));
-		swprintf_s(lpOut, 100, L"Score:\\%.3gK", TotalScore / 1000);
+		swprintf_s(lpOut, 100, L"Score:\\%.3gK", Player[0].Statistic.TotalScore / 1000);
 	}
-	else if (TotalScore < 1000000000)
+	else if (Player[0].Statistic.TotalScore < 1000000000)
 	{
 		SetTextColor(memdc, RGB(255, 0, 0));
-		swprintf_s(lpOut, 100, L"Score:\\%.3gM", TotalScore / 1000000);
+		swprintf_s(lpOut, 100, L"Score:\\%.3gM", Player[0].Statistic.TotalScore / 1000000);
 	}
-	else if (TotalScore < 1000000000000)
+	else if (Player[0].Statistic.TotalScore < 1000000000000)
 	{
 		SetTextColor(memdc, RGB(0, 0, 255));
-		swprintf_s(lpOut, 100, L"Score:\\%.3gB", TotalScore / 1000000000);
+		swprintf_s(lpOut, 100, L"Score:\\%.3gB", Player[0].Statistic.TotalScore / 1000000000);
 	}
 	else
 	{
@@ -1006,19 +1006,19 @@ void UIScore()
 	hFont = CreateFont((int)(100 * window_size), 0, 0, 0, FW_ULTRABOLD, FALSE, FALSE, FALSE, DEFAULT_CHARSET, OUT_DEVICE_PRECIS, CLIP_CHARACTER_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_ROMAN, L"PowerIngElectric");
 	oldFont = (HFONT)SelectObject(memdc, hFont);
 	SetTextColor(memdc, RGB(0, 255, 0));
-	if (Score < 1000) swprintf_s(lpOut, 100, L"\\%.0f ", Score);
-	else if (Score < 1000000) swprintf_s(lpOut, 100, L"\\%.3gK", Score / 1000);
-	else if (Score < 1000000000) swprintf_s(lpOut, 100, L"\\%.3gM", Score / 1000000);
-	else if (Score < 1000000000000) swprintf_s(lpOut, 100, L"\\%.3gB", Score / 1000000000);
+	if (Player[0].Score < 1000) swprintf_s(lpOut, 100, L"\\%.0f ", Player[0].Score);
+	else if (Player[0].Score < 1000000) swprintf_s(lpOut, 100, L"\\%.3gK", Player[0].Score / 1000);
+	else if (Player[0].Score < 1000000000) swprintf_s(lpOut, 100, L"\\%.3gM", Player[0].Score / 1000000);
+	else if (Player[0].Score < 1000000000000) swprintf_s(lpOut, 100, L"\\%.3gB", Player[0].Score / 1000000000);
 	else swprintf_s(lpOut, 100, L"\\MAX\\");
 
 	TextOut(memdc, int(Pibot_x + 600 * window_size), int(Pibot_y), lpOut, lstrlen(lpOut));
 	TextOut(memdc, int(Pibot_x + 600 * window_size), int(Pibot_y - 75 * window_size), L"Power", 5);
-	if (Orbcount < 0) {
+	if (Player[0].Count < 0) {
 		SetTextColor(memdc, RGB(255, 0, 0));
 		swprintf_s(lpOut, 100, L"X");
 	}
-	else swprintf_s(lpOut, 100, L"%d", Orbcount);
+	else swprintf_s(lpOut, 100, L"%d", Player[0].Count);
 	TextOut(memdc, int(Pibot_x + 725 * window_size), int(Pibot_y - 367.5 * window_size), lpOut, lstrlen(lpOut));
 
 	SelectObject(memdc, oldFont);

@@ -1,4 +1,4 @@
-	#ifndef _POWER_ORB_
+#ifndef _POWER_ORB_
 #define _POWER_ORB_
 #include <stdlib.h>
 #include <time.h>
@@ -11,12 +11,8 @@
 extern HINSTANCE g_hInst;
 extern LPCTSTR lpszClass, lpszWindowName;
 
-extern bool Multireflect;
-
-extern int Menu;
-
-extern bool WASD, RestartPressure, ChargedMod, keyboard;
-extern int Reflector1Left, Reflector1Right, Reflector1Up, Reflector1Down, Player1Charge[3];
+extern bool RestartPressure, ChargedMod;
+extern int Player1Charge[3];
 
 extern int PlayerRGB;
 
@@ -106,13 +102,22 @@ struct Power_Reflector // 패널 구조체
 	bool module_charged[5] = { false, false, false, false, false };
 	int Effect_effect = 0, Effect_rebound = 0;
 };
+
+struct Power_Statistic {
+	double TotalScore = 0, HighestScore = 0;
+	int ReflectCount = 0, BonusCount = 0, CherenkovCount = 0;
+	double ReflectSpeed = 0, MoveDistance = 0;
+};
+
 struct Power_Player {
 	bool Online = false, Ready = false;
 	int ID = 0;
 	int RGB = 0xffff00;
-	int Score = 0, CherenkovMeter = 0;
+	int CherenkovMeter = 0, Count = 3;
+	double Score = 0;
 	short Control[5] = { 0, 0, 0, 0, 0 };
 	struct Power_Reflector Reflector;
+	struct Power_Statistic Statistic;
 };
 
 struct Power_Team {
@@ -122,8 +127,8 @@ struct Power_Team {
 };
 
 extern bool GameStart;
-extern double Score, Temperture, Mole, TotalScore;
-extern int PreTime, ReactorEffect, OrbType, Orbcount;
+extern double Temperture, Mole;
+extern int ReactorEffect, OrbType, Orbcount;
 
 extern int Time, Time_Server;
 
@@ -164,7 +169,7 @@ struct Power_Orb* OrbApply(struct Power_Orb* Orb, int Type, bool Major, double x
 //--------------------------------------------------------------------------------------------------------------// 반사 관련 함수
 bool ReflectCheck(double x, double y, double angle, double position, double size); // 오브가 반사되기 적합한지 판단하는 함수
 struct Power_Reflector ReflectDetect(struct Power_Orb* Orb, struct Power_Reflector Reflector); // 리스트에서 ReflectCheck를 만족하는 오브가 있는지 찾는 함수
-struct Power_Reflector ReflectReflector(struct Power_Orb* Orb, struct Power_Reflector Reflector); // 반사할 때 패널의 변화를 다루는 함수
+struct Power_Reflector ReflectReflector(struct Power_Orb* Orb, struct Power_Reflector Reflector, int Num); // 반사할 때 패널의 변화를 다루는 함수
 struct Power_Orb* ReflectReflectorOrb(struct Power_Orb* Orb, struct Power_Reflector Reflector); // 패널의 상태에 따라 공에 변화를 주는 함수
 struct Power_Orb* ReflectOrb(struct Power_Orb* Orb, double Angle); // 오브를 반사시키는 함수
 //--------------------------------------------------------------------------------------------------------------//

@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Power_Client.cpp" />
     <ClCompile Include="Power_Display.cpp" />
     <ClCompile Include="Power_Main.cpp" />
     <ClCompile Include="Power_Math.cpp" />
@@ -147,6 +148,7 @@
     <ClCompile Include="Power_Serverside.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Common.h" />
     <ClInclude Include="Power_Math.h" />
     <ClInclude Include="Power_ing.h" />
     <ClInclude Include="resource.h" />

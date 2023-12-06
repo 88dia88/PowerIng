@@ -1,7 +1,7 @@
 #include "Power_ing.h"
 //--------------------------------------------------------------------------------------------------------------//
 bool GameStart;
-double Score, Temperture, Mole, TotalScore;
+double Temperture, Mole;
 int PreTime, ReactorEffect, OrbType, Orbcount;
 
 int Time, Time_Server;
@@ -66,7 +66,7 @@ void GeneralReset()
 	//Cherenkov.cherenkov = false, Cherenkov.meter = 0, Cherenkov.counter = 0, Cherenkov.lever = 0;
 	Reactor.cherenkov = false, Reactor.cherenkovlevel = 0, Reactor.meltdown = false, Reactor.meltdownlevel = 0, Reactor.cherenkovmeter;
 	for (int i = 0; i < 5; i++) Button[i] = 0;
-	Time = 0, GameStart = false, Score = 0, ReactorEffect = 0;
+	Time = 0, GameStart = false, ReactorEffect = 0;
 	if (RestartPressure) Temperture = Kelvin, Mole = MaxMole * 0.5;
 }
 void GameRestart()
@@ -78,7 +78,7 @@ void GameRestart()
 	}
 	//Cherenkov.meter -= Cherenkov.meter / (31.0 + Time);
 	Reactor.cherenkovmeter -= int(Reactor.cherenkovmeter / (31.0 + Time));
-	Score -= Score / (31.0 + Time);
+	//Score -= Score / (31.0 + Time);
 	if (Time % 5 == 0) ReactorEffect--;
 	Time--;
 }
@@ -163,7 +163,7 @@ void CollisionDetect(struct Power_Orb* Orb)
 				ClosestPolar_x = Player[i].Reflector.polar_x;
 			}
 		}
-		if (ClosestReflector != -1) Player[ClosestReflector].Reflector = ReflectReflector(Orb, Player[ClosestReflector].Reflector);
+		if (ClosestReflector != -1) Player[ClosestReflector].Reflector = ReflectReflector(Orb, Player[ClosestReflector].Reflector, ClosestReflector);
 		else if (DistanceOvercmp(Orb->next->x + Orb->next->shellx, Orb->next->y + Orb->next->shelly, 500))
 		{
 			if (((Orb->next->major == false && Orb->next->type == 0) || Orb->next->effect == 1) 
@@ -178,13 +178,14 @@ void CollisionDetect(struct Power_Orb* Orb)
 				{
 					int Color = -1;
 					for (int k = 0; k < 7; k++) {
-						if (Orb->next->RGB == PlayerColor[k]) Color = k;
+						if (Orb->next->RGB == PlayerColor[k]) {
+							Color = k;
+							Player[k].Count--;
+						}
 					}
 					if (Color >= 0 and Color < 8) ColliderColor = Color;
 
 					Reactor.meltdown = true;
-
-					//评 格见 贸府
 
 					ReactorEffect = 6;
 					if (Orbcount > 0) ReactorEffect = 6;
@@ -282,12 +283,12 @@ struct Power_Reflector ReflectDetect(struct Power_Orb* Orb, struct Power_Reflect
 	if (Orb->next != OrbHead)
 	{
 		if (ReflectCheck(Orb->next->x + Orb->next->shellx, Orb->next->y + Orb->next->shelly, Reflector.polar_x, Reflector.polar_y, Reflector.size))
-			return ReflectReflector(Orb, Reflector);
+			return ReflectReflector(Orb, Reflector, 0);
 		Reflector = ReflectDetect(Orb->next, Reflector);
 	}
 	else return Reflector;
 }
-struct Power_Reflector ReflectReflector(struct Power_Orb* Orb, struct Power_Reflector Reflector)
+struct Power_Reflector ReflectReflector(struct Power_Orb* Orb, struct Power_Reflector Reflector, int Num)
 {
 	if (Orb->next->major)
 	{
@@ -328,16 +329,16 @@ struct Power_Reflector ReflectReflector(struct Power_Orb* Orb, struct Power_Refl
 				break;
 			}
 			CreateEffect(EffectHead, Orb->next->x, Orb->next->y, score);
-			Score += score;
-
+			
+			Player[Num].Score += score;
+			Player[Num].Statistic.TotalScore += score;
+			Player[Num].Statistic.ReflectCount++;
 			Reflector.age = Time + (int)(50 / Orb->next->speed);
 
 			if (score > 1000) Reflector.Effect_effect = Time + 324;
 			else if (score > 500) Reflector.Effect_effect = Time + 224;
 			else if (score > 250) Reflector.Effect_effect = Time + 124;
 			else Reflector.Effect_effect = Time + 24;
-
-			//Reflector.RGB = PlayerColor[rand() % 7];
 
 			Reflector.Effect_rebound = Time + int(3 * Orb->next->speed);
 		}
@@ -356,7 +357,10 @@ struct Power_Reflector ReflectReflector(struct Power_Orb* Orb, struct Power_Refl
 			else {
 				double score = OrbScore(Orb->next->speed, Mole, PressureCaculate(Mole, Temperture), 1, Reactor.cherenkov);
 				CreateEffect(EffectHead, Orb->next->x, Orb->next->y, score);
-				Score += score;
+
+				Player[Num].Score += score;
+				Player[Num].Statistic.TotalScore += score;
+				Player[Num].Statistic.BonusCount++;
 			}
 			break;
 		case 1:
