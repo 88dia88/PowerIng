@@ -1014,7 +1014,7 @@ void UIScore()
 
 	TextOut(memdc, int(Pibot_x + 600 * window_size), int(Pibot_y), lpOut, lstrlen(lpOut));
 	TextOut(memdc, int(Pibot_x + 600 * window_size), int(Pibot_y - 75 * window_size), L"Power", 5);
-	if (Player[0].Count < 0) {
+	if (Player[0].Count <= 0) {
 		SetTextColor(memdc, RGB(255, 0, 0));
 		swprintf_s(lpOut, 100, L"X");
 	}

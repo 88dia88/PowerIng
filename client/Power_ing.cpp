@@ -42,6 +42,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 	static int EscMode = 0;
 	static bool DisplayGame = false;
 
+	int MinCount = 3;
 	static bool OrbLaunch = false;
 
 	static int CustomRGB[4] = { RGBTemplate_Yellow, 255, 255, 0 };
@@ -249,9 +250,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 					{
 					case 0:
 						Time_Server++;
+						for (int i = 0; i < 7; i++) {
+							if (Player[i].Count < MinCount) MinCount = Player[i].Count;
+						}
 
-						if (Reactor.meltdown == false and Player[0].Count <= 0) {
-							Player[0].Count--;
+						if (Reactor.meltdown == false and MinCount <= 0) {
+							MinCount = 3;
 							GameStatus = -2;
 							//게임오버
 						}
@@ -282,8 +286,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 										if (Player[i].CherenkovMeter < 1000) Player[i].CherenkovMeter++;
 										Player[i].Reflector.cherenkovcounter--;
 									}
-								}
-
+								}	
 								if (Player[i].Control[0] & 0x8001 || Player[i].Control[0] & 0x8000) {
 									if (Reactor.cherenkov == false) {
 										if (Player[i].CherenkovMeter == 1000) {
@@ -803,6 +806,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			}
 			else if (Menu_Type == 311) {
 				UIMenu(SelectedButton, L"Control", L"Movement", L"Action", L"", L"Reset to defult", rgb);
+				UIBack(SelectedButton == -1);
+			}
+			else if (Menu_Type == 3112) {
+				UIMenu(SelectedButton, L"Movement", L"Right", L"Left", L"Up", L"Down", rgb);
 				UIBack(SelectedButton == -1);
 			}
 
